@@ -1,0 +1,186 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+
+  <groupId>org.jboss.set.payload</groupId>
+  <artifactId>manifest-payload-linker</artifactId>
+  <version>1.0-SNAPSHOT</version>
+
+  <url>https://github.com/jboss-set/manifest-payload-linker</url>
+  <developers>
+    <developer>
+      <name>Tomas Hofman</name>
+      <email>thofman@redhat.com</email>
+    </developer>
+  </developers>
+  <licenses>
+    <license>
+      <name>Apache License, Version 2.0</name>
+      <url>https://www.apache.org/licenses/LICENSE-2.0</url>
+    </license>
+  </licenses>
+
+  <scm>
+    <connection>scm:git:git://github.com/jboss-set/manifest-payload-linker.git</connection>
+    <developerConnection>scm:git:git@github.com:jboss-set/manifest-payload-linker.git</developerConnection>
+    <url>https://github.com/jboss-set/manifest-payload-linker</url>
+    <tag>HEAD</tag>
+  </scm>
+
+  <distributionManagement>
+    <repository>
+      <id>jboss-releases-repository</id>
+      <name>JBoss Releases Repository</name>
+      <url>https://repository.jboss.org/nexus/service/local/staging/deploy/maven2/</url>
+    </repository>
+  </distributionManagement>
+
+  <properties>
+    <maven.compiler.source>17</maven.compiler.source>
+    <maven.compiler.target>17</maven.compiler.target>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+
+    <version.com.fasterxml.jackson>2.18.2</version.com.fasterxml.jackson>
+  </properties>
+
+  <build>
+    <plugins>
+      <plugin>
+        <artifactId>maven-release-plugin</artifactId>
+        <version>3.0.1</version>
+        <configuration>
+          <autoVersionSubmodules>true</autoVersionSubmodules>
+          <tagNameFormat>@{project.version}</tagNameFormat>
+          <arguments>-DskipTests</arguments>
+        </configuration>
+      </plugin>
+
+      <!-- Standalone JAR -->
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-assembly-plugin</artifactId>
+        <version>3.6.0</version>
+        <configuration>
+          <archive>
+            <index>true</index>
+            <manifest>
+              <mainClass>org.jboss.set.payload.Main</mainClass>
+            </manifest>
+          </archive>
+          <descriptors>
+            <descriptor>src/assembly/jar.xml</descriptor>
+          </descriptors>
+          <appendAssemblyId>true</appendAssemblyId>
+        </configuration>
+        <executions>
+          <execution>
+            <id>make-assembly</id>
+            <phase>package</phase>
+            <goals>
+              <goal>single</goal>
+            </goals>
+          </execution>
+        </executions>
+      </plugin>
+    </plugins>
+  </build>
+
+  <dependencies>
+
+    <!-- Jira REST client -->
+    <dependency>
+      <groupId>com.atlassian.jira</groupId>
+      <artifactId>jira-rest-java-client-core</artifactId>
+      <version>6.0.1</version>
+    </dependency>
+    <dependency>
+      <groupId>io.atlassian.fugue</groupId>
+      <artifactId>fugue</artifactId>
+      <version>6.1.2</version>
+    </dependency>
+
+    <!-- PNC REST client -->
+    <dependency>
+      <groupId>org.jboss.pnc</groupId>
+      <artifactId>rest-client</artifactId>
+      <version>3.0.4</version>
+    </dependency>
+    <dependency>
+      <groupId>com.fasterxml.jackson.core</groupId>
+      <artifactId>jackson-core</artifactId>
+      <version>${version.com.fasterxml.jackson}</version>
+    </dependency>
+    <dependency>
+      <groupId>com.fasterxml.jackson.core</groupId>
+      <artifactId>jackson-annotations</artifactId>
+      <version>${version.com.fasterxml.jackson}</version>
+    </dependency>
+
+    <!-- Parsing Maven GAVs -->
+    <dependency>
+      <groupId>org.commonjava.maven.atlas</groupId>
+      <artifactId>atlas-identities</artifactId>
+      <version>0.17.2</version>
+    </dependency>
+
+    <!-- Wildfly Channel parsing -->
+    <dependency>
+      <groupId>org.wildfly.channel</groupId>
+      <artifactId>channel-core</artifactId>
+      <version>1.2.2.Final</version>
+    </dependency>
+    <dependency>
+      <groupId>com.fasterxml.jackson.dataformat</groupId>
+      <artifactId>jackson-dataformat-yaml</artifactId>
+      <version>${version.com.fasterxml.jackson}</version>
+    </dependency>
+    <dependency>
+      <groupId>com.fasterxml.jackson.core</groupId>
+      <artifactId>jackson-databind</artifactId>
+      <version>${version.com.fasterxml.jackson}</version>
+    </dependency>
+
+    <!-- Maven version comparator -->
+    <dependency>
+      <groupId>org.codehaus.mojo.versions</groupId>
+      <artifactId>versions-common</artifactId>
+      <version>2.18.0</version>
+    </dependency>
+    <dependency>
+      <groupId>org.apache.maven</groupId>
+      <artifactId>maven-artifact</artifactId>
+      <version>3.8.6</version>
+    </dependency>
+
+    <!-- Smallrye Config -->
+    <dependency>
+      <groupId>io.smallrye.config</groupId>
+      <artifactId>smallrye-config</artifactId>
+      <version>3.12.2</version>
+    </dependency>
+
+    <!-- Logging -->
+    <dependency>
+      <groupId>org.jboss.logging</groupId>
+      <artifactId>jboss-logging</artifactId>
+      <version>3.6.1.Final</version>
+    </dependency>
+    <dependency>
+      <groupId>ch.qos.logback</groupId>
+      <artifactId>logback-classic</artifactId>
+      <version>1.5.16</version>
+    </dependency>
+
+  </dependencies>
+
+  <repositories>
+    <!-- Needed for the Atlassian artifacts -->
+    <repository>
+      <id>atlassian-public</id>
+      <url>https://packages.atlassian.com/maven/repository/public</url>
+    </repository>
+  </repositories>
+
+</project>

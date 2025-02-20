@@ -1,0 +1,9 @@
+# Jira server URL
+jira.url=https://jira-domain/
+# Auth token for connecting to Jira
+jira.token=
+# Target release string to be used for filtering the component upgrade issues
+jira.target_release=8.1.0.GA
+
+# PNC Builds API URL
+pnc.builds_api_url=https://pnc-domain/pnc-rest/v2/builds

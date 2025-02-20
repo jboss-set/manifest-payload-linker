@@ -1,0 +1,16 @@
+<configuration>
+
+  <appender name="STDERR" class="ch.qos.logback.core.ConsoleAppender">
+    <target>System.err</target>
+    <encoder>
+      <pattern>%highlight(%-5level) %cyan(%logger{15}) - %msg%n</pattern>
+    </encoder>
+  </appender>
+
+  <root level="WARN">
+    <appender-ref ref="STDERR" />
+  </root>
+
+  <logger name="org.jboss.set.payload" level="INFO" />
+
+</configuration>

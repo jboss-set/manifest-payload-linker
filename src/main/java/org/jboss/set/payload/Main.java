@@ -71,6 +71,7 @@ public class Main implements Closeable, Runnable {
     public static void main(String[] args) throws Exception {
         if (args.length != 1) {
             logger.error("Expected single argument: path to a manifest file");
+            System.exit(1);
         }
 
         try (Main main = new Main(Path.of(args[0]))) {

@@ -47,7 +47,8 @@ public class DetailedReportConsumer extends AbstractReportConsumer {
         try {
             IssueField field = issue.getFieldByName("Target Release");
             if (field != null) {
-                return ((JSONObject) field.getValue()).getString("name");
+                JSONObject value = (JSONObject) field.getValue();
+                return value != null ? value.getString("name") : null;
             }
             return "";
         } catch (JSONException e) {

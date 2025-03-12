@@ -132,8 +132,8 @@ public class Main implements Closeable, Runnable {
         try {
             List<String> issueKeys = loadIssueKeys();
             for (String issueKey : issueKeys) {
+                logger.debugf("Processing issue %s", issueKey);
                 Issue issue = jiraClient.getIssueClient().getIssue(issueKey).claim();
-                logger.debugf("Processing issue %s: %s", issueKey, issue.getSummary());
                 String buildId = findBuildId(issue);
                 if (buildId != null) {
                     if (isBuildCoveredByManifest(buildId)) {
@@ -170,7 +170,7 @@ public class Main implements Closeable, Runnable {
                 // manifest. If the version from the manifest is lower, the component upgrade is not covered by this
                 // manifest.
                 if (compareVersions(artifactRef.getVersionString(), versionInManifest) > 0) {
-                    logger.debugf("Build artifact %s is not satisfied by manifest stream %s:%s",
+                    logger.infof("Build artifact %s is not satisfied by manifest stream %s:%s",
                             artifact.getIdentifier(), key, versionInManifest);
                     artifactsCovered = false;
                     break;
@@ -179,6 +179,10 @@ public class Main implements Closeable, Runnable {
                             artifact.getIdentifier(), key, versionInManifest);
                 }
             }
+        }
+
+        if (!anyMatch) {
+            logger.infof("No artifacts for build %s are present in the manifest.", buildId);
         }
 
         return anyMatch && artifactsCovered;
@@ -226,15 +230,15 @@ public class Main implements Closeable, Runnable {
         for (Comment comment : issue.getComments()) {
             List<String> lines = comment.getBody().lines().toList();
             for (String line : lines) {
-                if (line.contains("PNC Build:")) {
+                if (line.toLowerCase().contains("pnc build:")) {
                     Matcher matcher = BUILD_URL_PATTERN.matcher(line);
                     if (matcher.find()) {
                         buildId = matcher.group(BUILD_ID_PATTERN_GROUP);
+                        logger.infof("Found PNC build ID %s in %s %s", buildId, issue.getKey(), issue.getSummary());
                     }
                 }
             }
         }
-        logger.debugf("Build ID for issue %s is determined as %s.", issue.getKey(), buildId);
         return buildId;
     }
 

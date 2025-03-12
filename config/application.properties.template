@@ -2,8 +2,8 @@
 jira.url=https://jira-domain/
 # Auth token for connecting to Jira
 jira.token=
-# Target release string to be used for filtering the component upgrade issues
-jira.target_release=8.1.0.GA
+# Jira JQL query to load component upgrade tickets
+jira.query=project = JBEAP AND issuetype = "Component Upgrade" AND ("Target Release" = 8.1.0.GA or fixVersion = 8.1.0.Beta) AND status in (Resolved, "Ready for QA") ORDER BY created ASC
 
 # PNC Builds API URL
 pnc.builds_api_url=https://pnc-domain/pnc-rest/v2/builds

@@ -37,8 +37,6 @@ import java.util.regex.Pattern;
 
 public class Main implements Closeable, Runnable {
 
-    private static final String JIRA_QUERY = "project = JBEAP AND issuetype = \"Component Upgrade\" AND status in (Resolved) AND \"Target Release\" = %s ORDER BY created ASC";
-
     /**
      * Pattern to extract PNC build ID from a URL posted in a text. If you change this, update the group number bellow.
      */
@@ -53,7 +51,7 @@ public class Main implements Closeable, Runnable {
     private interface CONFIG {
         String JIRA_TOKEN = "jira.token";
         String JIRA_URL = "jira.url";
-        String JIRA_TARGET_RELEASE = "jira.target_release";
+        String JIRA_QUERY = "jira.query";
         String PNC_BUILDS_API_URL = "pnc.builds_api_url";
     }
 
@@ -198,8 +196,7 @@ public class Main implements Closeable, Runnable {
         List<String> keys = new ArrayList<>();
         SearchResult searchResult;
 
-        String targetRelease = config.getValue(CONFIG.JIRA_TARGET_RELEASE, String.class);
-        String jiraQuery = String.format(JIRA_QUERY, targetRelease);
+        String jiraQuery = config.getValue(CONFIG.JIRA_QUERY, String.class);
 
         do {
             searchResult = jiraClient.getSearchClient()

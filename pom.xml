@@ -4,7 +4,7 @@
 
   <groupId>org.jboss.set.payload</groupId>
   <artifactId>manifest-payload-linker</artifactId>
-  <version>1.0.2</version>
+  <version>1.0.3-SNAPSHOT</version>
 
   <name>Manifest Payload Linker</name>
   <description>A tool that links Jira tickets with given Wildfly Channel manifest.</description>
@@ -26,7 +26,7 @@
     <connection>scm:git:git://github.com/jboss-set/manifest-payload-linker.git</connection>
     <developerConnection>scm:git:git@github.com:jboss-set/manifest-payload-linker.git</developerConnection>
     <url>https://github.com/jboss-set/manifest-payload-linker</url>
-    <tag>1.0.2</tag>
+    <tag>HEAD</tag>
   </scm>
 
   <distributionManagement>

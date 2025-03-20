@@ -17,6 +17,7 @@ import org.jboss.pnc.client.Configuration;
 import org.jboss.pnc.client.RemoteCollection;
 import org.jboss.pnc.client.RemoteResourceException;
 import org.jboss.pnc.dto.Artifact;
+import org.jboss.set.payload.jira.RetryingJiraIssueClient;
 import org.wildfly.channel.ChannelManifest;
 import org.wildfly.channel.ChannelManifestMapper;
 
@@ -55,13 +56,12 @@ public class Main implements Closeable, Runnable {
         String PNC_BUILDS_API_URL = "pnc.builds_api_url";
     }
 
-
     private static final Logger logger = Logger.getLogger(Main.class);
-
 
     private Map<String, String> manifestStreams;
     private final BuildClient buildClient;
     private final JiraRestClient jiraClient;
+    private final RetryingJiraIssueClient issueClient;
     private final Config config;
 
     private final List<AbstractReportConsumer> reportConsumers = new ArrayList<>();
@@ -104,12 +104,12 @@ public class Main implements Closeable, Runnable {
         jiraClient = new AsynchronousJiraRestClientFactory()
                 .createWithAuthenticationHandler(jiraUri,
                         builder -> builder.setHeader("Authorization", "Bearer " + jiraToken));
-
+        issueClient = new RetryingJiraIssueClient(jiraClient.getIssueClient());
 
         try {
-            reportConsumers.add(new IssueLinksReportConsumer(new File("issue-links.txt"), jiraUri));
-            reportConsumers.add(new IssueCodesReportConsumer(new File("issue-codes.txt")));
-            reportConsumers.add(new DetailedReportConsumer(new File("detailed-report.txt"), jiraUri, jiraClient));
+            reportConsumers.add(new IssueLinksReportConsumer(issueClient, new File("issue-links.txt"), jiraUri));
+            reportConsumers.add(new IssueCodesReportConsumer(issueClient, new File("issue-codes.txt")));
+            reportConsumers.add(new DetailedReportConsumer(issueClient, new File("detailed-report.txt"), jiraUri));
         } catch (IOException e) {
             logger.errorf(e, "Can't create report file");
             System.exit(1);
@@ -131,7 +131,7 @@ public class Main implements Closeable, Runnable {
             List<String> issueKeys = loadIssueKeys();
             for (String issueKey : issueKeys) {
                 logger.debugf("Processing issue %s", issueKey);
-                Issue issue = jiraClient.getIssueClient().getIssue(issueKey).claim();
+                Issue issue = issueClient.getIssue(issueKey);
                 String buildId = findBuildId(issue);
                 if (buildId != null) {
                     if (isBuildCoveredByManifest(buildId)) {

@@ -1,10 +1,10 @@
 package org.jboss.set.payload;
 
-import com.atlassian.jira.rest.client.api.JiraRestClient;
 import com.atlassian.jira.rest.client.api.domain.Issue;
 import com.atlassian.jira.rest.client.api.domain.IssueField;
 import org.codehaus.jettison.json.JSONException;
 import org.codehaus.jettison.json.JSONObject;
+import org.jboss.set.payload.jira.RetryingJiraIssueClient;
 
 import java.io.File;
 import java.io.IOException;
@@ -13,12 +13,10 @@ import java.net.URI;
 public class DetailedReportConsumer extends AbstractReportConsumer {
 
     private final URI jiraUri;
-    private final JiraRestClient jiraClient;
 
-    public DetailedReportConsumer(File file, URI jiraUri, JiraRestClient jiraClient) throws IOException {
-        super(file);
+    public DetailedReportConsumer(RetryingJiraIssueClient issueClient, File file, URI jiraUri) throws IOException {
+        super(issueClient, file);
         this.jiraUri = jiraUri;
-        this.jiraClient = jiraClient;
     }
 
     @Override
@@ -29,8 +27,7 @@ public class DetailedReportConsumer extends AbstractReportConsumer {
     }
 
     @Override
-    protected String incorporatedIssueLine(String key) {
-        Issue issue = jiraClient.getIssueClient().getIssue(key).claim();
+    protected String incorporatedIssueLine(Issue issue) {
         String line = "  " + line(issue);
         System.out.print(line);
         return line;

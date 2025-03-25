@@ -7,6 +7,7 @@ import org.junit.Test;
 import org.wildfly.channel.ChannelManifest;
 import org.wildfly.channel.ChannelManifestMapper;
 
+import java.io.File;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
@@ -19,11 +20,9 @@ public class DependencyGroupsTestCase {
         Assert.assertNotNull(manifestResource);
         ChannelManifest manifest = ChannelManifestMapper.from(manifestResource);
 
-        URL groupsResource = getClass().getClassLoader().getResource("dependency-groups.yaml");
-        Assert.assertNotNull(groupsResource);
         YAMLMapper mapper = YAMLMapper.builder().build();
         JavaType type = mapper.getTypeFactory().constructParametricType(List.class, DependencyGroup.class);
-        List<DependencyGroup> groups = mapper.readValue(groupsResource, type);
+        List<DependencyGroup> groups = mapper.readValue(new File("dependency-groups.yaml"), type);
 
         ArrayList<String> notMatching = new ArrayList<>();
         manifest.getStreams().forEach(stream -> {

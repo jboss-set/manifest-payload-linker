@@ -7,3 +7,8 @@ jira.query=project = JBEAP AND issuetype = "Component Upgrade" AND ("Target Rele
 
 # PNC Builds API URL
 pnc.builds_api_url=https://pnc-domain/pnc-rest/v2/builds
+
+# OpenAPI endpoint of the LLM
+llm.base_url=http://localhost:35271/v1
+# Query timeout for the LLM
+llm.timeout=60

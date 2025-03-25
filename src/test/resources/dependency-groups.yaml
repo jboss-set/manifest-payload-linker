@@ -1,0 +1,1940 @@
+---
+- component: org.jboss.eap
+  aliases:
+    - jboss eap
+  dependencies:
+    - org.jboss.eap.channels:wildfly-ee:8.1.0.Beta-SNAPSHOT
+    - org.jboss.eap.channels:wildfly-preview:8.1.0.Beta-SNAPSHOT
+    - org.jboss.eap.channels:wildfly:8.1.0.Beta-SNAPSHOT
+    - org.jboss.eap:eap-expansion-pack:8.1.0.Beta-SNAPSHOT
+    - org.jboss.eap:jboss-insights:8.1.0.Beta-SNAPSHOT
+    - org.jboss.eap:jipijapa-eclipselink:8.1.0.Beta-SNAPSHOT
+    - org.jboss.eap:jipijapa-hibernate6:8.1.0.Beta-SNAPSHOT
+    - org.jboss.eap:jipijapa-hibernatesearch:8.1.0.Beta-SNAPSHOT
+    - org.jboss.eap:jipijapa-spi:8.1.0.Beta-SNAPSHOT
+    - org.jboss.eap:wildfly-appclient:8.1.0.Beta-SNAPSHOT
+    - org.jboss.eap:wildfly-batch-jberet:8.1.0.Beta-SNAPSHOT
+    - org.jboss.eap:wildfly-bean-validation:8.1.0.Beta-SNAPSHOT
+    - org.jboss.eap:wildfly-client-all:8.1.0.Beta-SNAPSHOT
+    - org.jboss.eap:wildfly-client-properties:8.1.0.Beta-SNAPSHOT
+    - org.jboss.eap:wildfly-clustering-common:8.1.0.Beta-SNAPSHOT
+    - org.jboss.eap:wildfly-clustering-ejb-cache:8.1.0.Beta-SNAPSHOT
+    - org.jboss.eap:wildfly-clustering-ejb-client:8.1.0.Beta-SNAPSHOT
+    - org.jboss.eap:wildfly-clustering-ejb-extension:8.1.0.Beta-SNAPSHOT
+    - org.jboss.eap:wildfly-clustering-ejb-infinispan:8.1.0.Beta-SNAPSHOT
+    - org.jboss.eap:wildfly-clustering-ejb-spi:8.1.0.Beta-SNAPSHOT
+    - org.jboss.eap:wildfly-clustering-el-expressly:8.1.0.Beta-SNAPSHOT
+    - org.jboss.eap:wildfly-clustering-faces-api:8.1.0.Beta-SNAPSHOT
+    - org.jboss.eap:wildfly-clustering-faces-mojarra:8.1.0.Beta-SNAPSHOT
+    - org.jboss.eap:wildfly-clustering-infinispan-client-api:8.1.0.Beta-SNAPSHOT
+    - org.jboss.eap:wildfly-clustering-infinispan-client-service:8.1.0.Beta-SNAPSHOT
+    - org.jboss.eap:wildfly-clustering-infinispan-embedded-service:8.1.0.Beta-SNAPSHOT
+    - org.jboss.eap:wildfly-clustering-infinispan-extension:8.1.0.Beta-SNAPSHOT
+    - org.jboss.eap:wildfly-clustering-jgroups-api:8.1.0.Beta-SNAPSHOT
+    - org.jboss.eap:wildfly-clustering-jgroups-extension:8.1.0.Beta-SNAPSHOT
+    - org.jboss.eap:wildfly-clustering-jgroups-spi:8.1.0.Beta-SNAPSHOT
+    - org.jboss.eap:wildfly-clustering-marshalling-api:8.1.0.Beta-SNAPSHOT
+    - org.jboss.eap:wildfly-clustering-marshalling-jboss:8.1.0.Beta-SNAPSHOT
+    - org.jboss.eap:wildfly-clustering-marshalling-protostream:8.1.0.Beta-SNAPSHOT
+    - org.jboss.eap:wildfly-clustering-server-api:8.1.0.Beta-SNAPSHOT
+    - org.jboss.eap:wildfly-clustering-server-extension:8.1.0.Beta-SNAPSHOT
+    - org.jboss.eap:wildfly-clustering-server-service:8.1.0.Beta-SNAPSHOT
+    - org.jboss.eap:wildfly-clustering-service:8.1.0.Beta-SNAPSHOT
+    - org.jboss.eap:wildfly-clustering-singleton-api:8.1.0.Beta-SNAPSHOT
+    - org.jboss.eap:wildfly-clustering-singleton-compat:8.1.0.Beta-SNAPSHOT
+    - org.jboss.eap:wildfly-clustering-singleton-extension:8.1.0.Beta-SNAPSHOT
+    - org.jboss.eap:wildfly-clustering-singleton-server:8.1.0.Beta-SNAPSHOT
+    - org.jboss.eap:wildfly-clustering-web-api:8.1.0.Beta-SNAPSHOT
+    - org.jboss.eap:wildfly-clustering-web-container:8.1.0.Beta-SNAPSHOT
+    - org.jboss.eap:wildfly-clustering-web-extension:8.1.0.Beta-SNAPSHOT
+    - org.jboss.eap:wildfly-clustering-web-service:8.1.0.Beta-SNAPSHOT
+    - org.jboss.eap:wildfly-clustering-web-undertow:8.1.0.Beta-SNAPSHOT
+    - org.jboss.eap:wildfly-clustering-weld-core:8.1.0.Beta-SNAPSHOT
+    - org.jboss.eap:wildfly-clustering-weld-ejb:8.1.0.Beta-SNAPSHOT
+    - org.jboss.eap:wildfly-clustering-weld-web:8.1.0.Beta-SNAPSHOT
+    - org.jboss.eap:wildfly-common-ee-dependency-management:8.1.0.Beta-SNAPSHOT
+    - org.jboss.eap:wildfly-common-expansion-dependency-management:8.1.0.Beta-SNAPSHOT
+    - org.jboss.eap:wildfly-concurrency-impl-30:8.1.0.Beta-SNAPSHOT
+    - org.jboss.eap:wildfly-concurrency-spi:8.1.0.Beta-SNAPSHOT
+    - org.jboss.eap:wildfly-connector:8.1.0.Beta-SNAPSHOT
+    - org.jboss.eap:wildfly-datasources-agroal:8.1.0.Beta-SNAPSHOT
+    - org.jboss.eap:wildfly-ee-build:8.1.0.Beta-SNAPSHOT
+    - org.jboss.eap:wildfly-ee-dist:8.1.0.Beta-SNAPSHOT
+    - org.jboss.eap:wildfly-ee-feature-pack-galleon-local:8.1.0.Beta-SNAPSHOT
+    - org.jboss.eap:wildfly-ee-feature-pack-galleon-shared:8.1.0.Beta-SNAPSHOT
+    - org.jboss.eap:wildfly-ee-feature-pack-product-conf:8.1.0.Beta-SNAPSHOT
+    - org.jboss.eap:wildfly-ee-galleon-pack:8.1.0.Beta-SNAPSHOT
+    - org.jboss.eap:wildfly-ee-security:8.1.0.Beta-SNAPSHOT
+    - org.jboss.eap:wildfly-ee:8.1.0.Beta-SNAPSHOT
+    - org.jboss.eap:wildfly-ejb3:8.1.0.Beta-SNAPSHOT
+    - org.jboss.eap:wildfly-elytron-oidc-client-subsystem:8.1.0.Beta-SNAPSHOT
+    - org.jboss.eap:wildfly-health:8.1.0.Beta-SNAPSHOT
+    - org.jboss.eap:wildfly-iiop-openjdk:8.1.0.Beta-SNAPSHOT
+    - org.jboss.eap:wildfly-jaxrs:8.1.0.Beta-SNAPSHOT
+    - org.jboss.eap:wildfly-jdr:8.1.0.Beta-SNAPSHOT
+    - org.jboss.eap:wildfly-jpa:8.1.0.Beta-SNAPSHOT
+    - org.jboss.eap:wildfly-jsf-injection:8.1.0.Beta-SNAPSHOT
+    - org.jboss.eap:wildfly-jsf:8.1.0.Beta-SNAPSHOT
+    - org.jboss.eap:wildfly-jsr77:8.1.0.Beta-SNAPSHOT
+    - org.jboss.eap:wildfly-keycloak:8.1.0.Beta-SNAPSHOT
+    - org.jboss.eap:wildfly-legacy-ee-bom:8.1.0.Beta-SNAPSHOT
+    - org.jboss.eap:wildfly-legacy-expansion-bom:8.1.0.Beta-SNAPSHOT
+    - org.jboss.eap:wildfly-legacy-test-bom:8.1.0.Beta-SNAPSHOT
+    - org.jboss.eap:wildfly-mail:8.1.0.Beta-SNAPSHOT
+    - org.jboss.eap:wildfly-messaging-activemq-injection:8.1.0.Beta-SNAPSHOT
+    - org.jboss.eap:wildfly-messaging-activemq-subsystem:8.1.0.Beta-SNAPSHOT
+    - org.jboss.eap:wildfly-metrics:8.1.0.Beta-SNAPSHOT
+    - org.jboss.eap:wildfly-micrometer-deployment:8.1.0.Beta-SNAPSHOT
+    - org.jboss.eap:wildfly-micrometer:8.1.0.Beta-SNAPSHOT
+    - org.jboss.eap:wildfly-microprofile-config-smallrye:8.1.0.Beta-SNAPSHOT
+    - org.jboss.eap:wildfly-microprofile-fault-tolerance-smallrye-deployment:8.1.0.Beta-SNAPSHOT
+    - org.jboss.eap:wildfly-microprofile-fault-tolerance-smallrye-extension:8.1.0.Beta-SNAPSHOT
+    - org.jboss.eap:wildfly-microprofile-fault-tolerance-smallrye:8.1.0.Beta-SNAPSHOT
+    - org.jboss.eap:wildfly-microprofile-health-smallrye:8.1.0.Beta-SNAPSHOT
+    - org.jboss.eap:wildfly-microprofile-jwt-smallrye:8.1.0.Beta-SNAPSHOT
+    - org.jboss.eap:wildfly-microprofile-lra-coordinator:8.1.0.Beta-SNAPSHOT
+    - org.jboss.eap:wildfly-microprofile-lra-participant:8.1.0.Beta-SNAPSHOT
+    - org.jboss.eap:wildfly-microprofile-metrics-smallrye:8.1.0.Beta-SNAPSHOT
+    - org.jboss.eap:wildfly-microprofile-openapi-smallrye:8.1.0.Beta-SNAPSHOT
+    - org.jboss.eap:wildfly-microprofile-opentracing-extension:8.1.0.Beta-SNAPSHOT
+    - org.jboss.eap:wildfly-microprofile-reactive-messaging-amqp:8.1.0.Beta-SNAPSHOT
+    - org.jboss.eap:wildfly-microprofile-reactive-messaging-common:8.1.0.Beta-SNAPSHOT
+    - org.jboss.eap:wildfly-microprofile-reactive-messaging-config:8.1.0.Beta-SNAPSHOT
+    - org.jboss.eap:wildfly-microprofile-reactive-messaging-kafka:8.1.0.Beta-SNAPSHOT
+    - org.jboss.eap:wildfly-microprofile-reactive-messaging:8.1.0.Beta-SNAPSHOT
+    - org.jboss.eap:wildfly-microprofile-reactive-streams-operators-cdi-provider:8.1.0.Beta-SNAPSHOT
+    - org.jboss.eap:wildfly-microprofile-reactive-streams-operators:8.1.0.Beta-SNAPSHOT
+    - org.jboss.eap:wildfly-microprofile-telemetry-cdi-provider:8.1.0.Beta-SNAPSHOT
+    - org.jboss.eap:wildfly-microprofile-telemetry:8.1.0.Beta-SNAPSHOT
+    - org.jboss.eap:wildfly-mod_cluster-extension:8.1.0.Beta-SNAPSHOT
+    - org.jboss.eap:wildfly-mod_cluster-undertow:8.1.0.Beta-SNAPSHOT
+    - org.jboss.eap:wildfly-naming:8.1.0.Beta-SNAPSHOT
+    - org.jboss.eap:wildfly-opentelemetry-api:8.1.0.Beta-SNAPSHOT
+    - org.jboss.eap:wildfly-opentelemetry:8.1.0.Beta-SNAPSHOT
+    - org.jboss.eap:wildfly-picketlink:8.1.0.Beta-SNAPSHOT
+    - org.jboss.eap:wildfly-pojo:8.1.0.Beta-SNAPSHOT
+    - org.jboss.eap:wildfly-preview-build:8.1.0.Beta-SNAPSHOT
+    - org.jboss.eap:wildfly-preview-dist:8.1.0.Beta-SNAPSHOT
+    - org.jboss.eap:wildfly-preview-ee-bom:8.1.0.Beta-SNAPSHOT
+    - org.jboss.eap:wildfly-preview-expansion-bom:8.1.0.Beta-SNAPSHOT
+    - org.jboss.eap:wildfly-preview-feature-pack-galleon-local:8.1.0.Beta-SNAPSHOT
+    - org.jboss.eap:wildfly-preview-feature-pack:8.1.0.Beta-SNAPSHOT
+    - org.jboss.eap:wildfly-preview-test-bom:8.1.0.Beta-SNAPSHOT
+    - org.jboss.eap:wildfly-preview-test-expansion-bom:8.1.0.Beta-SNAPSHOT
+    - org.jboss.eap:wildfly-release:8.1.0.Beta-SNAPSHOT
+    - org.jboss.eap:wildfly-rts:8.1.0.Beta-SNAPSHOT
+    - org.jboss.eap:wildfly-sar:8.1.0.Beta-SNAPSHOT
+    - org.jboss.eap:wildfly-security:8.1.0.Beta-SNAPSHOT
+    - org.jboss.eap:wildfly-standard-ee-bom:8.1.0.Beta-SNAPSHOT
+    - org.jboss.eap:wildfly-standard-expansion-bom:8.1.0.Beta-SNAPSHOT
+    - org.jboss.eap:wildfly-standard-test-bom:8.1.0.Beta-SNAPSHOT
+    - org.jboss.eap:wildfly-standard-test-expansion-bom:8.1.0.Beta-SNAPSHOT
+    - org.jboss.eap:wildfly-system-jmx:8.1.0.Beta-SNAPSHOT
+    - org.jboss.eap:wildfly-test-feature-pack-preview:8.1.0.Beta-SNAPSHOT
+    - org.jboss.eap:wildfly-test-feature-pack:8.1.0.Beta-SNAPSHOT
+    - org.jboss.eap:wildfly-testsuite-shared:8.1.0.Beta-SNAPSHOT
+    - org.jboss.eap:wildfly-transactions:8.1.0.Beta-SNAPSHOT
+    - org.jboss.eap:wildfly-undertow:8.1.0.Beta-SNAPSHOT
+    - org.jboss.eap:wildfly-web-common:8.1.0.Beta-SNAPSHOT
+    - org.jboss.eap:wildfly-webservices-opensaml-sysconfig:8.1.0.Beta-SNAPSHOT
+    - org.jboss.eap:wildfly-webservices-server-integration:8.1.0.Beta-SNAPSHOT
+    - org.jboss.eap:wildfly-weld-bean-validation:8.1.0.Beta-SNAPSHOT
+    - org.jboss.eap:wildfly-weld-common:8.1.0.Beta-SNAPSHOT
+    - org.jboss.eap:wildfly-weld-ejb:8.1.0.Beta-SNAPSHOT
+    - org.jboss.eap:wildfly-weld-jpa:8.1.0.Beta-SNAPSHOT
+    - org.jboss.eap:wildfly-weld-spi:8.1.0.Beta-SNAPSHOT
+    - org.jboss.eap:wildfly-weld-transactions:8.1.0.Beta-SNAPSHOT
+    - org.jboss.eap:wildfly-weld-webservices:8.1.0.Beta-SNAPSHOT
+    - org.jboss.eap:wildfly-weld:8.1.0.Beta-SNAPSHOT
+    - org.jboss.eap:wildfly-xts:8.1.0.Beta-SNAPSHOT
+    - org.jboss.eap:wildfly-standard-ee-bom:8.1.0.Beta-SNAPSHOT
+    - org.jboss.eap:wildfly-standard-test-bom:8.1.0.Beta-SNAPSHOT
+- component: org.jboss.eap.xp
+  aliases: []
+  dependencies:
+    - org.jboss.eap.xp:wildfly-build:6.0.0.Beta-SNAPSHOT
+    - org.jboss.eap.xp:wildfly-dist:6.0.0.Beta-SNAPSHOT
+    - org.jboss.eap.xp:wildfly-feature-pack-galleon-local:6.0.0.Beta-SNAPSHOT
+    - org.jboss.eap.xp:wildfly-feature-pack-galleon-shared:6.0.0.Beta-SNAPSHOT
+    - org.jboss.eap.xp:wildfly-galleon-pack:6.0.0.Beta-SNAPSHOT
+- component: org.jboss.galleon
+  aliases:
+    - galleon
+  dependencies:
+    - org.jboss.galleon:galleon-core
+- component: legacy.io.netty
+  aliases: []
+  dependencies:
+    - io.netty:netty-all:4.0.19.Final
+- component: legacy.jakarta.enterprise
+  aliases: []
+  dependencies:
+    - jakarta.enterprise:jakarta.enterprise.cdi-api:2.0.2
+- component: legacy.jakarta.inject.jakarta.inject-api
+  aliases: []
+  dependencies:
+    - jakarta.inject:jakarta.inject-api:1.0.5
+- component: legacy.org.jboss.spec.javax.jms.jboss-jms-api_2.0_spec
+  aliases: []
+  dependencies:
+    - org.jboss.spec.javax.jms:jboss-jms-api_2.0_spec:2.0.0.Final
+- component: legacy.org.wildfly.naming-client
+  aliases: []
+  dependencies:
+    - org.wildfly:wildfly-naming-client:1.0.17.Final
+- component: org.wildfly.core
+  aliases:
+    - wildfly core
+    - wildfly-core
+  dependencies:
+    - org.wildfly.core:wildfly-cli:27.0.1.Final-redhat-SNAPSHOT
+    - org.wildfly.core:wildfly-controller-client:27.0.1.Final-redhat-SNAPSHOT
+    - org.wildfly.core:wildfly-controller:27.0.1.Final-redhat-SNAPSHOT
+    - org.wildfly.core:wildfly-core-channel:27.0.1.Final-redhat-SNAPSHOT
+    - org.wildfly.core:wildfly-core-dist:27.0.1.Final-redhat-SNAPSHOT
+    - org.wildfly.core:wildfly-core-feature-pack-common:27.0.1.Final-redhat-SNAPSHOT
+    - org.wildfly.core:wildfly-core-feature-pack-ee-10-api:27.0.1.Final-redhat-SNAPSHOT
+    - org.wildfly.core:wildfly-core-feature-pack-galleon-common:27.0.1.Final-redhat-SNAPSHOT
+    - org.wildfly.core:wildfly-core-feature-pack-parent:27.0.1.Final-redhat-SNAPSHOT
+    - org.wildfly.core:wildfly-core-feature-pack:27.0.1.Final-redhat-SNAPSHOT
+    - org.wildfly.core:wildfly-core-galleon-pack:27.0.1.Final-redhat-SNAPSHOT
+    - org.wildfly.core:wildfly-core-management-client:27.0.1.Final-redhat-SNAPSHOT
+    - org.wildfly.core:wildfly-core-management-subsystem:27.0.1.Final-redhat-SNAPSHOT
+    - org.wildfly.core:wildfly-core-manifest:27.0.1.Final-redhat-SNAPSHOT
+    - org.wildfly.core:wildfly-core-model-test-controller-optional:27.0.1.Final-redhat-SNAPSHOT
+    - org.wildfly.core:wildfly-core-model-test-framework:27.0.1.Final-redhat-SNAPSHOT
+    - org.wildfly.core:wildfly-core-security:27.0.1.Final-redhat-SNAPSHOT
+    - org.wildfly.core:wildfly-core-test-runner:27.0.1.Final-redhat-SNAPSHOT
+    - org.wildfly.core:wildfly-core-testbom:27.0.1.Final-redhat-SNAPSHOT
+    - org.wildfly.core:wildfly-core-testsuite-shared:27.0.1.Final-redhat-SNAPSHOT
+    - org.wildfly.core:wildfly-deployment-repository:27.0.1.Final-redhat-SNAPSHOT
+    - org.wildfly.core:wildfly-deployment-scanner:27.0.1.Final-redhat-SNAPSHOT
+    - org.wildfly.core:wildfly-discovery:27.0.1.Final-redhat-SNAPSHOT
+    - org.wildfly.core:wildfly-domain-http-error-context:27.0.1.Final-redhat-SNAPSHOT
+    - org.wildfly.core:wildfly-domain-http-interface:27.0.1.Final-redhat-SNAPSHOT
+    - org.wildfly.core:wildfly-domain-management:27.0.1.Final-redhat-SNAPSHOT
+    - org.wildfly.core:wildfly-elytron-integration:27.0.1.Final-redhat-SNAPSHOT
+    - org.wildfly.core:wildfly-elytron-tool-wrapper:27.0.1.Final-redhat-SNAPSHOT
+    - org.wildfly.core:wildfly-embedded:27.0.1.Final-redhat-SNAPSHOT
+    - org.wildfly.core:wildfly-event-logger:27.0.1.Final-redhat-SNAPSHOT
+    - org.wildfly.core:wildfly-host-controller:27.0.1.Final-redhat-SNAPSHOT
+    - org.wildfly.core:wildfly-installation-manager:27.0.1.Final-redhat-SNAPSHOT
+    - org.wildfly.core:wildfly-io-spi:27.0.1.Final-redhat-SNAPSHOT
+    - org.wildfly.core:wildfly-io:27.0.1.Final-redhat-SNAPSHOT
+    - org.wildfly.core:wildfly-jar-boot:27.0.1.Final-redhat-SNAPSHOT
+    - org.wildfly.core:wildfly-jar-runtime:27.0.1.Final-redhat-SNAPSHOT
+    - org.wildfly.core:wildfly-jmx:27.0.1.Final-redhat-SNAPSHOT
+    - org.wildfly.core:wildfly-logging:27.0.1.Final-redhat-SNAPSHOT
+    - org.wildfly.core:wildfly-management-client-content:27.0.1.Final-redhat-SNAPSHOT
+    - org.wildfly.core:wildfly-model-test:27.0.1.Final-redhat-SNAPSHOT
+    - org.wildfly.core:wildfly-network:27.0.1.Final-redhat-SNAPSHOT
+    - org.wildfly.core:wildfly-patching:27.0.1.Final-redhat-SNAPSHOT
+    - org.wildfly.core:wildfly-platform-mbean:27.0.1.Final-redhat-SNAPSHOT
+    - org.wildfly.core:wildfly-process-controller:27.0.1.Final-redhat-SNAPSHOT
+    - org.wildfly.core:wildfly-protocol:27.0.1.Final-redhat-SNAPSHOT
+    - org.wildfly.core:wildfly-remoting:27.0.1.Final-redhat-SNAPSHOT
+    - org.wildfly.core:wildfly-request-controller:27.0.1.Final-redhat-SNAPSHOT
+    - org.wildfly.core:wildfly-security-manager:27.0.1.Final-redhat-SNAPSHOT
+    - org.wildfly.core:wildfly-server:27.0.1.Final-redhat-SNAPSHOT
+    - org.wildfly.core:wildfly-service:27.0.1.Final-redhat-SNAPSHOT
+    - org.wildfly.core:wildfly-subsystem-test-framework:27.0.1.Final-redhat-SNAPSHOT
+    - org.wildfly.core:wildfly-subsystem-test:27.0.1.Final-redhat-SNAPSHOT
+    - org.wildfly.core:wildfly-subsystem:27.0.1.Final-redhat-SNAPSHOT
+    - org.wildfly.core:wildfly-threads:27.0.1.Final-redhat-SNAPSHOT
+    - org.wildfly.core:wildfly-version:27.0.1.Final-redhat-SNAPSHOT
+- component: antlr
+  aliases: []
+  dependencies:
+    - org.antlr:antlr4-runtime:4.13.0
+    - org.antlr:antlr4:4.13.0
+- component: com.beust
+  aliases: []
+  dependencies:
+    - com.beust:jcommander:1.78
+- component: com.carrotsearch.hppc
+  aliases: []
+  dependencies:
+    - com.carrotsearch:hppc:0.10.0
+- component: com.fasterxml.classmate
+  aliases: []
+  dependencies:
+    - com.fasterxml:classmate:1.5.1
+- component: com.fasterxml.jackson
+  aliases: []
+  dependencies:
+    - com.fasterxml.jackson.core:jackson-annotations:2.17.3
+    - com.fasterxml.jackson.core:jackson-annotations:2.18.2
+    - com.fasterxml.jackson.core:jackson-core:2.17.3
+    - com.fasterxml.jackson.core:jackson-core:2.18.2
+    - com.fasterxml.jackson.core:jackson-databind:2.17.3
+    - com.fasterxml.jackson.core:jackson-databind:2.18.2
+    - com.fasterxml.jackson.dataformat:jackson-dataformat-yaml:2.18.2
+    - com.fasterxml.jackson.datatype:jackson-datatype-jdk8:2.18.2
+    - com.fasterxml.jackson.datatype:jackson-datatype-jsr310:2.18.2
+    - com.fasterxml.jackson.jakarta.rs:jackson-jakarta-rs-base:2.18.2
+    - com.fasterxml.jackson.jakarta.rs:jackson-jakarta-rs-json-provider:2.18.2
+    - com.fasterxml.jackson.jr:jackson-jr-objects:2.18.2
+    - com.fasterxml.jackson.module:jackson-module-jakarta-xmlbind-annotations:2.18.2
+- component: com.github.ben-manes.caffeine
+  aliases: []
+  dependencies:
+    - com.github.ben-manes.caffeine:caffeine:3.1.8
+- component: com.github.fge.btf
+  aliases: []
+  dependencies:
+    - com.github.fge:btf:1.2
+- component: com.github.fge.jackson-coreutils
+  aliases: []
+  dependencies:
+    - com.github.fge:jackson-coreutils:1.8
+- component: com.github.fge.json-patch
+  aliases: []
+  dependencies:
+    - com.github.fge:json-patch:1.9
+- component: com.github.fge.msg-simple
+  aliases: []
+  dependencies:
+    - com.github.fge:msg-simple:1.1
+- component: com.github.luben.zstd-jni
+  aliases: []
+  dependencies:
+    - com.github.luben:zstd-jni:1.5.6-8
+- component: com.google.api.grpc
+  aliases: []
+  dependencies:
+    - com.google.api.grpc:proto-google-common-protos:2.0.1
+- component: com.google.code.findbugs
+  aliases: []
+  dependencies:
+    - com.google.code.findbugs:jsr305:3.0.2
+- component: com.google.code.gson
+  aliases: []
+  dependencies:
+    - com.google.code.gson:gson:2.8.9
+- component: com.google.guava
+  aliases: []
+  dependencies:
+    - com.google.guava:guava:31.1-jre
+    - com.google.guava:guava:33.0.0-jre
+- component: com.google.guava.failureaccess
+  aliases: []
+  dependencies:
+    - com.google.guava:failureaccess:1.0.2
+- component: com.google.protobuf
+  aliases: []
+  dependencies:
+    - com.google.protobuf:protobuf-java-util:4.28.3
+    - com.google.protobuf:protobuf-java:4.28.3
+- component: com.googlecode.javaewah
+  aliases: []
+  dependencies:
+    - com.googlecode.javaewah:JavaEWAH:1.2.3
+- component: com.h2database
+  aliases: []
+  dependencies:
+    - com.h2database:h2:2.2.224
+- component: com.ibm.async.asyncutil
+  aliases: []
+  dependencies:
+    - com.ibm.async:asyncutil:0.1.0
+- component: com.jcraft.jsch
+  aliases: []
+  dependencies:
+    - com.jcraft:jsch:0.1.55
+- component: com.microsoft.azure
+  aliases: []
+  dependencies:
+    - com.microsoft.azure:azure-storage:8.6.6
+- component: com.nimbus.jose-jwt
+  aliases: []
+  dependencies:
+    - com.nimbusds:nimbus-jose-jwt:9.37.3
+- component: com.redhat.insights
+  aliases: []
+  dependencies:
+    - com.redhat.insights:runtimes-java-api:1.1.3.redhat-00001
+    - com.redhat.insights:runtimes-java-core-runtime:1.1.3.redhat-00001
+- component: com.squareup.protoparser
+  aliases: []
+  dependencies:
+    - com.squareup:protoparser:4.0.3
+- component: com.sun.istack
+  aliases: []
+  dependencies:
+    - com.sun.istack:istack-commons-runtime:4.1.2
+    - com.sun.istack:istack-commons-tools:4.1.2
+- component: com.sun.xml.fastinfoset
+  aliases: []
+  dependencies:
+    - com.sun.xml.fastinfoset:FastInfoset:2.1.1
+- component: com.sun.xml.messaging.saaj
+  aliases: []
+  dependencies:
+    - com.sun.xml.messaging.saaj:saaj-impl:3.0.0
+- component: commons-beanutils
+  aliases: []
+  dependencies:
+    - commons-beanutils:commons-beanutils:1.9.4
+- component: commons-cli
+  aliases: []
+  dependencies:
+    - commons-cli:commons-cli:1.9.0
+- component: commons-codec
+  aliases: []
+  dependencies:
+    - commons-codec:commons-codec:1.17.1
+- component: commons-collections
+  aliases: []
+  dependencies:
+    - commons-collections:commons-collections:3.2.2
+- component: commons-daemon
+  aliases: []
+  dependencies:
+    - commons-daemon:commons-daemon:1.3.4
+- component: commons-io
+  aliases: []
+  dependencies:
+    - commons-io:commons-io:2.10.0
+    - commons-io:commons-io:2.16.1
+- component: commons-lang3
+  aliases: []
+  dependencies:
+    - org.apache.commons:commons-lang3:3.17.0
+- component: de.dentrassi.crypto
+  aliases: []
+  dependencies:
+    - de.dentrassi.crypto:pem-keystore:2.4.0
+- component: dom4j
+  aliases: []
+  dependencies:
+    - org.dom4j:dom4j:2.1.4
+- component: gnu.getopt
+  aliases: []
+  dependencies:
+    - gnu.getopt:java-getopt:1.0.13
+- component: httpunit
+  aliases: []
+  dependencies:
+    - org.httpunit:httpunit:1.7.3
+- component: io.agroal
+  aliases: []
+  dependencies:
+    - io.agroal:agroal-api:2.0
+    - io.agroal:agroal-narayana:2.0
+    - io.agroal:agroal-pool:2.0
+- component: io.github.resilience4j
+  aliases: []
+  dependencies:
+    - io.github.resilience4j:resilience4j-core:2.2.0
+    - io.github.resilience4j:resilience4j-retry:2.2.0
+- component: io.grpc
+  aliases: []
+  dependencies:
+    - io.grpc:grpc-api:1.68.0
+- component: io.micrometer
+  aliases: []
+  dependencies:
+    - io.micrometer:micrometer-commons:1.14.2
+    - io.micrometer:micrometer-core:1.14.2
+    - io.micrometer:micrometer-registry-otlp:1.14.2
+- component: io.netty
+  aliases: []
+  dependencies:
+    - io.netty:netty-bom:4.1.116.Final
+    - io.netty:netty-buffer:4.1.115.Final
+    - io.netty:netty-codec-http2:4.1.116.Final
+    - io.netty:netty-codec-http:4.1.115.Final
+    - io.netty:netty-codec-socks:4.1.115.Final
+    - io.netty:netty-codec:4.1.115.Final
+    - io.netty:netty-common:4.1.115.Final
+    - io.netty:netty-handler-proxy:4.1.115.Final
+    - io.netty:netty-handler:4.1.115.Final
+    - io.netty:netty-transport:4.1.115.Final
+    - io.netty:netty-codec-dns
+    - io.netty:netty-resolver
+    - io.netty:netty-resolver-dns
+    - io.netty:netty-transport-classes-epoll
+    - io.netty:netty-transport-native-epoll
+    - io.netty:netty-transport-native-unix-common
+- component: io.opentelemetry.instrumentation
+  aliases: []
+  dependencies:
+    - io.opentelemetry.instrumentation:opentelemetry-instrumentation-annotations:2.8.0
+    - io.opentelemetry.instrumentation:opentelemetry-instrumentation-api:2.8.0
+- component: io.opentelemetry.instrumentation}-alph
+  aliases: []
+  dependencies:
+    - io.opentelemetry.instrumentation:opentelemetry-instrumentation-annotations-support:2.8.0-alpha
+    - io.opentelemetry.instrumentation:opentelemetry-instrumentation-api-incubator:2.8.0-alpha
+    - io.opentelemetry.instrumentation:opentelemetry-runtime-telemetry-java8:2.8.0-alpha
+- component: io.opentelemetry.opentelemetry
+  aliases: []
+  dependencies:
+    - io.opentelemetry:opentelemetry-api:1.42.1
+    - io.opentelemetry:opentelemetry-context:1.42.1
+    - io.opentelemetry:opentelemetry-exporter-common:1.42.1
+    - io.opentelemetry:opentelemetry-exporter-logging:1.42.1
+    - io.opentelemetry:opentelemetry-exporter-otlp-common:1.42.1
+    - io.opentelemetry:opentelemetry-sdk-common:1.42.1
+    - io.opentelemetry:opentelemetry-sdk-extension-autoconfigure-spi:1.42.1
+    - io.opentelemetry:opentelemetry-sdk-extension-autoconfigure:1.42.1
+    - io.opentelemetry:opentelemetry-sdk-logs:1.42.1
+    - io.opentelemetry:opentelemetry-sdk-metrics:1.42.1
+    - io.opentelemetry:opentelemetry-sdk-trace:1.42.1
+    - io.opentelemetry:opentelemetry-sdk:1.42.1
+- component: io.opentelemetry.opentelemetry-semconv
+  aliases: []
+  dependencies:
+    - io.opentelemetry.semconv:opentelemetry-semconv:1.25.0-alpha
+- component: io.opentelemetry.opentelemetry}-alph
+  aliases: []
+  dependencies:
+    - io.opentelemetry.instrumentation:opentelemetry-java-http-client:1.42.1-alpha
+    - io.opentelemetry:opentelemetry-api-incubator:1.42.1-alpha
+- component: io.opentelemetry.proto
+  aliases: []
+  dependencies:
+    - io.opentelemetry.proto:opentelemetry-proto:1.3.2-alpha
+- component: io.perfmark
+  aliases: []
+  dependencies:
+    - io.perfmark:perfmark-api:0.23.0
+- component: io.reactivex.rxjava2
+  aliases: []
+  dependencies:
+    - io.reactivex.rxjava2:rxjava:2.2.21
+- component: io.reactivex.rxjava3
+  aliases: []
+  dependencies:
+    - io.reactivex.rxjava3:rxjava:3.1.10
+- component: io.rest-assured
+  aliases: []
+  dependencies:
+    - io.rest-assured:rest-assured:5.5.0
+- component: io.smallrye.jandex
+  aliases: []
+  dependencies:
+    - io.smallrye:jandex:3.2.3
+- component: io.smallrye.open-api
+  aliases: []
+  dependencies:
+    - io.smallrye:smallrye-open-api-core:4.0.5
+    - io.smallrye:smallrye-open-api-jaxrs:4.0.5
+    - io.smallrye:smallrye-open-api-model:4.0.5
+- component: io.smallrye.reactive-utils
+  aliases: []
+  dependencies:
+    - io.smallrye.reactive:smallrye-reactive-converter-api:2.6.0
+- component: io.smallrye.smallrye-common
+  aliases: []
+  dependencies:
+    - io.smallrye.common:smallrye-common-annotation:2.5.0
+    - io.smallrye.common:smallrye-common-classloader:2.5.0
+    - io.smallrye.common:smallrye-common-constraint:2.5.0
+    - io.smallrye.common:smallrye-common-expression:2.5.0
+    - io.smallrye.common:smallrye-common-function:2.5.0
+    - io.smallrye.common:smallrye-common-vertx-context:2.5.0
+- component: io.smallrye.smallrye-config
+  aliases: []
+  dependencies:
+    - io.smallrye.config:smallrye-config-common:3.9.1
+    - io.smallrye.config:smallrye-config-core:3.9.1
+    - io.smallrye.config:smallrye-config-source-file-system:3.9.1
+    - io.smallrye.config:smallrye-config:3.9.1
+- component: io.smallrye.smallrye-fault-tolerance
+  aliases: []
+  dependencies:
+    - io.smallrye:smallrye-fault-tolerance-api:6.7.1
+    - io.smallrye:smallrye-fault-tolerance-autoconfig-core:6.7.1
+    - io.smallrye:smallrye-fault-tolerance-core:6.7.1
+    - io.smallrye:smallrye-fault-tolerance:6.7.1
+- component: io.smallrye.smallrye-health
+  aliases: []
+  dependencies:
+    - io.smallrye:smallrye-health:4.0.4
+- component: io.smallrye.smallrye-jwt
+  aliases: []
+  dependencies:
+    - io.smallrye:smallrye-jwt-cdi-extension:4.3.1
+    - io.smallrye:smallrye-jwt-common:4.3.1
+    - io.smallrye:smallrye-jwt-http-mechanism:4.3.1
+    - io.smallrye:smallrye-jwt:4.3.1
+- component: io.smallrye.smallrye-mutiny
+  aliases: []
+  dependencies:
+    - io.smallrye.reactive:mutiny-reactive-streams-operators:2.6.2
+    - io.smallrye.reactive:mutiny:2.6.2
+- component: io.smallrye.smallrye-mutiny-vertx
+  aliases: []
+  dependencies:
+    - io.smallrye.reactive:smallrye-mutiny-vertx-amqp-client:3.13.2
+    - io.smallrye.reactive:smallrye-mutiny-vertx-core:3.13.2
+    - io.smallrye.reactive:smallrye-mutiny-vertx-runtime:3.13.2
+- component: io.smallrye.smallrye-mutiny-zero
+  aliases: []
+  dependencies:
+    - io.smallrye.reactive:mutiny-zero-flow-adapters:1.1.0
+    - io.smallrye.reactive:mutiny-zero:1.1.0
+- component: io.smallrye.smallrye-opentelemetry
+  aliases: []
+  dependencies:
+    - io.smallrye.opentelemetry:smallrye-opentelemetry-api:2.9.2
+    - io.smallrye.opentelemetry:smallrye-opentelemetry-cdi:2.9.2
+    - io.smallrye.opentelemetry:smallrye-opentelemetry-exporters:2.9.2
+    - io.smallrye.opentelemetry:smallrye-opentelemetry-propagation:2.9.2
+    - io.smallrye.opentelemetry:smallrye-opentelemetry-rest:2.9.2
+- component: io.smallrye.smallrye-reactive-messaging
+  aliases: []
+  dependencies:
+    - io.smallrye.reactive:smallrye-reactive-messaging-amqp:4.24.0
+    - io.smallrye.reactive:smallrye-reactive-messaging-api:4.24.0
+    - io.smallrye.reactive:smallrye-reactive-messaging-kafka-api:4.24.0
+    - io.smallrye.reactive:smallrye-reactive-messaging-kafka-test-companion:4.24.0
+    - io.smallrye.reactive:smallrye-reactive-messaging-kafka:4.24.0
+    - io.smallrye.reactive:smallrye-reactive-messaging-otel:4.24.0
+    - io.smallrye.reactive:smallrye-reactive-messaging-provider:4.24.0
+- component: io.undertow
+  aliases: []
+  dependencies:
+    - io.undertow:undertow-core:2.3.18.Final
+    - io.undertow:undertow-servlet:2.3.18.Final
+    - io.undertow:undertow-websockets-jsr:2.3.18.Final
+- component: io.undertow.jastow
+  aliases: []
+  dependencies:
+    - io.undertow.jastow:jastow:2.2.8.Final
+- component: io.vertx.vertx
+  aliases: []
+  dependencies:
+    - io.vertx:vertx-amqp-client:4.5.10
+    - io.vertx:vertx-core:4.5.10
+    - io.vertx:vertx-grpc-client:4.5.10
+    - io.vertx:vertx-grpc-common:4.5.10
+    - io.vertx:vertx-proton:4.5.10
+- component: io.vertx.vertx-kafka-client
+  aliases: []
+  dependencies:
+    - io.vertx:vertx-kafka-client:4.4.9
+- component: jakarta.activation.jakarta.activation-api
+  aliases: []
+  dependencies:
+    - jakarta.activation:jakarta.activation-api:2.1.3
+- component: jakarta.annotation.jakarta-annotation-api
+  aliases: []
+  dependencies:
+    - jakarta.annotation:jakarta.annotation-api:2.1.1
+- component: jakarta.authentication.jakarta-authentication-api
+  aliases: []
+  dependencies:
+    - jakarta.authentication:jakarta.authentication-api:3.0.0
+- component: jakarta.authorization.jakarta-authorization-api
+  aliases: []
+  dependencies:
+    - jakarta.authorization:jakarta.authorization-api:2.1.0
+- component: jakarta.batch.jakarta.batch-api
+  aliases: []
+  dependencies:
+    - jakarta.batch:jakarta.batch-api:2.1.1
+- component: jakarta.data.jakarta-data-api
+  aliases: []
+  dependencies:
+    - jakarta.data:jakarta.data-api:1.0.1
+- component: jakarta.ejb.jakarta-ejb-api
+  aliases: []
+  dependencies:
+    - jakarta.ejb:jakarta.ejb-api:4.0.1
+- component: jakarta.enterprise
+  aliases: []
+  dependencies:
+    - jakarta.enterprise:jakarta.enterprise.cdi-api:4.0.1
+    - jakarta.enterprise:jakarta.enterprise.lang-model:4.0.1
+- component: jakarta.enterprise.concurrent.jakarta-enterprise.concurrent-api
+  aliases: []
+  dependencies:
+    - jakarta.enterprise.concurrent:jakarta.enterprise.concurrent-api:3.0.3
+- component: jakarta.faces
+  aliases:
+    - mojarra
+  dependencies:
+    - org.glassfish:jakarta.faces:4.0.8
+- component: jakarta.faces.jakarta-faces-api
+  aliases:
+    - jakarta-faces-api
+  dependencies:
+    - jakarta.faces:jakarta.faces-api:4.0.1
+- component: jakarta.inject.jakarta.inject-api
+  aliases: []
+  dependencies:
+    - jakarta.inject:jakarta.inject-api:2.0.1
+- component: jakarta.interceptor.jakarta-interceptors-api
+  aliases: []
+  dependencies:
+    - jakarta.interceptor:jakarta.interceptor-api:2.1.0
+- component: jakarta.jms.jakarta-jms-api
+  aliases: []
+  dependencies:
+    - jakarta.jms:jakarta.jms-api:3.1.0
+- component: jakarta.json.bind.api
+  aliases: []
+  dependencies:
+    - jakarta.json.bind:jakarta.json.bind-api:3.0.1
+- component: jakarta.json.jakarta-json-api
+  aliases: []
+  dependencies:
+    - jakarta.json:jakarta.json-api:2.1.3
+- component: jakarta.mail-api
+  aliases: []
+  dependencies:
+    - jakarta.mail:jakarta.mail-api:2.1.3
+- component: jakarta.mvc.jakarta-mvc-api
+  aliases: []
+  dependencies:
+    - jakarta.mvc:jakarta.mvc-api:2.1.0
+- component: jakarta.persistence
+  aliases: []
+  dependencies:
+    - jakarta.persistence:jakarta.persistence-api:3.1.0
+- component: jakarta.resource.jakarta-resource-api
+  aliases: []
+  dependencies:
+    - jakarta.resource:jakarta.resource-api:2.1.0
+- component: jakarta.security.enterprise
+  aliases: []
+  dependencies:
+    - jakarta.security.enterprise:jakarta.security.enterprise-api:3.0.0
+- component: jakarta.servlet.jakarta-servlet-api
+  aliases: []
+  dependencies:
+    - jakarta.servlet:jakarta.servlet-api:6.0.0
+- component: jakarta.servlet.jsp.jakarta-servlet-jsp-api
+  aliases: []
+  dependencies:
+    - jakarta.servlet.jsp:jakarta.servlet.jsp-api:3.1.1
+- component: jakarta.servlet.jsp.jstl.jakarta-servlet-jsp-jstl-api
+  aliases: []
+  dependencies:
+    - jakarta.servlet.jsp.jstl:jakarta.servlet.jsp.jstl-api:3.0.2
+- component: jakarta.transaction.jakarta-transaction-api
+  aliases: []
+  dependencies:
+    - jakarta.transaction:jakarta.transaction-api:2.0.1
+- component: jakarta.validation.jakarta-validation-api
+  aliases: []
+  dependencies:
+    - jakarta.validation:jakarta.validation-api:3.0.2
+- component: jakarta.websocket.jakarta-websocket-api
+  aliases: []
+  dependencies:
+    - jakarta.websocket:jakarta.websocket-api:2.1.1
+    - jakarta.websocket:jakarta.websocket-client-api:2.1.1
+- component: jakarta.ws.rs.jakarta-ws-rs-api
+  aliases: []
+  dependencies:
+    - jakarta.ws.rs:jakarta.ws.rs-api:3.1.0
+- component: jakarta.xml.bind.jakarta-xml-bind-api
+  aliases: []
+  dependencies:
+    - jakarta.xml.bind:jakarta.xml.bind-api:4.0.2
+- component: javax.xml.bind.jaxb-api
+  aliases: []
+  dependencies:
+    - javax.xml.bind:jaxb-api:2.4.0-b180830.0359
+- component: jboss.jaxbintros
+  aliases: []
+  dependencies:
+    - jboss.jaxbintros:jboss-jaxb-intros:2.0.1
+- component: joda-time
+  aliases: []
+  dependencies:
+    - joda-time:joda-time:2.12.7
+- component: jsoup
+  aliases: []
+  dependencies:
+    - org.jsoup:jsoup:1.15.4
+- component: junit
+  aliases: []
+  dependencies:
+    - junit:junit:4.13.2
+- component: net.jcip
+  aliases: []
+  dependencies:
+    - net.jcip:jcip-annotations:1.0
+- component: net.shibboleth.utilities.java-support
+  aliases: []
+  dependencies:
+    - net.shibboleth.utilities:java-support:8.0.0
+- component: org.aesh
+  aliases: []
+  dependencies:
+    - org.aesh:aesh:2.4
+- component: org.aesh-extensions
+  aliases: []
+  dependencies:
+    - org.aesh:aesh-extensions:1.8
+- component: org.aesh-readline
+  aliases: []
+  dependencies:
+    - org.aesh:readline:2.2
+- component: org.apache.activemq.artemis
+  aliases:
+    - org.apache.activemq
+    - activemq
+    - artemis
+    - amq
+  dependencies:
+    - org.apache.activemq:artemis-amqp-protocol:2.33.0.redhat-00016
+    - org.apache.activemq:artemis-cli:2.33.0.redhat-00016
+    - org.apache.activemq:artemis-commons:2.33.0.redhat-00016
+    - org.apache.activemq:artemis-core-client:2.33.0.redhat-00016
+    - org.apache.activemq:artemis-dto:2.33.0.redhat-00016
+    - org.apache.activemq:artemis-hornetq-protocol:2.33.0.redhat-00016
+    - org.apache.activemq:artemis-hqclient-protocol:2.33.0.redhat-00016
+    - org.apache.activemq:artemis-jakarta-client:2.33.0.redhat-00016
+    - org.apache.activemq:artemis-jakarta-ra:2.33.0.redhat-00016
+    - org.apache.activemq:artemis-jakarta-server:2.33.0.redhat-00016
+    - org.apache.activemq:artemis-jakarta-service-extensions:2.33.0.redhat-00016
+    - org.apache.activemq:artemis-jdbc-store:2.33.0.redhat-00016
+    - org.apache.activemq:artemis-journal:2.33.0.redhat-00016
+    - org.apache.activemq:artemis-selector:2.33.0.redhat-00016
+    - org.apache.activemq:artemis-server:2.33.0.redhat-00016
+- component: org.apache.activemq.artemis.native
+  aliases: []
+  dependencies:
+    - org.apache.activemq:activemq-artemis-native:2.0.0
+- component: org.apache.cxf
+  aliases: []
+  dependencies:
+    - org.apache.cxf.services.sts:cxf-services-sts-core:4.0.5
+    - org.apache.cxf.services.ws-discovery:cxf-services-ws-discovery-api:4.0.5
+    - org.apache.cxf:cxf-core:4.0.5
+    - org.apache.cxf:cxf-rt-bindings-coloc:4.0.5
+    - org.apache.cxf:cxf-rt-bindings-soap:4.0.5
+    - org.apache.cxf:cxf-rt-bindings-xml:4.0.5
+    - org.apache.cxf:cxf-rt-databinding-aegis:4.0.5
+    - org.apache.cxf:cxf-rt-databinding-jaxb:4.0.5
+    - org.apache.cxf:cxf-rt-features-clustering:4.0.5
+    - org.apache.cxf:cxf-rt-features-logging:4.0.5
+    - org.apache.cxf:cxf-rt-features-throttling:4.0.5
+    - org.apache.cxf:cxf-rt-frontend-jaxws:4.0.5
+    - org.apache.cxf:cxf-rt-frontend-simple:4.0.5
+    - org.apache.cxf:cxf-rt-management:4.0.5
+    - org.apache.cxf:cxf-rt-security-saml:4.0.5
+    - org.apache.cxf:cxf-rt-security:4.0.5
+    - org.apache.cxf:cxf-rt-transports-http-hc:4.0.5
+    - org.apache.cxf:cxf-rt-transports-http:4.0.5
+    - org.apache.cxf:cxf-rt-transports-jms:4.0.5
+    - org.apache.cxf:cxf-rt-transports-local:4.0.5
+    - org.apache.cxf:cxf-rt-ws-addr:4.0.5
+    - org.apache.cxf:cxf-rt-ws-mex:4.0.5
+    - org.apache.cxf:cxf-rt-ws-policy:4.0.5
+    - org.apache.cxf:cxf-rt-ws-rm:4.0.5
+    - org.apache.cxf:cxf-rt-ws-security:4.0.5
+    - org.apache.cxf:cxf-rt-wsdl:4.0.5
+    - org.apache.cxf:cxf-tools-common:4.0.5
+    - org.apache.cxf:cxf-tools-java2ws:4.0.5
+    - org.apache.cxf:cxf-tools-validator:4.0.5
+    - org.apache.cxf:cxf-tools-wsdlto-core:4.0.5
+    - org.apache.cxf:cxf-tools-wsdlto-databinding-jaxb:4.0.5
+    - org.apache.cxf:cxf-tools-wsdlto-frontend-jaxws:4.0.5
+- component: org.apache.cxf.xjcplugins
+  aliases: []
+  dependencies:
+    - org.apache.cxf.xjc-utils:cxf-xjc-runtime:4.0.0
+    - org.apache.cxf.xjcplugins:cxf-xjc-boolean:4.0.0
+    - org.apache.cxf.xjcplugins:cxf-xjc-bug986:4.0.0
+    - org.apache.cxf.xjcplugins:cxf-xjc-dv:4.0.0
+    - org.apache.cxf.xjcplugins:cxf-xjc-ts:4.0.0
+- component: org.apache.ds
+  aliases: []
+  dependencies:
+    - org.apache.directory.server:apacheds-all:2.0.0.AM27
+    - org.apache.directory.server:apacheds-interceptor-kerberos:2.0.0.AM26
+    - org.apache.directory.server:apacheds-test-framework:2.0.0.AM26
+- component: org.apache.groovy
+  aliases: []
+  dependencies:
+    - org.apache.groovy:groovy:4.0.24
+- component: org.apache.httpcomponents.httpasyncclient
+  aliases: []
+  dependencies:
+    - org.apache.httpcomponents:httpasyncclient:4.1.5
+- component: org.apache.httpcomponents.httpclient
+  aliases: []
+  dependencies:
+    - org.apache.httpcomponents:httpclient:4.5.14
+    - org.apache.httpcomponents:httpmime:4.5.14
+- component: org.apache.httpcomponents.httpcore
+  aliases: []
+  dependencies:
+    - org.apache.httpcomponents:httpcore-nio:4.4.16
+    - org.apache.httpcomponents:httpcore:4.4.16
+- component: org.apache.james.apache-mime4j
+  aliases: []
+  dependencies:
+    - org.apache.james:apache-mime4j-core:0.8.11
+    - org.apache.james:apache-mime4j-dom:0.8.11
+    - org.apache.james:apache-mime4j-storage:0.8.11
+- component: org.apache.kafka
+  aliases: []
+  dependencies:
+    - org.apache.kafka:kafka-clients:3.9.0
+    - org.apache.kafka:kafka-server-common:3.9.0
+    - org.apache.kafka:kafka_2.13:3.9.0
+- component: org.apache.logging.log4j
+  aliases: []
+  dependencies:
+    - org.apache.logging.log4j:log4j-api:2.23.1
+    - org.apache.logging.log4j:log4j-core:2.23.1
+- component: org.apache.lucene
+  aliases: []
+  dependencies:
+    - org.apache.lucene:lucene-analysis-common:9.11.1
+    - org.apache.lucene:lucene-core:9.11.1
+    - org.apache.lucene:lucene-facet:9.11.1
+    - org.apache.lucene:lucene-join:9.11.1
+    - org.apache.lucene:lucene-queries:9.11.1
+    - org.apache.lucene:lucene-queryparser:9.11.1
+- component: org.apache.maven.provider
+  aliases: []
+  dependencies:
+    - org.apache.maven:maven-resolver-provider:3.5.4
+- component: org.apache.maven.resolver
+  aliases: []
+  dependencies:
+    - org.apache.maven.resolver:maven-resolver-api:1.1.1
+    - org.apache.maven.resolver:maven-resolver-connector-basic:1.1.1
+    - org.apache.maven.resolver:maven-resolver-impl:1.1.1
+    - org.apache.maven.resolver:maven-resolver-spi:1.1.1
+    - org.apache.maven.resolver:maven-resolver-transport-file:1.1.1
+    - org.apache.maven.resolver:maven-resolver-transport-http:1.1.1
+    - org.apache.maven.resolver:maven-resolver-util:1.1.1
+- component: org.apache.neethi
+  aliases: []
+  dependencies:
+    - org.apache.neethi:neethi:3.2.0
+- component: org.apache.openjpa
+  aliases: []
+  dependencies:
+    - org.apache.openjpa:openjpa-all:${version.org.apache.openjpa}
+- component: org.apache.qpid.proton
+  aliases: []
+  dependencies:
+    - org.apache.qpid:proton-j:0.34.1
+- component: org.apache.santuario
+  aliases: []
+  dependencies:
+    - org.apache.santuario:xmlsec:3.0.4
+- component: org.apache.sshd
+  aliases: []
+  dependencies:
+    - org.apache.sshd:sshd-common:2.14.0
+    - org.apache.sshd:sshd-core:2.14.0
+- component: org.apache.velocity
+  aliases: []
+  dependencies:
+    - org.apache.velocity:velocity-engine-core:2.3
+    - org.apache.velocity:velocity-engine-scripting:2.3
+- component: org.apache.ws.xmlschema
+  aliases: []
+  dependencies:
+    - org.apache.ws.xmlschema:xmlschema-core:2.3.0
+- component: org.apache.wss4j
+  aliases: []
+  dependencies:
+    - org.apache.wss4j:wss4j-bindings:3.0.3
+    - org.apache.wss4j:wss4j-policy:3.0.3
+    - org.apache.wss4j:wss4j-ws-security-common:3.0.3
+    - org.apache.wss4j:wss4j-ws-security-dom:3.0.3
+    - org.apache.wss4j:wss4j-ws-security-policy-stax:3.0.3
+    - org.apache.wss4j:wss4j-ws-security-stax:3.0.3
+- component: org.assertj
+  aliases: []
+  dependencies:
+    - org.assertj:assertj-bom:3.26.3
+- component: org.awaitility.awaitility
+  aliases: []
+  dependencies:
+    - org.awaitility:awaitility:4.0.3
+- component: org.bitbucket.jose4j
+  aliases: []
+  dependencies:
+    - org.bitbucket.b_c:jose4j:0.9.6
+- component: org.bouncycastle
+  aliases: []
+  dependencies:
+    - org.bouncycastle:bcjmail-jdk18on:1.79
+    - org.bouncycastle:bcmail-jdk18on:1.79
+    - org.bouncycastle:bcpg-jdk18on:1.79
+    - org.bouncycastle:bcpkix-jdk18on:1.79
+    - org.bouncycastle:bcprov-jdk18on:1.79
+    - org.bouncycastle:bcutil-jdk18on:1.79
+- component: org.bytebuddy
+  aliases: []
+  dependencies:
+    - net.bytebuddy:byte-buddy:1.14.18
+- component: org.codehaus.plexus.plexus-utils
+  aliases: []
+  dependencies:
+    - org.codehaus.plexus:plexus-utils:3.5.1
+- component: org.codehaus.woodstox.stax2-api
+  aliases: []
+  dependencies:
+    - org.codehaus.woodstox:stax2-api:4.2.2
+- component: org.codehaus.woodstox.woodstox-core
+  aliases: []
+  dependencies:
+    - com.fasterxml.woodstox:woodstox-core:7.0.0
+- component: org.cryptacular
+  aliases: []
+  dependencies:
+    - org.cryptacular:cryptacular:1.2.5
+- component: org.eclipse.angus.angus-activation
+  aliases: []
+  dependencies:
+    - org.eclipse.angus:angus-activation:2.0.2
+- component: org.eclipse.angus.angus-mail
+  aliases: []
+  dependencies:
+    - org.eclipse.angus:angus-mail:2.0.3
+- component: org.eclipse.jdt
+  aliases: []
+  dependencies:
+    - org.eclipse.jdt:ecj:3.32.0
+- component: org.eclipse.jetty
+  aliases: []
+  dependencies:
+    - org.eclipse.jetty:jetty-http:11.0.24
+    - org.eclipse.jetty:jetty-io:11.0.24
+    - org.eclipse.jetty:jetty-proxy:11.0.24
+    - org.eclipse.jetty:jetty-server:11.0.24
+    - org.eclipse.jetty:jetty-servlet:11.0.24
+    - org.eclipse.jetty:jetty-servlets:11.0.24
+    - org.eclipse.jetty:jetty-util:11.0.24
+    - org.eclipse.jetty:jetty-webapp:11.0.24
+- component: org.eclipse.jgit
+  aliases: []
+  dependencies:
+    - org.eclipse.jgit:org.eclipse.jgit.junit.http:6.10.0.202406032230-r
+    - org.eclipse.jgit:org.eclipse.jgit.junit.ssh:6.10.0.202406032230-r
+    - org.eclipse.jgit:org.eclipse.jgit.ssh.apache:6.10.0.202406032230-r
+    - org.eclipse.jgit:org.eclipse.jgit:6.10.0.202406032230-r
+- component: org.eclipse.microprofile.config.api
+  aliases: []
+  dependencies:
+    - org.eclipse.microprofile.config:microprofile-config-api:3.1
+    - org.eclipse.microprofile.config:microprofile-config-tck:3.1
+- component: org.eclipse.microprofile.fault-tolerance.api
+  aliases: []
+  dependencies:
+    - org.eclipse.microprofile.fault-tolerance:microprofile-fault-tolerance-api:4.1.1
+    - org.eclipse.microprofile.fault-tolerance:microprofile-fault-tolerance-tck:4.1.1
+- component: org.eclipse.microprofile.health.api
+  aliases: []
+  dependencies:
+    - org.eclipse.microprofile.health:microprofile-health-api:4.0.1
+    - org.eclipse.microprofile.health:microprofile-health-tck:4.0.1
+- component: org.eclipse.microprofile.jwt.api
+  aliases: []
+  dependencies:
+    - org.eclipse.microprofile.jwt:microprofile-jwt-auth-api:2.1
+    - org.eclipse.microprofile.jwt:microprofile-jwt-auth-tck:2.1
+- component: org.eclipse.microprofile.lra.api
+  aliases: []
+  dependencies:
+    - org.eclipse.microprofile.lra:microprofile-lra-api:2.0
+    - org.eclipse.microprofile.lra:microprofile-lra-tck:2.0
+- component: org.eclipse.microprofile.openapi
+  aliases: []
+  dependencies:
+    - org.eclipse.microprofile.openapi:microprofile-openapi-api:4.0.2
+    - org.eclipse.microprofile.openapi:microprofile-openapi-tck:4.0.2
+- component: org.eclipse.microprofile.reactive-messaging.api
+  aliases: []
+  dependencies:
+    - org.eclipse.microprofile.reactive.messaging:microprofile-reactive-messaging-api:3.0.1
+    - org.eclipse.microprofile.reactive.messaging:microprofile-reactive-messaging-tck:3.0.1
+- component: org.eclipse.microprofile.reactive-streams-operators.api
+  aliases: []
+  dependencies:
+    - org.eclipse.microprofile.reactive-streams-operators:microprofile-reactive-streams-operators-api:3.0.1
+    - org.eclipse.microprofile.reactive-streams-operators:microprofile-reactive-streams-operators-core:3.0.1
+    - org.eclipse.microprofile.reactive-streams-operators:microprofile-reactive-streams-operators-tck:3.0.1
+- component: org.eclipse.microprofile.rest.client.api
+  aliases: []
+  dependencies:
+    - org.eclipse.microprofile.rest.client:microprofile-rest-client-api:4.0
+    - org.eclipse.microprofile.rest.client:microprofile-rest-client-tck:4.0
+- component: org.eclipse.microprofile.telemetry
+  aliases: []
+  dependencies:
+    - org.eclipse.microprofile.telemetry:microprofile-telemetry-logs-tck:2.0.1
+    - org.eclipse.microprofile.telemetry:microprofile-telemetry-metrics-tck:2.0.1
+    - org.eclipse.microprofile.telemetry:microprofile-telemetry-tracing-tck:2.0.1
+- component: org.eclipse.parsson
+  aliases: []
+  dependencies:
+    - org.eclipse.parsson:parsson:1.1.7
+- component: org.eclipse.persistence.eclipselink
+  aliases: []
+  dependencies:
+    - org.eclipse.persistence:eclipselink:4.0.4
+- component: org.eclipse.yasson
+  aliases: []
+  dependencies:
+    - org.eclipse:yasson:3.0.4
+- component: org.elasticsearch.client.rest-client
+  aliases: []
+  dependencies:
+    - org.elasticsearch.client:elasticsearch-rest-client-sniffer:8.15.4
+    - org.elasticsearch.client:elasticsearch-rest-client:8.15.4
+- component: org.fusesource.jansi
+  aliases: []
+  dependencies:
+    - org.fusesource.jansi:jansi:1.18
+- component: org.glassfish.expressly
+  aliases: []
+  dependencies:
+    - org.glassfish.expressly:expressly:5.0.0
+- component: org.glassfish.jakarta.enterprise.concurrent
+  aliases: []
+  dependencies:
+    - org.glassfish:jakarta.enterprise.concurrent:3.0.0
+- component: org.glassfish.jakarta.json
+  aliases: []
+  dependencies:
+    - org.glassfish:jakarta.json:1.1.6
+- component: org.glassfish.jaxb
+  aliases:
+    - jaxb
+  dependencies:
+    - org.glassfish.jaxb:codemodel:4.0.5
+    - org.glassfish.jaxb:jaxb-core:4.0.5
+    - org.glassfish.jaxb:jaxb-jxc:4.0.5
+    - org.glassfish.jaxb:jaxb-runtime:4.0.5
+    - org.glassfish.jaxb:jaxb-xjc:4.0.5
+    - org.glassfish.jaxb:txw2:4.0.5
+    - org.glassfish.jaxb:xsom:4.0.5
+- component: org.glassfish.soteria
+  aliases:
+    - glassfish soteria
+    - soteria
+  dependencies:
+    - org.glassfish.soteria:jakarta.security.enterprise:3.0.3
+    - org.glassfish.soteria:soteria.spi.bean.decorator.weld:3.0.3
+- component: org.glassfish.web.jakarta.servlet.jsp.jstl
+  aliases:
+    - jstl
+  dependencies:
+    - org.glassfish.web:jakarta.servlet.jsp.jstl:3.0.1.redhat-00001
+- component: org.hamcrest
+  aliases:
+    - hamcrest
+  dependencies:
+    - org.hamcrest:hamcrest:2.2
+- component: org.hamcrest.legacy
+  aliases:
+    - legacy hamcrest
+  dependencies:
+    - org.hamcrest:hamcrest-all:1.3
+- component: org.hibernate
+  aliases:
+    - hibernate
+  dependencies:
+    - org.hibernate.orm:hibernate-core:6.6.3.Final
+    - org.hibernate.orm:hibernate-envers:6.6.3.Final
+- component: org.hibernate.commons.annotations
+  aliases:
+    - hibernate-commons-annotations
+    - hibernate-annotations
+    - hibernate annotations
+  dependencies:
+    - org.hibernate.common:hibernate-commons-annotations:7.0.3.Final
+- component: org.hibernate.search
+  aliases:
+    - hibernate-search
+    - hibernate search
+  dependencies:
+    - org.hibernate.search:hibernate-search-backend-elasticsearch:7.2.2.Final
+    - org.hibernate.search:hibernate-search-backend-lucene:7.2.2.Final
+    - org.hibernate.search:hibernate-search-engine:7.2.2.Final
+    - org.hibernate.search:hibernate-search-mapper-orm:7.2.2.Final
+    - org.hibernate.search:hibernate-search-mapper-pojo-base:7.2.2.Final
+    - org.hibernate.search:hibernate-search-util-common:7.2.2.Final
+    - org.hibernate.search:hibernate-search-v5migrationhelper-engine:7.2.2.Final
+    - org.hibernate.search:hibernate-search-v5migrationhelper-orm:7.2.2.Final
+- component: org.hibernate.validator
+  aliases:
+    - hibernate-validator
+    - hibernate validator
+  dependencies:
+    - org.hibernate.validator:hibernate-validator-cdi:8.0.2.Final
+    - org.hibernate.validator:hibernate-validator:8.0.2.Final
+- component: org.hornetq
+  aliases:
+    - hornetq
+  dependencies:
+    - org.hornetq:hornetq-commons:2.4.11.Final
+    - org.hornetq:hornetq-core-client:2.4.11.Final
+    - org.hornetq:hornetq-jakarta-client:2.4.11.Final
+    - org.hornetq:hornetq-jms-client:2.4.11.Final
+- component: org.infinispan
+  aliases:
+    - infinispan
+  dependencies:
+    - org.infinispan:infinispan-bom:15.0.11.Final
+    - org.infinispan:infinispan-cachestore-jdbc
+    - org.infinispan:infinispan-cachestore-jdbc-common
+    - org.infinispan:infinispan-cachestore-remote
+    - org.infinispan:infinispan-cdi-common
+    - org.infinispan:infinispan-cdi-embedded
+    - org.infinispan:infinispan-cdi-remote
+    - org.infinispan:infinispan-client-hotrod
+    - org.infinispan:infinispan-clustered-counter
+    - org.infinispan:infinispan-clustered-lock
+    - org.infinispan:infinispan-commons
+    - org.infinispan:infinispan-core
+    - org.infinispan:infinispan-hibernate-cache-commons
+    - org.infinispan:infinispan-hibernate-cache-spi
+    - org.infinispan:infinispan-hibernate-cache-v62
+    - org.infinispan:infinispan-objectfilter
+    - org.infinispan:infinispan-query
+    - org.infinispan:infinispan-query-core
+    - org.infinispan:infinispan-query-dsl
+    - org.infinispan:infinispan-remote-query-client
+    - org.infinispan.protostream:protostream
+    - org.infinispan.protostream:protostream-types
+- component: org.jasypt
+  aliases:
+    - jasypt
+  dependencies:
+    - org.jasypt:jasypt:1.9.3
+- component: org.javassist
+  aliases:
+    - javassist
+  dependencies:
+    - org.javassist:javassist:3.29.2-GA
+- component: org.jberet
+  aliases:
+    - jberet
+  dependencies:
+    - org.jberet:jberet-core:3.1.0.Final
+- component: org.jboss.activemq.artemis.integration
+  aliases:
+    - artemis-integration
+    - artemis integration
+  dependencies:
+    - org.jboss.activemq.artemis.integration:artemis-wildfly-integration:2.0.3.Final
+- component: org.jboss.arquillian.core
+  aliases:
+    - arquillian
+  dependencies:
+    - org.jboss.arquillian:arquillian-bom:1.9.2.Final
+- component: org.jboss.arquillian.jakarta
+  aliases:
+    - arquillian-jakarta-bom
+    - arquillian-jakarta
+  dependencies:
+    - org.jboss.arquillian.jakarta:arquillian-jakarta-bom:10.0.0.Final
+- component: org.jboss.arquillian.testcontainers
+  aliases:
+    - testcontainers
+  dependencies:
+    - org.jboss.arquillian:arquillian-testcontainers:1.0.0.Alpha3
+- component: org.jboss.byteman
+  aliases:
+    - byteman
+  dependencies:
+    - org.jboss.byteman:byteman-bmunit:4.0.24
+    - org.jboss.byteman:byteman-install:4.0.24
+    - org.jboss.byteman:byteman-submit:4.0.24
+    - org.jboss.byteman:byteman:4.0.24
+- component: org.jboss.classfilewriter
+  aliases:
+    - jboss-classfilewriter
+    - classfilewriter
+  dependencies:
+    - org.jboss.classfilewriter:jboss-classfilewriter:1.3.1.Final
+- component: org.jboss.common.jboss-common-beans
+  aliases:
+    - jboss-common-beans
+  dependencies:
+    - org.jboss.common:jboss-common-beans:2.0.1.Final
+- component: org.jboss.ejb-client
+  aliases:
+    - ejb-client
+    - ejb client
+    - jboss-ejb-client
+  dependencies:
+    - org.jboss:jboss-ejb-client:5.0.8.Final
+- component: org.jboss.ejb3.ext-api
+  aliases:
+    - jboss-ejb3-ext-api
+  dependencies:
+    - org.jboss.ejb3:jboss-ejb3-ext-api:2.4.0.Final
+- component: org.jboss.genericjms
+  aliases: []
+  dependencies:
+    - org.jboss.genericjms:generic-jms-ra-jar:3.0.0.Final
+- component: org.jboss.hal.console
+  aliases:
+    - hal
+    - hal-console
+  dependencies:
+    - org.jboss.hal:hal-console:3.7.7.Final
+- component: org.jboss.iiop-client
+  aliases: []
+  dependencies:
+    - org.jboss:jboss-iiop-client:2.0.1.Final
+- component: org.jboss.invocation
+  aliases:
+    - jboss-invocation
+  dependencies:
+    - org.jboss.invocation:jboss-invocation:2.0.1.Final
+- component: org.jboss.ironjacamar
+  aliases:
+    - ironjacamar
+  dependencies:
+    - org.jboss.ironjacamar:ironjacamar-common-api:3.0.10.Final
+    - org.jboss.ironjacamar:ironjacamar-common-impl:3.0.10.Final
+    - org.jboss.ironjacamar:ironjacamar-common-spi:3.0.10.Final
+    - org.jboss.ironjacamar:ironjacamar-core-api:3.0.10.Final
+    - org.jboss.ironjacamar:ironjacamar-core-impl:3.0.10.Final
+    - org.jboss.ironjacamar:ironjacamar-deployers-common:3.0.10.Final
+    - org.jboss.ironjacamar:ironjacamar-jdbc:3.0.10.Final
+    - org.jboss.ironjacamar:ironjacamar-validator:3.0.10.Final
+- component: org.jboss.jboss-dmr
+  aliases: []
+  dependencies:
+    - org.jboss:jboss-dmr:1.7.0.Final
+- component: org.jboss.jboss-transaction-spi
+  aliases: []
+  dependencies:
+    - org.jboss:jboss-transaction-spi:8.0.0.Final
+- component: org.jboss.jboss-vfs
+  aliases: []
+  dependencies:
+    - org.jboss:jboss-vfs:3.3.2.Final
+- component: org.jboss.logging.commons-logging-jboss-logging
+  aliases: []
+  dependencies:
+    - org.jboss.logging:commons-logging-jboss-logging:1.0.0.Final
+- component: org.jboss.logging.jboss-logging
+  aliases: []
+  dependencies:
+    - org.jboss.logging:jboss-logging:3.6.1.Final
+- component: org.jboss.logging.jboss-logging-tools
+  aliases: []
+  dependencies:
+    - org.jboss.logging:jboss-logging-annotations:3.0.3.Final
+    - org.jboss.logging:jboss-logging-processor:3.0.3.Final
+- component: org.jboss.logging.jul-to-slf4j-stub
+  aliases: []
+  dependencies:
+    - org.jboss.logging:jul-to-slf4j-stub:1.0.1.Final
+- component: org.jboss.logmanager.commons-logging-jboss-logmanager
+  aliases: []
+  dependencies:
+    - org.jboss.logmanager:commons-logging-jboss-logmanager:1.0.3.Final
+- component: org.jboss.logmanager.jboss-logmanager
+  aliases: []
+  dependencies:
+    - org.jboss.logmanager:jboss-logmanager:2.1.19.Final
+- component: org.jboss.logmanager.log4j2-jboss-logmanager
+  aliases: []
+  dependencies:
+    - org.jboss.logmanager:log4j2-jboss-logmanager:2.0.1.Final
+- component: org.jboss.marshalling.jboss-marshalling
+  aliases: []
+  dependencies:
+    - org.jboss.marshalling:jboss-marshalling-river:2.2.1.Final
+    - org.jboss.marshalling:jboss-marshalling:2.2.1.Final
+- component: org.jboss.metadata
+  aliases: []
+  dependencies:
+    - org.jboss.metadata:jboss-metadata-appclient:16.0.0.Final
+    - org.jboss.metadata:jboss-metadata-common:16.0.0.Final
+    - org.jboss.metadata:jboss-metadata-ear:16.0.0.Final
+    - org.jboss.metadata:jboss-metadata-ejb:16.0.0.Final
+    - org.jboss.metadata:jboss-metadata-web:16.0.0.Final
+- component: org.jboss.mod_cluster
+  aliases: []
+  dependencies:
+    - org.jboss.mod_cluster:mod_cluster-container-spi:2.1.0.Final
+    - org.jboss.mod_cluster:mod_cluster-core:2.1.0.Final
+    - org.jboss.mod_cluster:mod_cluster-load-spi:2.1.0.Final
+- component: org.jboss.modules.jboss-modules
+  aliases: []
+  dependencies:
+    - org.jboss.modules:jboss-modules:2.1.6.Final
+- component: org.jboss.msc.jboss-msc
+  aliases: []
+  dependencies:
+    - org.jboss.msc:jboss-msc:1.5.5.Final
+- component: org.jboss.narayana
+  aliases:
+    - narayana
+  dependencies:
+    - org.jboss.narayana.jts:narayana-jts-idlj:7.1.0.Final
+    - org.jboss.narayana.jts:narayana-jts-integration:7.1.0.Final
+    - org.jboss.narayana.rts:restat-api:7.1.0.Final
+    - org.jboss.narayana.rts:restat-bridge:7.1.0.Final
+    - org.jboss.narayana.rts:restat-integration:7.1.0.Final
+    - org.jboss.narayana.rts:restat-util:7.1.0.Final
+    - org.jboss.narayana.xts:byteman_support:7.1.0.Final
+    - org.jboss.narayana.xts:jbossxts:7.1.0.Final
+    - org.jboss.narayana:jbosstxbridge:7.1.0.Final
+- component: org.jboss.narayana.lra
+  aliases: []
+  dependencies:
+    - org.jboss.narayana.lra:lra-client:0.0.9.Final
+    - org.jboss.narayana.lra:lra-coordinator-jar:0.0.9.Final
+    - org.jboss.narayana.lra:lra-proxy-api:0.0.9.Final
+    - org.jboss.narayana.lra:lra-service-base:0.0.9.Final
+    - org.jboss.narayana.lra:narayana-lra:0.0.9.Final
+- component: org.jboss.openjdk-orb
+  aliases:
+    - openjdk-orb
+  dependencies:
+    - org.jboss.openjdk-orb:openjdk-orb:10.1.0.Final
+- component: org.jboss.remoting
+  aliases: []
+  dependencies:
+    - org.jboss.remoting:jboss-remoting:5.0.30.Final
+- component: org.jboss.remotingjmx.remoting-jmx
+  aliases: []
+  dependencies:
+    - org.jboss.remotingjmx:remoting-jmx:3.1.0.Final
+- component: org.jboss.resteasy
+  aliases: []
+  dependencies:
+    - org.jboss.resteasy:resteasy-atom-provider:6.2.11.Final
+    - org.jboss.resteasy:resteasy-cdi:6.2.11.Final
+    - org.jboss.resteasy:resteasy-client-api:6.2.11.Final
+    - org.jboss.resteasy:resteasy-client-utils:6.2.11.Final
+    - org.jboss.resteasy:resteasy-client:6.2.11.Final
+    - org.jboss.resteasy:resteasy-core-spi:6.2.11.Final
+    - org.jboss.resteasy:resteasy-core:6.2.11.Final
+    - org.jboss.resteasy:resteasy-crypto:6.2.11.Final
+    - org.jboss.resteasy:resteasy-jackson2-provider:6.2.11.Final
+    - org.jboss.resteasy:resteasy-jaxb-provider:6.2.11.Final
+    - org.jboss.resteasy:resteasy-jsapi:6.2.11.Final
+    - org.jboss.resteasy:resteasy-json-binding-provider:6.2.11.Final
+    - org.jboss.resteasy:resteasy-json-p-provider:6.2.11.Final
+    - org.jboss.resteasy:resteasy-multipart-provider:6.2.11.Final
+    - org.jboss.resteasy:resteasy-rxjava2:6.2.11.Final
+    - org.jboss.resteasy:resteasy-validator-provider:6.2.11.Final
+- component: org.jboss.resteasy.extensions
+  aliases: []
+  dependencies:
+    - org.jboss.resteasy:resteasy-tracing-api:2.0.1.Final
+- component: org.jboss.resteasy.microprofile
+  aliases: []
+  dependencies:
+    - org.jboss.resteasy.microprofile:microprofile-config:3.0.0.Final
+    - org.jboss.resteasy.microprofile:microprofile-rest-client-base:3.0.0.Final
+    - org.jboss.resteasy.microprofile:microprofile-rest-client:3.0.0.Final
+- component: org.jboss.resteasy.spring
+  aliases: []
+  dependencies:
+    - org.jboss.resteasy.spring:resteasy-spring:3.2.0.Final
+- component: org.jboss.shrinkwrap.descriptors
+  aliases: []
+  dependencies:
+    - org.jboss.shrinkwrap.descriptors:shrinkwrap-descriptors-impl-javaee:2.0.0
+- component: org.jboss.shrinkwrap.resolvers
+  aliases: []
+  dependencies:
+    - org.jboss.shrinkwrap.resolver:shrinkwrap-resolver-depchain:2.2.7
+- component: org.jboss.shrinkwrap.shrinkwrap
+  aliases: []
+  dependencies:
+    - org.jboss.shrinkwrap:shrinkwrap-api:1.2.6
+    - org.jboss.shrinkwrap:shrinkwrap-bom:1.2.6
+    - org.jboss.shrinkwrap:shrinkwrap-impl-base:1.2.6
+- component: org.jboss.slf4j.slf4j-jboss-logmanager
+  aliases: []
+  dependencies:
+    - org.jboss.slf4j:slf4j-jboss-logmanager:2.0.1.Final
+- component: org.jboss.spec.jakarta.el.jboss-el-api_5.0_spec
+  aliases: []
+  dependencies:
+    - org.jboss.spec.jakarta.el:jboss-el-api_5.0_spec:4.0.1.Final
+- component: org.jboss.spec.jakarta.xml.soap.saaj-api_3.0_spec
+  aliases: []
+  dependencies:
+    - org.jboss.spec.jakarta.xml.soap:jboss-saaj-api_3.0_spec:1.0.0.Final
+- component: org.jboss.spec.jakarta.xml.ws.api_4.0_spec
+  aliases: []
+  dependencies:
+    - org.jboss.spec.jakarta.xml.ws:jboss-jakarta-xml-ws-api_4.0_spec:1.0.0.Final
+- component: org.jboss.spec.javax.servlet.jboss-servlet-api_4.0_spec
+  aliases: []
+  dependencies:
+    - org.jboss.spec.javax.servlet:jboss-servlet-api_4.0_spec:2.0.0.Final
+- component: org.jboss.staxmapper
+  aliases: []
+  dependencies:
+    - org.jboss:staxmapper:1.5.0.Final
+- component: org.jboss.stdio
+  aliases: []
+  dependencies:
+    - org.jboss.stdio:jboss-stdio:1.1.0.Final
+- component: org.jboss.threads
+  aliases: []
+  dependencies:
+    - org.jboss.threads:jboss-threads:2.4.0.Final
+- component: org.jboss.universe.community
+  aliases: []
+  dependencies:
+    - org.jboss.universe:community-universe:1.2.0.Final
+- component: org.jboss.universe.producer.wildfly
+  aliases: []
+  dependencies:
+    - org.jboss.universe.producer:wildfly-producers:1.3.11.Final
+- component: org.jboss.weld.weld
+  aliases:
+    - weld
+  dependencies:
+    - org.jboss.weld.module:weld-ejb:5.1.4.Final
+    - org.jboss.weld.module:weld-jsf:5.1.4.Final
+    - org.jboss.weld.module:weld-jta:5.1.4.Final
+    - org.jboss.weld.module:weld-web:5.1.4.Final
+    - org.jboss.weld.se:weld-se-core:5.1.4.Final
+    - org.jboss.weld:weld-core-impl:5.1.4.Final
+    - org.jboss.weld:weld-lite-extension-translator:5.1.4.Final
+- component: org.jboss.weld.weld-api
+  aliases: []
+  dependencies:
+    - org.jboss.weld:weld-api:5.0.SP3
+    - org.jboss.weld:weld-spi:5.0.SP3
+- component: org.jboss.ws.api
+  aliases: []
+  dependencies:
+    - org.jboss.ws:jbossws-api:3.0.0.Final
+- component: org.jboss.ws.common
+  aliases: []
+  dependencies:
+    - org.jboss.ws:jbossws-common:5.1.0.Final
+- component: org.jboss.ws.common.tools
+  aliases: []
+  dependencies:
+    - org.jboss.ws:jbossws-common-tools:2.1.0.Final
+- component: org.jboss.ws.cxf
+  aliases: []
+  dependencies:
+    - org.jboss.ws.cxf:jbossws-cxf-client:7.3.1.Final
+    - org.jboss.ws.cxf:jbossws-cxf-factories:7.3.1.Final
+    - org.jboss.ws.cxf:jbossws-cxf-resources:7.3.1.Final
+    - org.jboss.ws.cxf:jbossws-cxf-server:7.3.1.Final
+    - org.jboss.ws.cxf:jbossws-cxf-transports-udp:7.3.1.Final
+    - org.jboss.ws.cxf:jbossws-cxf-transports-undertow:7.3.1.Final
+- component: org.jboss.ws.jaxws-undertow-httpspi
+  aliases: []
+  dependencies:
+    - org.jboss.ws.projects:jaxws-undertow-httpspi:2.0.0.Final
+- component: org.jboss.ws.spi
+  aliases: []
+  dependencies:
+    - org.jboss.ws:jbossws-spi:5.0.0.Final
+- component: org.jboss.xnio.netty.netty-xnio-transport
+  aliases: []
+  dependencies:
+    - org.jboss.xnio.netty:netty-xnio-transport:0.1.10.Final
+- component: org.jboss.xnio.xnio-api
+  aliases: []
+  dependencies:
+    - org.jboss.xnio:xnio-api:3.8.16.Final
+- component: org.jboss.xnio.xnio-nio
+  aliases: []
+  dependencies:
+    - org.jboss.xnio:xnio-nio:3.8.16.Final
+- component: org.jctools.jctools-core
+  aliases: []
+  dependencies:
+    - org.jctools:jctools-core:4.0.5
+- component: org.jgroups
+  aliases: []
+  dependencies:
+    - org.jgroups:jgroups:5.3.13.Final
+- component: org.jgroups.aws
+  aliases: []
+  dependencies:
+    - org.jgroups.aws:jgroups-aws:3.0.0.Final
+- component: org.jgroups.azure
+  aliases: []
+  dependencies:
+    - org.jgroups.azure:jgroups-azure:2.0.2.Final
+- component: org.jgroups.kubernetes
+  aliases: []
+  dependencies:
+    - org.jgroups.kubernetes:jgroups-kubernetes:2.0.2.Final
+- component: org.jmockit
+  aliases: []
+  dependencies:
+    - org.jmockit:jmockit:1.49
+- component: org.junit
+  aliases: []
+  dependencies:
+    - org.junit:junit-bom:5.10.5
+- component: org.jvnet.staxex
+  aliases: []
+  dependencies:
+    - org.jvnet.staxex:stax-ex:2.1.0
+- component: org.keycloak
+  aliases: []
+  dependencies:
+    - org.keycloak:keycloak-admin-client:25.0.6
+    - org.keycloak:keycloak-core:25.0.6
+    - org.keycloak:keycloak-services:25.0.6
+- component: org.keycloak.keycloak-saml-wildfly-subsystem
+  aliases: []
+  dependencies:
+    - org.keycloak:keycloak-saml-wildfly-subsystem:18.0.2
+- component: org.kohsuke.metainf-services
+  aliases: []
+  dependencies:
+    - org.kohsuke.metainf-services:metainf-services:1.11
+- component: org.lz4.lz4-java
+  aliases: []
+  dependencies:
+    - org.lz4:lz4-java:1.8.0
+- component: org.mock-server.mockserver
+  aliases: []
+  dependencies:
+    - org.mock-server:mockserver-netty:5.15.0
+    - org.mock-server:mockserver:5.15.0
+- component: org.mock-server.mockserver-netty
+  aliases: []
+  dependencies:
+    - org.mock-server:mockserver-netty:5.8.1
+- component: org.mockito
+  aliases: []
+  dependencies:
+    - org.mockito:mockito-bom:5.14.2
+    - org.mockito:mockito-core:3.10.0
+- component: org.opensaml.opensaml
+  aliases: []
+  dependencies:
+    - org.opensaml:opensaml-core:4.3.0
+    - org.opensaml:opensaml-profile-api:4.3.0
+    - org.opensaml:opensaml-saml-api:4.3.0
+    - org.opensaml:opensaml-saml-impl:4.3.0
+    - org.opensaml:opensaml-security-api:4.3.0
+    - org.opensaml:opensaml-security-impl:4.3.0
+    - org.opensaml:opensaml-soap-api:4.3.0
+    - org.opensaml:opensaml-xacml-api:4.3.0
+    - org.opensaml:opensaml-xacml-impl:4.3.0
+    - org.opensaml:opensaml-xacml-saml-api:4.3.0
+    - org.opensaml:opensaml-xacml-saml-impl:4.3.0
+    - org.opensaml:opensaml-xmlsec-api:4.3.0
+    - org.opensaml:opensaml-xmlsec-impl:4.3.0
+- component: org.ow2.asm
+  aliases: []
+  dependencies:
+    - org.ow2.asm:asm-util:9.7.1
+    - org.ow2.asm:asm:9.7.1
+- component: org.projectodd.vdx
+  aliases: []
+  dependencies:
+    - org.projectodd.vdx:vdx-core:1.1.6
+    - org.projectodd.vdx:vdx-wildfly:1.1.6
+- component: org.reactivestreams
+  aliases: []
+  dependencies:
+    - org.reactivestreams:reactive-streams-tck:1.0.4
+    - org.reactivestreams:reactive-streams:1.0.4
+- component: org.slf4j
+  aliases: []
+  dependencies:
+    - org.slf4j:jcl-over-slf4j:2.0.16
+    - org.slf4j:slf4j-api:2.0.16
+- component: org.syslog4j
+  aliases: []
+  dependencies:
+    - org.syslog4j:syslog4j:0.9.30
+- component: org.testcontainers
+  aliases: []
+  dependencies:
+    - org.testcontainers:testcontainers-bom:1.20.4
+- component: org.testng
+  aliases: []
+  dependencies:
+    - org.testng:testng:7.8.0
+- component: org.wildfly.arquillian
+  aliases: []
+  dependencies:
+    - org.wildfly.arquillian:wildfly-arquillian-bom:5.1.0.Beta9
+- component: org.wildfly.checkstyle-config
+  aliases: []
+  dependencies:
+    - org.wildfly.checkstyle:wildfly-checkstyle-config:1.0.8.Final
+- component: org.wildfly.client.config
+  aliases: []
+  dependencies:
+    - org.wildfly.client:wildfly-client-config:1.0.1.Final
+- component: org.wildfly.clustering
+  aliases: []
+  dependencies:
+    - org.wildfly.clustering:wildfly-clustering-bom:5.0.4.Final
+    - org.wildfly.clustering:wildfly-clustering-cache-infinispan-common
+    - org.wildfly.clustering:wildfly-clustering-cache-infinispan-embedded
+    - org.wildfly.clustering:wildfly-clustering-cache-infinispan-remote
+    - org.wildfly.clustering:wildfly-clustering-cache-spi
+    - org.wildfly.clustering:wildfly-clustering-context
+    - org.wildfly.clustering:wildfly-clustering-marshalling-jboss
+    - org.wildfly.clustering:wildfly-clustering-marshalling-protostream
+    - org.wildfly.clustering:wildfly-clustering-marshalling-spi
+    - org.wildfly.clustering:wildfly-clustering-server-api
+    - org.wildfly.clustering:wildfly-clustering-server-infinispan
+    - org.wildfly.clustering:wildfly-clustering-server-jgroups
+    - org.wildfly.clustering:wildfly-clustering-server-local
+    - org.wildfly.clustering:wildfly-clustering-server-spi
+    - org.wildfly.clustering:wildfly-clustering-session-cache
+    - org.wildfly.clustering:wildfly-clustering-session-infinispan-embedded
+    - org.wildfly.clustering:wildfly-clustering-session-infinispan-remote
+    - org.wildfly.clustering:wildfly-clustering-session-spec-servlet-6.0
+    - org.wildfly.clustering:wildfly-clustering-session-spec-spi
+    - org.wildfly.clustering:wildfly-clustering-session-spi
+- component: org.wildfly.common
+  aliases: []
+  dependencies:
+    - org.wildfly.common:wildfly-common:1.7.0.Final
+- component: org.wildfly.discovery
+  aliases: []
+  dependencies:
+    - org.wildfly.discovery:wildfly-discovery-client:1.3.0.Final
+- component: org.wildfly.extras.creaper
+  aliases: []
+  dependencies:
+    - org.wildfly.extras.creaper:creaper-commands:2.0.3
+    - org.wildfly.extras.creaper:creaper-core:2.0.3
+- component: org.wildfly.galleon-plugins
+  aliases:
+    - galleon plugins
+    - galleon-plugins
+  dependencies:
+    - org.wildfly.galleon-plugins:wildfly-config-gen:7.2.1.Final
+    - org.wildfly.galleon-plugins:wildfly-config-gen:7.3.1.Final
+    - org.wildfly.galleon-plugins:wildfly-galleon-plugins:7.2.1.Final
+    - org.wildfly.galleon-plugins:wildfly-galleon-plugins:7.3.1.Final
+- component: org.wildfly.glow
+  aliases: []
+  dependencies:
+    - org.wildfly.glow:wildfly-glow-core:1.2.0.Final
+    - org.wildfly.glow:wildfly-glow-maven-resolver:1.2.0.Final
+- component: org.wildfly.http-client
+  aliases: []
+  dependencies:
+    - org.wildfly.wildfly-http-client:wildfly-http-client-common:2.0.7.Final
+    - org.wildfly.wildfly-http-client:wildfly-http-ejb-client:2.0.7.Final
+    - org.wildfly.wildfly-http-client:wildfly-http-naming-client:2.0.7.Final
+    - org.wildfly.wildfly-http-client:wildfly-http-transaction-client:2.0.7.Final
+- component: org.wildfly.installation-manager.installation-manager-api
+  aliases: []
+  dependencies:
+    - org.wildfly.installation-manager:installation-manager-api:1.1.1.Final
+- component: org.wildfly.launcher
+  aliases: []
+  dependencies:
+    - org.wildfly.launcher:wildfly-launcher:1.0.0.Final
+- component: org.wildfly.legacy.test
+  aliases: []
+  dependencies:
+    - org.wildfly.legacy.test:wildfly-legacy-spi:9.0.0.Final
+    - org.wildfly.legacy.test:wildfly-legacy-versions:9.0.0.Final
+- component: org.wildfly.mvc.krazo
+  aliases: []
+  dependencies:
+    - org.wildfly:mvc-krazo-galleon-shared:1.0.0.Final
+- component: org.wildfly.naming-client
+  aliases: []
+  dependencies:
+    - org.wildfly:wildfly-naming-client:2.0.1.Final
+- component: org.wildfly.openssl
+  aliases: []
+  dependencies:
+    - org.wildfly.openssl:wildfly-openssl-java:2.2.5.Final
+- component: org.wildfly.openssl.wildfly-openssl-linux-ppc64le
+  aliases: []
+  dependencies:
+    - org.wildfly.openssl:wildfly-openssl-linux-ppc64le:2.2.2.Final-redhat-00002
+- component: org.wildfly.openssl.wildfly-openssl-linux-rhel8-x86_64
+  aliases: []
+  dependencies:
+    - org.wildfly.openssl:wildfly-openssl-linux-rhel8-x86_64:2.2.2.Final-redhat-00002
+- component: org.wildfly.openssl.wildfly-openssl-linux-rhel9-x86_64
+  aliases: []
+  dependencies:
+    - org.wildfly.openssl:wildfly-openssl-linux-rhel9-x86_64:2.2.2.Final-redhat-00002
+- component: org.wildfly.openssl.wildfly-openssl-linux-s390x
+  aliases: []
+  dependencies:
+    - org.wildfly.openssl:wildfly-openssl-linux-s390x:2.2.2.Final-redhat-00002
+- component: org.wildfly.openssl.wildfly-openssl-windows-x86_64
+  aliases: []
+  dependencies:
+    - org.wildfly.openssl:wildfly-openssl-windows-x86_64:2.2.2.Final-redhat-00002
+- component: org.wildfly.security.elytron
+  aliases:
+    - elytron
+    - wildfly elytron
+  dependencies:
+    - org.wildfly.security:wildfly-elytron-asn1:2.6.0.Final
+    - org.wildfly.security:wildfly-elytron-audit:2.6.0.Final
+    - org.wildfly.security:wildfly-elytron-auth-server-deprecated:2.6.0.Final
+    - org.wildfly.security:wildfly-elytron-auth-server-http:2.6.0.Final
+    - org.wildfly.security:wildfly-elytron-auth-server-sasl:2.6.0.Final
+    - org.wildfly.security:wildfly-elytron-auth-server:2.6.0.Final
+    - org.wildfly.security:wildfly-elytron-auth-util:2.6.0.Final
+    - org.wildfly.security:wildfly-elytron-auth:2.6.0.Final
+    - org.wildfly.security:wildfly-elytron-base:2.6.0.Final
+    - org.wildfly.security:wildfly-elytron-client:2.6.0.Final
+    - org.wildfly.security:wildfly-elytron-credential-source-impl:2.6.0.Final
+    - org.wildfly.security:wildfly-elytron-credential-store:2.6.0.Final
+    - org.wildfly.security:wildfly-elytron-credential:2.6.0.Final
+    - org.wildfly.security:wildfly-elytron-digest:2.6.0.Final
+    - org.wildfly.security:wildfly-elytron-dynamic-ssl:2.6.0.Final
+    - org.wildfly.security:wildfly-elytron-encryption:2.6.0.Final
+    - org.wildfly.security:wildfly-elytron-http-basic:2.6.0.Final
+    - org.wildfly.security:wildfly-elytron-http-bearer:2.6.0.Final
+    - org.wildfly.security:wildfly-elytron-http-cert:2.6.0.Final
+    - org.wildfly.security:wildfly-elytron-http-digest:2.6.0.Final
+    - org.wildfly.security:wildfly-elytron-http-external:2.6.0.Final
+    - org.wildfly.security:wildfly-elytron-http-form:2.6.0.Final
+    - org.wildfly.security:wildfly-elytron-http-oidc:2.6.0.Final
+    - org.wildfly.security:wildfly-elytron-http-spnego:2.6.0.Final
+    - org.wildfly.security:wildfly-elytron-http-sso:2.6.0.Final
+    - org.wildfly.security:wildfly-elytron-http-stateful-basic:2.6.0.Final
+    - org.wildfly.security:wildfly-elytron-http-util:2.6.0.Final
+    - org.wildfly.security:wildfly-elytron-http:2.6.0.Final
+    - org.wildfly.security:wildfly-elytron-jacc:2.6.0.Final
+    - org.wildfly.security:wildfly-elytron-jaspi:2.6.0.Final
+    - org.wildfly.security:wildfly-elytron-jose-jwk:2.6.0.Final
+    - org.wildfly.security:wildfly-elytron-jose-util:2.6.0.Final
+    - org.wildfly.security:wildfly-elytron-json-util:2.6.0.Final
+    - org.wildfly.security:wildfly-elytron-keystore:2.6.0.Final
+    - org.wildfly.security:wildfly-elytron-mechanism-digest:2.6.0.Final
+    - org.wildfly.security:wildfly-elytron-mechanism-gssapi:2.6.0.Final
+    - org.wildfly.security:wildfly-elytron-mechanism-http:2.6.0.Final
+    - org.wildfly.security:wildfly-elytron-mechanism-oauth2:2.6.0.Final
+    - org.wildfly.security:wildfly-elytron-mechanism-scram:2.6.0.Final
+    - org.wildfly.security:wildfly-elytron-mechanism:2.6.0.Final
+    - org.wildfly.security:wildfly-elytron-password-impl:2.6.0.Final
+    - org.wildfly.security:wildfly-elytron-permission:2.6.0.Final
+    - org.wildfly.security:wildfly-elytron-provider-util:2.6.0.Final
+    - org.wildfly.security:wildfly-elytron-realm-jdbc:2.6.0.Final
+    - org.wildfly.security:wildfly-elytron-realm-ldap:2.6.0.Final
+    - org.wildfly.security:wildfly-elytron-realm-token:2.6.0.Final
+    - org.wildfly.security:wildfly-elytron-realm:2.6.0.Final
+    - org.wildfly.security:wildfly-elytron-sasl-anonymous:2.6.0.Final
+    - org.wildfly.security:wildfly-elytron-sasl-auth-util:2.6.0.Final
+    - org.wildfly.security:wildfly-elytron-sasl-digest:2.6.0.Final
+    - org.wildfly.security:wildfly-elytron-sasl-entity:2.6.0.Final
+    - org.wildfly.security:wildfly-elytron-sasl-external:2.6.0.Final
+    - org.wildfly.security:wildfly-elytron-sasl-gs2:2.6.0.Final
+    - org.wildfly.security:wildfly-elytron-sasl-gssapi:2.6.0.Final
+    - org.wildfly.security:wildfly-elytron-sasl-localuser:2.6.0.Final
+    - org.wildfly.security:wildfly-elytron-sasl-oauth2:2.6.0.Final
+    - org.wildfly.security:wildfly-elytron-sasl-otp:2.6.0.Final
+    - org.wildfly.security:wildfly-elytron-sasl-plain:2.6.0.Final
+    - org.wildfly.security:wildfly-elytron-sasl-scram:2.6.0.Final
+    - org.wildfly.security:wildfly-elytron-sasl:2.6.0.Final
+    - org.wildfly.security:wildfly-elytron-security-manager-action:2.6.0.Final
+    - org.wildfly.security:wildfly-elytron-security-manager:2.6.0.Final
+    - org.wildfly.security:wildfly-elytron-ssh-util:2.6.0.Final
+    - org.wildfly.security:wildfly-elytron-ssl:2.6.0.Final
+    - org.wildfly.security:wildfly-elytron-tests-common:2.6.0.Final
+    - org.wildfly.security:wildfly-elytron-tool:2.6.0.Final
+    - org.wildfly.security:wildfly-elytron-util:2.6.0.Final
+    - org.wildfly.security:wildfly-elytron-x500-cert-acme:2.6.0.Final
+    - org.wildfly.security:wildfly-elytron-x500-cert-util:2.6.0.Final
+    - org.wildfly.security:wildfly-elytron-x500-cert:2.6.0.Final
+    - org.wildfly.security:wildfly-elytron-x500-principal:2.6.0.Final
+    - org.wildfly.security:wildfly-elytron-x500:2.6.0.Final
+    - org.wildfly.security:wildfly-elytron:2.6.0.Final
+- component: org.wildfly.security.elytron-mp
+  aliases: []
+  dependencies:
+    - org.wildfly.security.mp:wildfly-elytron-jwt:2.0.0.Final
+- component: org.wildfly.security.elytron-web
+  aliases: []
+  dependencies:
+    - org.wildfly.security.elytron-web:undertow-server-servlet:4.1.0.Final
+    - org.wildfly.security.elytron-web:undertow-server:4.1.0.Final
+- component: org.wildfly.security.jakarta.elytron-ee
+  aliases:
+    - elytron ee
+    - wildfly elytron ee
+    - wildfly-elytron-ee
+  dependencies:
+    - org.wildfly.security.jakarta:jakarta-authentication:3.1.1.Final
+    - org.wildfly.security.jakarta:jakarta-authorization:3.1.1.Final
+    - org.wildfly.security.jakarta:jakarta-client-resteasy:3.1.1.Final
+    - org.wildfly.security.jakarta:jakarta-client-webservices:3.1.1.Final
+    - org.wildfly.security.jakarta:jakarta-security:3.1.1.Final
+- component: org.wildfly.transaction.client
+  aliases: []
+  dependencies:
+    - org.wildfly.transaction:wildfly-transaction-client:3.0.5.Final
+- component: org.wildfly.unstable.api.annotation
+  aliases: []
+  dependencies:
+    - org.wildfly.unstable.api.annotation:unstable-api-annotation-classpath-indexer:1.0.0.Final
+- component: org.wiremock
+  aliases: []
+  dependencies:
+    - org.wiremock:wiremock:3.9.2
+- component: org.xerial.snappy.snappy-java
+  aliases: []
+  dependencies:
+    - org.xerial.snappy:snappy-java:1.1.10.5
+- component: org.yaml.snakeyaml
+  aliases: []
+  dependencies:
+    - org.yaml:snakeyaml:2.3
+- component: software.amazon.awssdk
+  aliases: []
+  dependencies:
+    - software.amazon.awssdk:annotations:2.20.126
+    - software.amazon.awssdk:apache-client:2.20.126
+    - software.amazon.awssdk:arns:2.20.126
+    - software.amazon.awssdk:auth:2.20.126
+    - software.amazon.awssdk:aws-core:2.20.126
+    - software.amazon.awssdk:aws-query-protocol:2.20.126
+    - software.amazon.awssdk:aws-xml-protocol:2.20.126
+    - software.amazon.awssdk:crt-core:2.20.126
+    - software.amazon.awssdk:endpoints-spi:2.20.126
+    - software.amazon.awssdk:http-client-spi:2.20.126
+    - software.amazon.awssdk:json-utils:2.20.126
+    - software.amazon.awssdk:metrics-spi:2.20.126
+    - software.amazon.awssdk:profiles:2.20.126
+    - software.amazon.awssdk:protocol-core:2.20.126
+    - software.amazon.awssdk:regions:2.20.126
+    - software.amazon.awssdk:s3:2.20.126
+    - software.amazon.awssdk:sdk-core:2.20.126
+    - software.amazon.awssdk:third-party-jackson-core:2.20.126
+    - software.amazon.awssdk:utils:2.20.126
+- component: software.amazon.eventstream
+  aliases: []
+  dependencies:
+    - software.amazon.eventstream:eventstream:1.0.1
+- component: sun.jaxb
+  aliases: []
+  dependencies:
+    - com.sun.xml.bind.external:relaxng-datatype:4.0.5
+    - com.sun.xml.bind.external:rngom:4.0.5
+- component: wsdl4j
+  aliases: []
+  dependencies:
+    - wsdl4j:wsdl4j:1.6.3
+- component: xml-resolver
+  aliases: []
+  dependencies:
+    - xml-resolver:xml-resolver:1.2
+- component: wildfly-ee-feature-pack-product-conf
+  aliases:
+    - eap-product-conf
+    - wildfly-ee-product-conf
+    - org.jboss.eap:wildfly-ee-product-conf
+  dependencies:
+    - org.jboss.eap:wildfly-ee-feature-pack-product-conf

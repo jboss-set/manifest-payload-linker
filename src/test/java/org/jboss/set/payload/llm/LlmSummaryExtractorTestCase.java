@@ -13,7 +13,9 @@ import org.junit.Test;
 
 import java.net.URI;
 
-@Ignore // TODO: This will need a testcontainers setup to start an LLM container.
+@Ignore
+// TODO: This requires an LLM instance, which may be too expensive to be running at each build. Move this to a
+//  non-default profile.
 public class LlmSummaryExtractorTestCase {
 
     private final LlmSummaryExtractor extractor;

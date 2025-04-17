@@ -8,7 +8,7 @@ import io.smallrye.config.SmallRyeConfigBuilder;
 import org.eclipse.microprofile.config.Config;
 import org.jboss.logging.Logger;
 import org.jboss.set.payload.dependencygroups.StaticDependencyGroupsResolutionStrategy;
-import org.jboss.set.payload.jira.RetryingJiraIssueClient;
+import org.jboss.set.payload.jira.FaultTolerantIssueClient;
 import org.jboss.set.payload.pnc.PncResolutionStrategy;
 import org.jboss.set.payload.manifest.ManifestChecker;
 
@@ -27,7 +27,7 @@ public class Main implements Closeable, Runnable {
     private static final Logger logger = Logger.getLogger(Main.class);
 
     private final JiraRestClient jiraClient;
-    private final RetryingJiraIssueClient issueClient;
+    private final FaultTolerantIssueClient issueClient;
     private final Config config;
 
     private final List<ComponentUpgradeResolutionStrategy> resolutionStrategies = new ArrayList<>();
@@ -54,13 +54,18 @@ public class Main implements Closeable, Runnable {
         // Initialize Jira client
         URI jiraUri = config.getValue(ConfigKeys.JIRA_URL, URI.class);
         String jiraToken = config.getValue(ConfigKeys.JIRA_TOKEN, String.class);
+        Long spacing = config.getOptionalValue(ConfigKeys.JIRA_REQUEST_FREQUENCY, Long.class).orElse(0L);
+        Boolean disableStaticStrategy = config.getOptionalValue("static_resolution_strategy.disable", Boolean.class).orElse(false);
+
         jiraClient = new AsynchronousJiraRestClientFactory()
                 .createWithAuthenticationHandler(jiraUri,
                         builder -> builder.setHeader("Authorization", "Bearer " + jiraToken));
-        issueClient = new RetryingJiraIssueClient(jiraClient.getIssueClient());
+        issueClient = new FaultTolerantIssueClient(jiraClient.getIssueClient(), spacing);
 
         resolutionStrategies.add(new PncResolutionStrategy(config, manifestChecker));
-        resolutionStrategies.add(new StaticDependencyGroupsResolutionStrategy(config, manifestChecker));
+        if (!disableStaticStrategy) {
+            resolutionStrategies.add(new StaticDependencyGroupsResolutionStrategy(config, manifestChecker));
+        }
 
         try {
             reportConsumers.add(new IssueLinksReportConsumer(issueClient, new File("issue-links.txt"), jiraUri));

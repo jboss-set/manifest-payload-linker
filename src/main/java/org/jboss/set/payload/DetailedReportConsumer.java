@@ -4,7 +4,7 @@ import com.atlassian.jira.rest.client.api.domain.Issue;
 import com.atlassian.jira.rest.client.api.domain.IssueField;
 import org.codehaus.jettison.json.JSONException;
 import org.codehaus.jettison.json.JSONObject;
-import org.jboss.set.payload.jira.RetryingJiraIssueClient;
+import org.jboss.set.payload.jira.FaultTolerantIssueClient;
 
 import java.io.File;
 import java.io.IOException;
@@ -14,7 +14,7 @@ public class DetailedReportConsumer extends AbstractReportConsumer {
 
     private final URI jiraUri;
 
-    public DetailedReportConsumer(RetryingJiraIssueClient issueClient, File file, URI jiraUri) throws IOException {
+    public DetailedReportConsumer(FaultTolerantIssueClient issueClient, File file, URI jiraUri) throws IOException {
         super(issueClient, file);
         this.jiraUri = jiraUri;
     }

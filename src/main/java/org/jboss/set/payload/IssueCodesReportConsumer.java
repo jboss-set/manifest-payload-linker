@@ -1,7 +1,7 @@
 package org.jboss.set.payload;
 
 import com.atlassian.jira.rest.client.api.domain.Issue;
-import org.jboss.set.payload.jira.RetryingJiraIssueClient;
+import org.jboss.set.payload.jira.FaultTolerantIssueClient;
 
 import java.io.File;
 import java.io.IOException;
@@ -10,7 +10,7 @@ public class IssueCodesReportConsumer extends AbstractReportConsumer {
 
     private boolean firstIssue = false;
 
-    public IssueCodesReportConsumer(RetryingJiraIssueClient issueClient, File file) throws IOException {
+    public IssueCodesReportConsumer(FaultTolerantIssueClient issueClient, File file) throws IOException {
         super(issueClient, file, INCLUDE_RESOLVED, INCLUDE_RESOLVED);
     }
 

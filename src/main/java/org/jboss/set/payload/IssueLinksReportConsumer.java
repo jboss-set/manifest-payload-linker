@@ -1,7 +1,7 @@
 package org.jboss.set.payload;
 
 import com.atlassian.jira.rest.client.api.domain.Issue;
-import org.jboss.set.payload.jira.RetryingJiraIssueClient;
+import org.jboss.set.payload.jira.FaultTolerantIssueClient;
 
 import java.io.File;
 import java.io.IOException;
@@ -11,7 +11,7 @@ public class IssueLinksReportConsumer extends AbstractReportConsumer {
 
     private final URI jiraUri;
 
-    public IssueLinksReportConsumer(RetryingJiraIssueClient issueClient, File file, URI jiraUri) throws IOException {
+    public IssueLinksReportConsumer(FaultTolerantIssueClient issueClient, File file, URI jiraUri) throws IOException {
         super(issueClient, file, INCLUDE_RESOLVED, INCLUDE_RESOLVED);
         this.jiraUri = jiraUri;
     }

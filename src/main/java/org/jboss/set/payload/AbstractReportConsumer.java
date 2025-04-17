@@ -3,7 +3,7 @@ package org.jboss.set.payload;
 import com.atlassian.jira.rest.client.api.domain.Issue;
 import com.atlassian.jira.rest.client.api.domain.IssueLink;
 import com.atlassian.jira.rest.client.api.domain.IssueLinkType;
-import org.jboss.set.payload.jira.RetryingJiraIssueClient;
+import org.jboss.set.payload.jira.FaultTolerantIssueClient;
 
 import java.io.BufferedWriter;
 import java.io.Closeable;
@@ -26,15 +26,15 @@ public abstract class AbstractReportConsumer implements Consumer<Issue>, Closeab
     private static final String INCORPORATES = "Incorporates";
 
     private final BufferedWriter writer;
-    protected final RetryingJiraIssueClient issueClient;
+    protected final FaultTolerantIssueClient issueClient;
     private final Predicate<Issue> componentUpgradeInclusionPredicate;
     private final Predicate<Issue> incorporatedInclusionPredicate;
 
-    public AbstractReportConsumer(RetryingJiraIssueClient issueClient, File file) throws IOException {
+    public AbstractReportConsumer(FaultTolerantIssueClient issueClient, File file) throws IOException {
         this(issueClient, file, INCLUDE_ALL, INCLUDE_ALL);
     }
 
-    public AbstractReportConsumer(RetryingJiraIssueClient issueClient, File file, Predicate<Issue> componentUpgradeInclusionPredicate,
+    public AbstractReportConsumer(FaultTolerantIssueClient issueClient, File file, Predicate<Issue> componentUpgradeInclusionPredicate,
                                   Predicate<Issue> incorporatedInclusionPredicate) throws IOException {
         this.writer = new BufferedWriter(new FileWriter(file));
         this.issueClient = issueClient;

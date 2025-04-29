@@ -1,17 +1,30 @@
 <configuration>
 
   <appender name="STDERR" class="ch.qos.logback.core.ConsoleAppender">
+    <filter class="ch.qos.logback.classic.filter.ThresholdFilter">
+      <level>info</level>
+    </filter>
     <target>System.err</target>
     <encoder>
       <pattern>%highlight(%-5level) %cyan(%logger{15}) - %msg%n</pattern>
     </encoder>
   </appender>
 
+  <appender name="FILE" class="ch.qos.logback.core.FileAppender">
+    <file>debug.log</file>
+    <append>true</append>
+    <encoder>
+      <pattern>%-4relative [%thread] %-5level %logger{35} - %msg%n</pattern>
+    </encoder>
+  </appender>
+
   <root level="WARN">
     <appender-ref ref="STDERR" />
+    <appender-ref ref="FILE" />
   </root>
 
   <logger name="org.jboss.set.payload" level="INFO" />
-  <logger name="dev.langchain4j" level="INFO" />
+  <logger name="dev.langchain4j" level="DEBUG">
+  </logger>
 
 </configuration>

@@ -35,7 +35,7 @@ public class StaticDependencyGroupsResolutionStrategy implements ComponentUpgrad
     @Override
     public Boolean apply(Issue issue) {
         ComponentUpgrade info = summaryExtractor.extractInfo(issue.getSummary());
-        if (info.isValid()) {
+        if (info != null && info.isValid()) {
             logger.infof("%s upgrades component '%s' to version '%s'",
                     issue.getKey(), info.component(), info.targetVersion());
             Collection<String> componentArtifacts = dependencyGroupLookup.findArtifacts(info.component());

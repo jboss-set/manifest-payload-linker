@@ -1723,7 +1723,9 @@
     - org.wildfly.glow:wildfly-glow-core
     - org.wildfly.glow:wildfly-glow-maven-resolver
 - component: org.wildfly.http-client
-  aliases: []
+  aliases:
+    - wildfly http client
+    - wildfly-http-client
   dependencies:
     - org.wildfly.wildfly-http-client:wildfly-http-client-common
     - org.wildfly.wildfly-http-client:wildfly-http-ejb-client
@@ -1778,6 +1780,7 @@
   aliases:
     - elytron
     - wildfly elytron
+    - wildfly-elytron
   dependencies:
     - org.wildfly.security:wildfly-elytron-asn1
     - org.wildfly.security:wildfly-elytron-audit
@@ -1877,7 +1880,9 @@
   dependencies:
     - org.wildfly.transaction:wildfly-transaction-client
 - component: org.wildfly.unstable.api.annotation
-  aliases: []
+  aliases:
+    - unstable-api-annotation
+    - unstable-api-annotation-utils
   dependencies:
     - org.wildfly.unstable.api.annotation:unstable-api-annotation-classpath-indexer
 - component: org.wiremock
@@ -1885,15 +1890,20 @@
   dependencies:
     - org.wiremock:wiremock
 - component: org.xerial.snappy.snappy-java
-  aliases: []
+  aliases:
+    - snappy-java
+    - snappy java
   dependencies:
     - org.xerial.snappy:snappy-java
 - component: org.yaml.snakeyaml
-  aliases: []
+  aliases:
+    - snakeyaml
   dependencies:
     - org.yaml:snakeyaml
 - component: software.amazon.awssdk
-  aliases: []
+  aliases:
+    - awssdk
+    - aws sdk
   dependencies:
     - software.amazon.awssdk:annotations
     - software.amazon.awssdk:apache-client

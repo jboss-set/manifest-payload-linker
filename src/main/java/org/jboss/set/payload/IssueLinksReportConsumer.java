@@ -11,19 +11,20 @@ public class IssueLinksReportConsumer extends AbstractReportConsumer {
 
     private final URI jiraUri;
 
-    public IssueLinksReportConsumer(FaultTolerantIssueClient issueClient, File file, URI jiraUri) throws IOException {
-        super(issueClient, file, INCLUDE_RESOLVED, INCLUDE_RESOLVED);
+    public IssueLinksReportConsumer(FaultTolerantIssueClient issueClient, File file, URI jiraUri, String manifestReference)
+            throws IOException {
+        super(issueClient, file, INCLUDE_RESOLVED, INCLUDE_RESOLVED, manifestReference);
         this.jiraUri = jiraUri;
     }
 
     @Override
-    protected String componentUpgradeIssueLine(Issue issue) {
-        return line(issue);
+    public void componentUpgradeIssue(Issue issue, String manifestReference) throws IOException {
+        writer.write(line(issue));
     }
 
     @Override
-    protected String incorporatedIssueLine(Issue issue) {
-        return line(issue);
+    public void incorporatedIssue(Issue issue, Issue componentUpgrade, String manifestReference) throws IOException {
+        writer.write(line(issue));
     }
 
     private String line(Issue issue) {

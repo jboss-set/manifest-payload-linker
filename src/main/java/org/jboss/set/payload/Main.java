@@ -20,7 +20,6 @@ import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import java.util.function.Consumer;
 
 public class Main implements Closeable, Runnable {
 
@@ -31,20 +30,26 @@ public class Main implements Closeable, Runnable {
     private final Config config;
 
     private final List<ComponentUpgradeResolutionStrategy> resolutionStrategies = new ArrayList<>();
-    private final List<AbstractReportConsumer> reportConsumers = new ArrayList<>();
+    private final List<IssueConsumer> issueConsumers = new ArrayList<>();
 
     public static void main(String[] args) throws Exception {
-        if (args.length != 1) {
-            logger.error("Expected single argument: path to a manifest file");
+        if (args.length != 2) {
+            logger.error("Incorrect number of parameters");
+            usage();
             System.exit(1);
         }
 
-        try (Main main = new Main(Path.of(args[0]))) {
+        try (Main main = new Main(Path.of(args[0]), args[1])) {
             main.run();
         }
     }
 
-    public Main(Path manifestPath) {
+    private static void usage() {
+        System.err.println("Usage:");
+        System.err.println("java -jar <path-to-jar-file> <path-to-manifest-file> <manifest-version-string>");
+    }
+
+    public Main(Path manifestPath, String manifestReference) {
         config = new SmallRyeConfigBuilder()
                 .addDefaultSources()
                 .build();
@@ -68,9 +73,10 @@ public class Main implements Closeable, Runnable {
         }
 
         try {
-            reportConsumers.add(new IssueLinksReportConsumer(issueClient, new File("issue-links.txt"), jiraUri));
-            reportConsumers.add(new IssueCodesReportConsumer(issueClient, new File("issue-codes.txt")));
-            reportConsumers.add(new DetailedReportConsumer(issueClient, new File("detailed-report.txt"), jiraUri));
+            issueConsumers.add(new IssueLinksReportConsumer(issueClient, new File("issue-links.txt"), jiraUri, manifestReference));
+            issueConsumers.add(new IssueCodesReportConsumer(issueClient, new File("issue-codes.txt"), manifestReference));
+            issueConsumers.add(new DetailedReportConsumer(issueClient, new File("detailed-report.txt"), jiraUri, manifestReference));
+            issueConsumers.add(new IssueTransitionConsumer(issueClient, manifestReference));
         } catch (IOException e) {
             logger.errorf(e, "Can't create report file");
             System.exit(1);
@@ -80,7 +86,7 @@ public class Main implements Closeable, Runnable {
     @Override
     public void close() throws IOException {
         jiraClient.close();
-        for (AbstractReportConsumer consumer: reportConsumers) {
+        for (IssueConsumer consumer: issueConsumers) {
             consumer.close();
         }
     }
@@ -134,7 +140,7 @@ public class Main implements Closeable, Runnable {
     }
 
     private void processReportConsumers(Issue issue) {
-        for (Consumer<Issue> consumer: reportConsumers) {
+        for (IssueConsumer consumer: issueConsumers) {
             consumer.accept(issue);
         }
     }

@@ -14,23 +14,23 @@ public class DetailedReportConsumer extends AbstractReportConsumer {
 
     private final URI jiraUri;
 
-    public DetailedReportConsumer(FaultTolerantIssueClient issueClient, File file, URI jiraUri) throws IOException {
-        super(issueClient, file);
+    public DetailedReportConsumer(FaultTolerantIssueClient issueClient, File file, URI jiraUri, String manifestReference) throws IOException {
+        super(issueClient, file, manifestReference);
         this.jiraUri = jiraUri;
     }
 
     @Override
-    protected String componentUpgradeIssueLine(Issue issue) {
+    public void componentUpgradeIssue(Issue issue, String manifestReference) throws IOException {
         String line = line(issue);
         System.out.print(line);
-        return line;
+        writer.write(line);
     }
 
     @Override
-    protected String incorporatedIssueLine(Issue issue) {
+    public void incorporatedIssue(Issue issue, Issue componentUpgrade, String manifestReference) throws IOException {
         String line = "  " + line(issue);
         System.out.print(line);
-        return line;
+        writer.write(line);
     }
 
     private String line(Issue issue) {

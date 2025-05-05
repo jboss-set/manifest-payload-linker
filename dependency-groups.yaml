@@ -2,6 +2,8 @@
 - component: org.jboss.eap
   aliases:
     - jboss eap
+    - jboss-eap
+    - jboss-eap8
   dependencies:
     - org.jboss.eap.channels:wildfly-ee
     - org.jboss.eap.channels:wildfly-preview

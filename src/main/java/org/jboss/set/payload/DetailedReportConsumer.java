@@ -22,14 +22,12 @@ public class DetailedReportConsumer extends AbstractReportConsumer {
     @Override
     public void componentUpgradeIssue(Issue issue, String manifestReference) throws IOException {
         String line = line(issue);
-        System.out.print(line);
         writer.write(line);
     }
 
     @Override
     public void incorporatedIssue(Issue issue, Issue componentUpgrade, String manifestReference) throws IOException {
         String line = "  " + line(issue);
-        System.out.print(line);
         writer.write(line);
     }
 

@@ -96,8 +96,9 @@ public class Main implements Closeable, Runnable {
     public void run() {
         List<String> issueKeys = loadIssueKeys();
         for (String issueKey : issueKeys) {
-            logger.debugf("Processing issue %s", issueKey);
+            logger.debugf("Retrieving issue %s", issueKey);
             Issue issue = issueClient.getIssue(issueKey);
+            logger.infof("Processing issue %s: %s", issueKey, issue.getSummary());
 
             Boolean result = null;
             for (ComponentUpgradeResolutionStrategy strategy: resolutionStrategies) {
@@ -106,12 +107,12 @@ public class Main implements Closeable, Runnable {
             }
 
             if (result == null) {
-                logger.infof("Unable to determine if issue %s is covered by the manifest.", issueKey);
+                logger.warnf("%s: Unable to determine if issue is covered by the manifest.", issueKey);
             } else if (result) {
-                logger.debugf("Issue %s is covered by the manifest.", issueKey);
+                logger.infof("%s: Issue is covered by the manifest.", issueKey);
                 processReportConsumers(issue);
             } else {
-                logger.debugf("Issue %s is not covered by the manifest.", issueKey);
+                logger.infof("%s: Issue is not covered by the manifest.", issueKey);
             }
         }
     }

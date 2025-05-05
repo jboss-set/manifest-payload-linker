@@ -85,7 +85,7 @@ public class PncResolutionStrategy implements ComponentUpgradeResolutionStrategy
                     Matcher matcher = BUILD_URL_PATTERN.matcher(line);
                     if (matcher.find()) {
                         buildId = matcher.group(BUILD_ID_PATTERN_GROUP);
-                        logger.infof("Found PNC build ID %s in %s %s", buildId, issue.getKey(), issue.getSummary());
+                        logger.infof("%s: Found PNC build ID %s", issue.getKey(), buildId);
                     }
                 }
             }

@@ -36,7 +36,7 @@ public class StaticDependencyGroupsResolutionStrategy implements ComponentUpgrad
     public Boolean apply(Issue issue) {
         ComponentUpgrade info = summaryExtractor.extractInfo(issue.getSummary());
         if (info != null && info.isValid()) {
-            logger.infof("%s upgrades component '%s' to version '%s'",
+            logger.infof("%s: Component '%s' upgraded to version '%s'",
                     issue.getKey(), info.component(), info.targetVersion());
             Collection<String> componentArtifacts = dependencyGroupLookup.findArtifacts(info.component());
             if (componentArtifacts != null) {
@@ -44,7 +44,7 @@ public class StaticDependencyGroupsResolutionStrategy implements ComponentUpgrad
                 componentArtifacts.forEach(ga -> upgradeArtifacts.put(ga, info.targetVersion()));
                 return manifestChecker.test(new ManifestChecker.ComponentQuery(issue.getKey(), upgradeArtifacts));
             } else {
-                logger.warnf("Can't identify component %s", info.component());
+                logger.warnf("%s: Can't identify component %s", issue.getKey(), info.component());
             }
         }
         return null; // Represents Unknown

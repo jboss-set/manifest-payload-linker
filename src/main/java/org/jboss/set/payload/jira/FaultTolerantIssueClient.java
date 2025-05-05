@@ -12,6 +12,7 @@ import com.atlassian.jira.rest.client.api.domain.input.TransitionInput;
 import io.atlassian.util.concurrent.Promise;
 import org.jboss.logging.Logger;
 
+import java.util.Arrays;
 import java.util.List;
 import java.util.Set;
 import java.util.concurrent.Callable;
@@ -22,6 +23,8 @@ import java.util.concurrent.Callable;
 public class FaultTolerantIssueClient {
 
     private static final Logger logger = Logger.getLogger(FaultTolerantIssueClient.class);
+
+    private static final String[] RESOLVED_STATES = new String[] {"Resolved", "Verified", "Closed"};
 
     private final IssueRestClient issueRestClient;
     private final Invoker invoker;
@@ -45,7 +48,7 @@ public class FaultTolerantIssueClient {
     }
 
     public void addComment(final Issue issue, final String comment) {
-        logger.infof("Commenting on issue %s: %s (dry mode is %b)", issue.getKey(), comment, dryMode);
+        logger.infof("%s: Commenting on issue (dry mode is %b): %s", issue.getKey(), dryMode, comment);
         if (!dryMode) {
             Callable<Promise<Void>> callable = () -> issueRestClient.addComment(issue.getCommentsUri(),
                     Comment.createWithGroupLevel(comment, "Red Hat Employee"));
@@ -54,7 +57,7 @@ public class FaultTolerantIssueClient {
     }
 
     public void addLabel(final Issue issue, final String label) {
-        logger.infof("Adding label %s to issue %s (dry mode is %b)", label, issue.getKey(), dryMode);
+        logger.infof("%s: Adding label \"%s\" to issue %s (dry mode is %b)", issue.getKey(), label, dryMode);
         Set<String> labels = issue.getLabels();
         labels.add(label);
 
@@ -69,7 +72,11 @@ public class FaultTolerantIssueClient {
     }
 
     public void transitionToResolved(final Issue issue) {
-        logger.infof("Transitioning issue %s to Resolved (dry mode is %b)", issue.getKey(), dryMode);
+        if (Arrays.stream(RESOLVED_STATES).anyMatch(state -> state.equals(issue.getStatus().getName()))) {
+            logger.infof("%s: Issue is already in resolved (%s)", issue.getKey(), issue.getStatus().getName());
+            return;
+        }
+        logger.infof("%s: Transitioning issue to Resolved (dry mode is %b)", issue.getKey(), dryMode);
         int transitionId = getResolveTransitionId(issue);
         TransitionInput transitionInput = new TransitionInput(transitionId, List.of(new FieldInput("resolution", "Done")));
         if (!dryMode) {

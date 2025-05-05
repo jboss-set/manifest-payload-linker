@@ -61,11 +61,12 @@ public class Main implements Closeable, Runnable {
         String jiraToken = config.getValue(ConfigKeys.JIRA_TOKEN, String.class);
         Long spacing = config.getOptionalValue(ConfigKeys.JIRA_REQUEST_FREQUENCY, Long.class).orElse(0L);
         Boolean disableStaticStrategy = config.getOptionalValue("static_resolution_strategy.disable", Boolean.class).orElse(false);
+        Boolean dryMode = config.getOptionalValue(ConfigKeys.JIRA_DRY_MODE, Boolean.class).orElse(true);
 
         jiraClient = new AsynchronousJiraRestClientFactory()
                 .createWithAuthenticationHandler(jiraUri,
                         builder -> builder.setHeader("Authorization", "Bearer " + jiraToken));
-        issueClient = new FaultTolerantIssueClient(jiraClient.getIssueClient(), spacing);
+        issueClient = new FaultTolerantIssueClient(jiraClient.getIssueClient(), spacing, dryMode);
 
         resolutionStrategies.add(new PncResolutionStrategy(config, manifestChecker));
         if (!disableStaticStrategy) {

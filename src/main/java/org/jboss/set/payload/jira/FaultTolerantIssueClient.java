@@ -29,13 +29,14 @@ public class FaultTolerantIssueClient {
     /**
      * If set to true, all issue modification operations will be no-ops.
      */
-    private final boolean dryMode = false;
+    private final boolean dryMode;
 
-    public FaultTolerantIssueClient(IssueRestClient issueRestClient, long spacingInMillis) {
+    public FaultTolerantIssueClient(IssueRestClient issueRestClient, long spacingInMillis, boolean dryMode) {
         this.issueRestClient = issueRestClient;
+        this.dryMode = dryMode;
 
         TimeSpacingInvoker timeSpacingInvoker = new TimeSpacingInvoker(spacingInMillis);
-        invoker = new RetryingInvoker(timeSpacingInvoker);
+        this.invoker = new RetryingInvoker(timeSpacingInvoker);
     }
 
     public Issue getIssue(String issueKey) {
@@ -44,7 +45,7 @@ public class FaultTolerantIssueClient {
     }
 
     public void addComment(final Issue issue, final String comment) {
-        logger.infof("Commenting on issue %s: %s", issue.getKey(), comment);
+        logger.infof("Commenting on issue %s: %s (dry mode is %b)", issue.getKey(), comment, dryMode);
         if (!dryMode) {
             Callable<Promise<Void>> callable = () -> issueRestClient.addComment(issue.getCommentsUri(),
                     Comment.createWithGroupLevel(comment, "Red Hat Employee"));
@@ -53,7 +54,7 @@ public class FaultTolerantIssueClient {
     }
 
     public void addLabel(final Issue issue, final String label) {
-        logger.infof("Adding label %s to issue %s", label, issue.getKey());
+        logger.infof("Adding label %s to issue %s (dry mode is %b)", label, issue.getKey(), dryMode);
         Set<String> labels = issue.getLabels();
         labels.add(label);
 
@@ -68,7 +69,7 @@ public class FaultTolerantIssueClient {
     }
 
     public void transitionToResolved(final Issue issue) {
-        logger.infof("Transitioning issue %s to Resolved", issue.getKey());
+        logger.infof("Transitioning issue %s to Resolved (dry mode is %b)", issue.getKey(), dryMode);
         int transitionId = getResolveTransitionId(issue);
         TransitionInput transitionInput = new TransitionInput(transitionId, List.of(new FieldInput("resolution", "Done")));
         if (!dryMode) {

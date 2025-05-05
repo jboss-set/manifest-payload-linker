@@ -1,19 +1,27 @@
-# Jira server URL
+# Jira server URL.
 jira.url=https://jira-domain/
-# Auth token for connecting to Jira
-jira.token=
-# Jira JQL query to load component upgrade tickets
-jira.query=project = JBEAP AND issuetype = "Component Upgrade" AND ("Target Release" = 8.1.0.GA or fixVersion = 8.1.0.Beta) AND status in (Resolved, "Ready for QA", Verified) ORDER BY created ASC
-# Jira rate limit - time span between requests in milliseconds
-#jira.request_frequency=500
 
-# PNC Builds API URL
+# Auth token for connecting to Jira.
+jira.token=
+
+# Jira JQL query to load component upgrade tickets.
+jira.query=project = JBEAP AND issuetype = "Component Upgrade" AND ("Target Release" = 8.1.0.GA or fixVersion = 8.1.0.Beta) AND status in (Resolved, "Ready for QA", Verified) ORDER BY created ASC
+
+# Jira rate limit - time span between requests in milliseconds.
+# Default is 0.
+jira.request_frequency=500
+
+# Dry mode - when false, the tool will be updating Jira issues.
+# Default is true.
+#jira.dry_mode=false
+
+# PNC Builds API URL.
 pnc.builds_api_url=https://pnc-domain/pnc-rest/v2/builds
 
-# OpenAPI endpoint of the LLM
+# OpenAPI endpoint of the LLM.
 llm.base_url=http://localhost:35271/v1
-# Query timeout for the LLM
+# Query timeout for the LLM.
 llm.timeout=60
 
-# Disable StaticDependencyGroupsResolutionStrategy
+# Disable StaticDependencyGroupsResolutionStrategy.
 #static_resolution_strategy.disable=true

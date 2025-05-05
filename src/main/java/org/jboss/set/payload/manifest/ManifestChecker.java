@@ -14,7 +14,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.function.Predicate;
 
-public class ManifestChecker implements Predicate<ManifestChecker.ComponentQuery> {
+public class ManifestChecker {
 
     public record ComponentQuery(String issueKey, Map<String, String> upgradedArtifacts) {
     }
@@ -41,37 +41,36 @@ public class ManifestChecker implements Predicate<ManifestChecker.ComponentQuery
      * @param componentQuery component query to resolve
      * @return true of all upgrade artifacts are covered by the manifest (version in manifest is equal or higher)
      */
-    @Override
-    public boolean test(ComponentQuery componentQuery) {
-        boolean artifactsCovered = true;
-        boolean anyMatch = false; // At least one build artifact has to be present in the manifest.
+    public Boolean test(ComponentQuery componentQuery) {
+        boolean presentInManifest = false; // At least one build artifact has to be present in the manifest.
         for (Map.Entry<String, String> entry : componentQuery.upgradedArtifacts.entrySet()) {
             String ga = entry.getKey();
             String upgradedVersion = entry.getValue();
             if (manifestStreams.containsKey(ga)) {
-                anyMatch = true;
+                presentInManifest = true;
                 String versionInManifest = manifestStreams.get(ga);
 
                 // Here were compare version introduced by the component upgrade against the version present in the
                 // manifest. If the version from the manifest is lower, the component upgrade is not covered by this
                 // manifest.
                 if (compareVersions(upgradedVersion, versionInManifest) > 0) {
-                    logger.infof("Build artifact %s:%s is not satisfied by manifest stream %s:%s",
-                            ga, upgradedVersion, ga, versionInManifest);
-                    artifactsCovered = false;
-                    break;
+                    logger.infof("%s: Build artifact %s:%s is not satisfied by manifest stream %s:%s",
+                            componentQuery.issueKey, ga, upgradedVersion, ga, versionInManifest);
+                    return false;
                 } else {
-                    logger.debugf("Build artifact %s:%s is satisfied by manifest stream %s:%s",
-                            ga, upgradedVersion, ga, versionInManifest);
+                    logger.debugf("%s: Build artifact %s:%s is satisfied by manifest stream %s:%s",
+                            componentQuery.issueKey, ga, upgradedVersion, ga, versionInManifest);
                 }
             }
         }
 
-        if (!anyMatch) {
-            logger.infof("No artifacts from issue %s are present in the manifest.", componentQuery.issueKey);
+        if (presentInManifest) { // At least one artifact was present in manifest.
+            return true;
         }
 
-        return anyMatch && artifactsCovered;
+        logger.infof("%s: No artifacts from this component upgrade are present in the manifest.",
+                componentQuery.issueKey);
+        return null; // Represents Unknown
     }
 
 

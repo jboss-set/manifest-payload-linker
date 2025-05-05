@@ -46,6 +46,8 @@ public class StaticDependencyGroupsResolutionStrategy implements ComponentUpgrad
             } else {
                 logger.warnf("%s: Can't identify component %s", issue.getKey(), info.component());
             }
+        } else {
+            logger.warnf("%s: Can't parse issue summary: %s", issue.getKey(), issue.getSummary());
         }
         return null; // Represents Unknown
     }

@@ -11,4 +11,7 @@ public final class JiraConstants {
     public static final String VERIFIED = "Verified";
     public static final String CLOSED = "Closed";
 
+    public static final String DONE = "Done";
+    public static final String DUPLICATE = "Duplicate";
+
 }

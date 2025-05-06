@@ -76,6 +76,7 @@ public class Main implements Closeable, Runnable {
                         builder -> builder.setHeader("Authorization", "Bearer " + jiraToken));
         issueClient = new FaultTolerantIssueClient(jiraClient.getIssueClient(), spacing, dryMode);
 
+        resolutionStrategies.add(new DenyUnwantedStatesStrategy());
         resolutionStrategies.add(new PncResolutionStrategy(config, manifestChecker));
         if (!disableStaticStrategy) {
             resolutionStrategies.add(new StaticDependencyGroupsResolutionStrategy(config, manifestChecker));

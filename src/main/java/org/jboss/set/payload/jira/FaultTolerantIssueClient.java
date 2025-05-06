@@ -5,17 +5,20 @@ import com.atlassian.jira.rest.client.api.RestClientException;
 import com.atlassian.jira.rest.client.api.domain.Comment;
 import com.atlassian.jira.rest.client.api.domain.Issue;
 import com.atlassian.jira.rest.client.api.domain.Transition;
+import com.atlassian.jira.rest.client.api.domain.Version;
 import com.atlassian.jira.rest.client.api.domain.input.FieldInput;
 import com.atlassian.jira.rest.client.api.domain.input.IssueInput;
 import com.atlassian.jira.rest.client.api.domain.input.IssueInputBuilder;
 import com.atlassian.jira.rest.client.api.domain.input.TransitionInput;
 import io.atlassian.util.concurrent.Promise;
+import org.apache.commons.lang3.stream.Streams;
 import org.jboss.logging.Logger;
 
 import java.util.Arrays;
 import java.util.List;
 import java.util.Set;
 import java.util.concurrent.Callable;
+import java.util.stream.Collectors;
 
 /**
  * Jira client wrapper that implements retry & rate limiting logic.
@@ -68,6 +71,41 @@ public class FaultTolerantIssueClient {
         if (!dryMode) {
             Callable<Promise<Void>> callable = () -> issueRestClient.updateIssue(issue.getKey(), issueInput);
             invoker.invoke(callable);
+        }
+    }
+
+    public void updateIssue(final Issue issue, final String fixVersion, final String label) {
+        boolean change = false;
+
+        Set<String> fixVersions = Streams.of(issue.getFixVersions())
+                .map(Version::getName)
+                .collect(Collectors.toSet());
+        if (!fixVersions.contains(fixVersion)) {
+            fixVersions.add(fixVersion);
+            change = true;
+        } else {
+            logger.infof("%s: Fix version \"%s\" already set.", issue.getKey(), fixVersion);
+        }
+
+        Set<String> labels = issue.getLabels();
+        if (!labels.contains(label)) {
+            labels.add(label);
+            change = true;
+        } else {
+            logger.infof("%s: Label \"%s\" already set.", issue.getKey(), label);
+        }
+
+        if (change) {
+            logger.infof("%s: Updating issue with fix_version = %s, label = %s (dry mode is %b)",
+                    issue.getKey(), fixVersion, label, dryMode);
+            if (!dryMode) {
+                final IssueInput issueInput = new IssueInputBuilder()
+                        .setFieldValue("labels", labels)
+                        .setFixVersionsNames(fixVersions)
+                        .build();
+                Callable<Promise<Void>> callable = () -> issueRestClient.updateIssue(issue.getKey(), issueInput);
+                invoker.invoke(callable);
+            }
         }
     }
 
@@ -134,10 +172,10 @@ public class FaultTolerantIssueClient {
 
     private static class RetryingInvoker implements Invoker {
 
-        private final Invoker nestedInvoker;
+        private final Invoker delegate;
 
-        public RetryingInvoker(Invoker nestedInvoker) {
-            this.nestedInvoker = nestedInvoker;
+        public RetryingInvoker(Invoker delegate) {
+            this.delegate = delegate;
         }
 
         @Override
@@ -147,7 +185,7 @@ public class FaultTolerantIssueClient {
 
         private <T> T invoke(Callable<Promise<T>> callable, int attempts) {
             try {
-                return nestedInvoker.invoke(callable);
+                return delegate.invoke(callable);
             } catch (RestClientException e) {
                 // Here we are only retrying in case the previous request resulted in HTTP 401.
                 if (e.getStatusCode().or(0).equals(401)) {

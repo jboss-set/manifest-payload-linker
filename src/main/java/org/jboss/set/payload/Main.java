@@ -31,25 +31,26 @@ public class Main implements Closeable, Runnable {
 
     private final List<ComponentUpgradeResolutionStrategy> resolutionStrategies = new ArrayList<>();
     private final List<IssueConsumer> issueConsumers = new ArrayList<>();
+    private final URI jiraUri;
 
     public static void main(String[] args) throws Exception {
-        if (args.length != 2) {
+        if (args.length != 3) {
             logger.error("Incorrect number of parameters");
             usage();
             System.exit(1);
         }
 
-        try (Main main = new Main(Path.of(args[0]), args[1])) {
+        try (Main main = new Main(Path.of(args[0]), args[1], args[2])) {
             main.run();
         }
     }
 
     private static void usage() {
         System.err.println("Usage:");
-        System.err.println("java -jar <path-to-jar-file> <path-to-manifest-file> <manifest-version-string>");
+        System.err.println("java -jar <path-to-jar-file> <path-to-manifest-file> <manifest-version-string> <jira-fix-version>");
     }
 
-    public Main(Path manifestPath, String manifestReference) {
+    public Main(Path manifestPath, String manifestReference, String fixVersion) {
         config = new SmallRyeConfigBuilder()
                 .addDefaultSources()
                 .build();
@@ -57,7 +58,7 @@ public class Main implements Closeable, Runnable {
         ManifestChecker manifestChecker = new ManifestChecker(manifestPath);
 
         // Initialize Jira client
-        URI jiraUri = config.getValue(ConfigKeys.JIRA_URL, URI.class);
+        jiraUri = config.getValue(ConfigKeys.JIRA_URL, URI.class);
         String jiraToken = config.getValue(ConfigKeys.JIRA_TOKEN, String.class);
         Long spacing = config.getOptionalValue(ConfigKeys.JIRA_REQUEST_FREQUENCY, Long.class).orElse(0L);
         Boolean disableStaticStrategy = config.getOptionalValue("static_resolution_strategy.disable", Boolean.class).orElse(false);
@@ -77,7 +78,7 @@ public class Main implements Closeable, Runnable {
             issueConsumers.add(new IssueLinksReportConsumer(issueClient, new File("issue-links.txt"), jiraUri, manifestReference));
             issueConsumers.add(new IssueCodesReportConsumer(issueClient, new File("issue-codes.txt"), manifestReference));
             issueConsumers.add(new DetailedReportConsumer(issueClient, new File("detailed-report.txt"), jiraUri, manifestReference));
-            issueConsumers.add(new IssueTransitionConsumer(issueClient, manifestReference));
+            issueConsumers.add(new IssueTransitionConsumer(issueClient, manifestReference, fixVersion));
         } catch (IOException e) {
             logger.errorf(e, "Can't create report file");
             System.exit(1);
@@ -98,7 +99,8 @@ public class Main implements Closeable, Runnable {
         for (String issueKey : issueKeys) {
             logger.debugf("Retrieving issue %s", issueKey);
             Issue issue = issueClient.getIssue(issueKey);
-            logger.infof("Processing issue %s: %s", issueKey, issue.getSummary());
+            URI issueUri = jiraUri.resolve("browse/").resolve(issueKey);
+            logger.infof("Processing issue %s : %s", issueUri.toString(), issue.getSummary());
 
             Boolean result = null;
             for (ComponentUpgradeResolutionStrategy strategy: resolutionStrategies) {

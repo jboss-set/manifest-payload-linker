@@ -9,9 +9,12 @@ public class IssueTransitionConsumer extends AbstractIssueConsumer {
     private static final String INCORPORATED_ISSUE_MESSAGE = "This issue has been incorporated in %s via component upgrade %s.";
     private static final String LABEL = "manifest-checked";
 
+    private final String fixVersion;
 
-    public IssueTransitionConsumer(FaultTolerantIssueClient issueClient, String manifestReference) {
+
+    public IssueTransitionConsumer(FaultTolerantIssueClient issueClient, String manifestReference, String fixVersion) {
         super(issueClient, INCLUDE_NON_VERIFIED, INCLUDE_RESOLVED, manifestReference);
+        this.fixVersion = fixVersion;
     }
 
     @Override
@@ -19,7 +22,7 @@ public class IssueTransitionConsumer extends AbstractIssueConsumer {
         String comment = String.format(COMPONENT_UPGRADE_MESSAGE, manifestReference);
         if (!hasLabel(issue, LABEL)) {
             issueClient.addComment(issue, comment);
-            issueClient.addLabel(issue, LABEL);
+            issueClient.updateIssue(issue, fixVersion, LABEL);
         }
     }
 
@@ -28,7 +31,7 @@ public class IssueTransitionConsumer extends AbstractIssueConsumer {
         String comment = String.format(INCORPORATED_ISSUE_MESSAGE, manifestReference, componentUpgrade.getKey());
         if (!hasLabel(issue, LABEL)) {
             issueClient.addComment(issue, comment);
-            issueClient.addLabel(issue, LABEL);
+            issueClient.updateIssue(issue, fixVersion, LABEL);
         }
     }
 

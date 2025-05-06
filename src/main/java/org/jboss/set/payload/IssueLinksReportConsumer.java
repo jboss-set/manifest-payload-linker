@@ -6,6 +6,7 @@ import org.jboss.set.payload.jira.FaultTolerantIssueClient;
 import java.io.File;
 import java.io.IOException;
 import java.net.URI;
+import java.util.function.Predicate;
 
 public class IssueLinksReportConsumer extends AbstractReportConsumer {
 
@@ -13,7 +14,15 @@ public class IssueLinksReportConsumer extends AbstractReportConsumer {
 
     public IssueLinksReportConsumer(FaultTolerantIssueClient issueClient, File file, URI jiraUri, String manifestReference)
             throws IOException {
-        super(issueClient, file, INCLUDE_RESOLVED, INCLUDE_RESOLVED, manifestReference);
+        this(issueClient, file, INCLUDE_RESOLVED, INCLUDE_RESOLVED, jiraUri, manifestReference);
+    }
+
+    public IssueLinksReportConsumer(FaultTolerantIssueClient issueClient, File file,
+                                    Predicate<Issue> componentUpgradeInclusionPredicate,
+                                    Predicate<Issue> incorporatedInclusionPredicate,
+                                    URI jiraUri, String manifestReference)
+            throws IOException {
+        super(issueClient, file, componentUpgradeInclusionPredicate, incorporatedInclusionPredicate, manifestReference);
         this.jiraUri = jiraUri;
     }
 

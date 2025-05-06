@@ -30,7 +30,8 @@ public class Main implements Closeable, Runnable {
     private final Config config;
 
     private final List<ComponentUpgradeResolutionStrategy> resolutionStrategies = new ArrayList<>();
-    private final List<IssueConsumer> issueConsumers = new ArrayList<>();
+    private final List<IssueConsumer> verifiedIssuesConsumers = new ArrayList<>();
+    private final IssueConsumer toCheckManually;
     private final URI jiraUri;
 
     public static void main(String[] args) throws Exception {
@@ -51,7 +52,7 @@ public class Main implements Closeable, Runnable {
         System.err.println("  * <manifest-reference> can be a Maven GAV, git hash, etc.");
     }
 
-    public Main(Path manifestPath, String manifestReference, String fixVersion) {
+    public Main(Path manifestPath, String manifestReference, String fixVersion) throws IOException {
         config = new SmallRyeConfigBuilder()
                 .addDefaultSources()
                 .build();
@@ -75,23 +76,22 @@ public class Main implements Closeable, Runnable {
             resolutionStrategies.add(new StaticDependencyGroupsResolutionStrategy(config, manifestChecker));
         }
 
-        try {
-            issueConsumers.add(new IssueLinksReportConsumer(issueClient, new File("issue-links.txt"), jiraUri, manifestReference));
-            issueConsumers.add(new IssueCodesReportConsumer(issueClient, new File("issue-codes.txt"), manifestReference));
-            issueConsumers.add(new DetailedReportConsumer(issueClient, new File("detailed-report.txt"), jiraUri, manifestReference));
-            issueConsumers.add(new IssueTransitionConsumer(issueClient, manifestReference, fixVersion));
-        } catch (IOException e) {
-            logger.errorf(e, "Can't create report file");
-            System.exit(1);
-        }
+        verifiedIssuesConsumers.add(new IssueLinksReportConsumer(issueClient, new File("issue-links.txt"), jiraUri, manifestReference));
+        verifiedIssuesConsumers.add(new IssueCodesReportConsumer(issueClient, new File("issue-codes.txt"), manifestReference));
+        verifiedIssuesConsumers.add(new DetailedReportConsumer(issueClient, new File("detailed-report.txt"), jiraUri, manifestReference));
+        verifiedIssuesConsumers.add(new IssueTransitionConsumer(issueClient, manifestReference, fixVersion));
+
+        toCheckManually = new IssueLinksReportConsumer(issueClient, new File("check-manually.txt"),
+                AbstractIssueConsumer.INCLUDE_ALL, AbstractIssueConsumer.INCLUDE_NONE, jiraUri, manifestReference);
     }
 
     @Override
     public void close() throws IOException {
         jiraClient.close();
-        for (IssueConsumer consumer: issueConsumers) {
+        for (IssueConsumer consumer: verifiedIssuesConsumers) {
             consumer.close();
         }
+        toCheckManually.close();
     }
 
     @Override
@@ -111,6 +111,7 @@ public class Main implements Closeable, Runnable {
 
             if (result == null) {
                 logger.warnf("%s: Unable to determine if issue is covered by the manifest.", issueKey);
+                toCheckManually.accept(issue);
             } else if (result) {
                 logger.infof("%s: Issue is covered by the manifest.", issueKey);
                 processReportConsumers(issue);
@@ -145,7 +146,7 @@ public class Main implements Closeable, Runnable {
     }
 
     private void processReportConsumers(Issue issue) {
-        for (IssueConsumer consumer: issueConsumers) {
+        for (IssueConsumer consumer: verifiedIssuesConsumers) {
             consumer.accept(issue);
         }
     }

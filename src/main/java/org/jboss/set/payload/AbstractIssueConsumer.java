@@ -12,9 +12,10 @@ import java.util.stream.StreamSupport;
 
 public abstract class AbstractIssueConsumer implements IssueConsumer {
 
-    protected static final Predicate<Issue> INCLUDE_ALL = i -> true;
-    protected static final Predicate<Issue> INCLUDE_NON_VERIFIED = i -> !"Verified".equals(i.getStatus().getName());
-    protected static final Predicate<Issue> INCLUDE_RESOLVED = i -> "Resolved".equals(i.getStatus().getName());
+    public static final Predicate<Issue> INCLUDE_ALL = i -> true;
+    public static final Predicate<Issue> INCLUDE_NONE = i -> false;
+    public static final Predicate<Issue> INCLUDE_NON_VERIFIED = i -> !"Verified".equals(i.getStatus().getName());
+    public static final Predicate<Issue> INCLUDE_RESOLVED = i -> "Resolved".equals(i.getStatus().getName());
 
 
     private static final String INCORPORATES = "Incorporates";

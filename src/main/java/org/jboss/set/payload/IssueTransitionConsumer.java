@@ -7,7 +7,7 @@ public class IssueTransitionConsumer extends AbstractIssueConsumer {
 
     private static final String COMPONENT_UPGRADE_MESSAGE = "This component upgrade has been incorporated in %s.";
     private static final String INCORPORATED_ISSUE_MESSAGE = "This issue has been incorporated in %s via component upgrade %s.";
-    private static final String LABEL = "manifest-checked";
+    private static final String LABEL = "on-payload";
 
     private final String fixVersion;
 
@@ -23,6 +23,7 @@ public class IssueTransitionConsumer extends AbstractIssueConsumer {
         if (!hasLabel(issue, LABEL)) {
             issueClient.addComment(issue, comment);
             issueClient.updateIssue(issue, fixVersion, LABEL);
+            issueClient.transitionToResolved(issue);
         }
     }
 

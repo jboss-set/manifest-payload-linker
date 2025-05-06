@@ -6,6 +6,7 @@ import com.atlassian.jira.rest.client.api.domain.Comment;
 import com.atlassian.jira.rest.client.api.domain.Issue;
 import com.atlassian.jira.rest.client.api.domain.Transition;
 import com.atlassian.jira.rest.client.api.domain.Version;
+import com.atlassian.jira.rest.client.api.domain.input.ComplexIssueInputFieldValue;
 import com.atlassian.jira.rest.client.api.domain.input.FieldInput;
 import com.atlassian.jira.rest.client.api.domain.input.IssueInput;
 import com.atlassian.jira.rest.client.api.domain.input.IssueInputBuilder;
@@ -20,6 +21,12 @@ import java.util.Set;
 import java.util.concurrent.Callable;
 import java.util.stream.Collectors;
 
+import static org.jboss.set.payload.jira.JiraConstants.CLOSED;
+import static org.jboss.set.payload.jira.JiraConstants.NEW;
+import static org.jboss.set.payload.jira.JiraConstants.READY_FOR_QA;
+import static org.jboss.set.payload.jira.JiraConstants.RESOLVED;
+import static org.jboss.set.payload.jira.JiraConstants.VERIFIED;
+
 /**
  * Jira client wrapper that implements retry & rate limiting logic.
  */
@@ -27,7 +34,7 @@ public class FaultTolerantIssueClient {
 
     private static final Logger logger = Logger.getLogger(FaultTolerantIssueClient.class);
 
-    private static final String[] RESOLVED_STATES = new String[] {"Resolved", "Verified", "Closed"};
+    private static final String[] RESOLVED_STATES = new String[] {RESOLVED, READY_FOR_QA, VERIFIED, CLOSED};
 
     private final IssueRestClient issueRestClient;
     private final Invoker invoker;
@@ -51,7 +58,7 @@ public class FaultTolerantIssueClient {
     }
 
     public void addComment(final Issue issue, final String comment) {
-        logger.infof("%s: Commenting on issue (dry mode is %b): %s", issue.getKey(), dryMode, comment);
+        logger.infof("%s: Commenting on issue %s: %s", issue.getKey(), dryModeFlag(), comment);
         if (!dryMode) {
             Callable<Promise<Void>> callable = () -> issueRestClient.addComment(issue.getCommentsUri(),
                     Comment.createWithGroupLevel(comment, "Red Hat Employee"));
@@ -60,7 +67,7 @@ public class FaultTolerantIssueClient {
     }
 
     public void addLabel(final Issue issue, final String label) {
-        logger.infof("%s: Adding label \"%s\" to issue %s (dry mode is %b)", issue.getKey(), label, dryMode);
+        logger.infof("%s: Adding label \"%s\" to issue %s %s", issue.getKey(), label, dryModeFlag());
         Set<String> labels = issue.getLabels();
         labels.add(label);
 
@@ -96,8 +103,8 @@ public class FaultTolerantIssueClient {
         }
 
         if (change) {
-            logger.infof("%s: Updating issue with fix_version = %s, label = %s (dry mode is %b)",
-                    issue.getKey(), fixVersion, label, dryMode);
+            logger.infof("%s: Updating issue with fix_version = %s, label = %s %s",
+                    issue.getKey(), fixVersion, label, dryModeFlag());
             if (!dryMode) {
                 final IssueInput issueInput = new IssueInputBuilder()
                         .setFieldValue("labels", labels)
@@ -110,13 +117,18 @@ public class FaultTolerantIssueClient {
     }
 
     public void transitionToResolved(final Issue issue) {
-        if (Arrays.stream(RESOLVED_STATES).anyMatch(state -> state.equals(issue.getStatus().getName()))) {
-            logger.infof("%s: Issue is already in resolved (%s)", issue.getKey(), issue.getStatus().getName());
+        if (issue.getStatus().getName().equals(NEW)) {
+            logger.warnf("%s: Transitioning from NEW state is not implemented currently.", issue.getKey());
             return;
         }
-        logger.infof("%s: Transitioning issue to Resolved (dry mode is %b)", issue.getKey(), dryMode);
+        if (Arrays.stream(RESOLVED_STATES).anyMatch(state -> state.equals(issue.getStatus().getName()))) {
+            logger.infof("%s: Issue is already resolved (%s)", issue.getKey(), issue.getStatus().getName());
+            return;
+        }
+        logger.infof("%s: Transitioning issue to Resolved %s", issue.getKey(), dryModeFlag());
         int transitionId = getResolveTransitionId(issue);
-        TransitionInput transitionInput = new TransitionInput(transitionId, List.of(new FieldInput("resolution", "Done")));
+        TransitionInput transitionInput = new TransitionInput(transitionId, List.of(
+                new FieldInput("resolution", ComplexIssueInputFieldValue.with("name", "Done"))));
         if (!dryMode) {
             Callable<Promise<Void>> callable = () -> issueRestClient.transition(issue, transitionInput);
             invoker.invoke(callable);
@@ -131,6 +143,10 @@ public class FaultTolerantIssueClient {
             }
         }
         throw new RuntimeException("Transition to Resolved is not available.");
+    }
+
+    private String dryModeFlag() {
+        return dryMode ? "(dry mode)" : "";
     }
 
     private interface Invoker {

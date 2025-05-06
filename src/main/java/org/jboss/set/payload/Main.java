@@ -47,7 +47,8 @@ public class Main implements Closeable, Runnable {
 
     private static void usage() {
         System.err.println("Usage:");
-        System.err.println("java -jar <path-to-jar-file> <path-to-manifest-file> <manifest-version-string> <jira-fix-version>");
+        System.err.println("java -jar <path-to-jar-file> <path-to-manifest-file> <manifest-reference> <jira-fix-version>");
+        System.err.println("  * <manifest-reference> can be a Maven GAV or other text identificator.");
     }
 
     public Main(Path manifestPath, String manifestReference, String fixVersion) {

@@ -16,6 +16,7 @@ import org.apache.commons.lang3.stream.Streams;
 import org.jboss.logging.Logger;
 
 import java.util.Arrays;
+import java.util.Collection;
 import java.util.List;
 import java.util.Set;
 import java.util.concurrent.Callable;
@@ -66,32 +67,17 @@ public class FaultTolerantIssueClient {
         }
     }
 
-    public void addLabel(final Issue issue, final String label) {
-        logger.infof("%s: Adding label \"%s\" to issue %s %s", issue.getKey(), label, dryModeFlag());
-        Set<String> labels = issue.getLabels();
-        labels.add(label);
-
-        final IssueInput issueInput = new IssueInputBuilder()
-                .setFieldValue("labels", labels)
-                .build();
-
-        if (!dryMode) {
-            Callable<Promise<Void>> callable = () -> issueRestClient.updateIssue(issue.getKey(), issueInput);
-            invoker.invoke(callable);
-        }
-    }
-
-    public void updateIssue(final Issue issue, final String fixVersion, final String label) {
+    public void updateIssue(final Issue issue, final Collection<String> fixVersions, final String label) {
         boolean change = false;
 
-        Set<String> fixVersions = Streams.of(issue.getFixVersions())
+        Set<String> fixVersionsToSet = Streams.of(issue.getFixVersions())
                 .map(Version::getName)
                 .collect(Collectors.toSet());
-        if (!fixVersions.contains(fixVersion)) {
-            fixVersions.add(fixVersion);
+        if (!fixVersionsToSet.containsAll(fixVersions)) {
+            fixVersionsToSet.addAll(fixVersions);
             change = true;
         } else {
-            logger.infof("%s: Fix version \"%s\" already set.", issue.getKey(), fixVersion);
+            logger.infof("%s: Fix versions already set.", issue.getKey());
         }
 
         Set<String> labels = issue.getLabels();
@@ -103,12 +89,12 @@ public class FaultTolerantIssueClient {
         }
 
         if (change) {
-            logger.infof("%s: Updating issue with fix_version = %s, label = %s %s",
-                    issue.getKey(), fixVersion, label, dryModeFlag());
+            logger.infof("%s: Updating issue with fix_version += %s; label += %s %s",
+                    issue.getKey(), String.join(", ", fixVersions), label, dryModeFlag());
             if (!dryMode) {
                 final IssueInput issueInput = new IssueInputBuilder()
                         .setFieldValue("labels", labels)
-                        .setFixVersionsNames(fixVersions)
+                        .setFixVersionsNames(fixVersionsToSet)
                         .build();
                 Callable<Promise<Void>> callable = () -> issueRestClient.updateIssue(issue.getKey(), issueInput);
                 invoker.invoke(callable);

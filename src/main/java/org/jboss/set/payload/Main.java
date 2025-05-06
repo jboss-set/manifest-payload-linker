@@ -18,8 +18,11 @@ import java.io.IOException;
 import java.net.URI;
 import java.nio.file.Path;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 public class Main implements Closeable, Runnable {
 
@@ -48,11 +51,13 @@ public class Main implements Closeable, Runnable {
 
     private static void usage() {
         System.err.println("Usage:");
-        System.err.println("java -jar <path-to-jar-file> <path-to-manifest-file> <manifest-reference> <jira-fix-version>");
-        System.err.println("  * <manifest-reference> can be a Maven GAV, git hash, etc.");
+        System.err.println("  java -jar <path-to-jar-file> <path-to-manifest-file> <manifest-reference> <jira-fix-versions>");
+        System.err.println();
+        System.err.println("  <manifest-reference>\tcan be a Maven GAV, git hash, etc.");
+        System.err.println("  <jira-fix-versions>\tcomma-delimited list of Jira fix versions.");
     }
 
-    public Main(Path manifestPath, String manifestReference, String fixVersion) throws IOException {
+    public Main(Path manifestPath, String manifestReference, String fixVersionsString) throws IOException {
         config = new SmallRyeConfigBuilder()
                 .addDefaultSources()
                 .build();
@@ -76,10 +81,14 @@ public class Main implements Closeable, Runnable {
             resolutionStrategies.add(new StaticDependencyGroupsResolutionStrategy(config, manifestChecker));
         }
 
+        Set<String> fixVersions = Arrays.stream(fixVersionsString.split(","))
+                .map(String::trim)
+                .collect(Collectors.toSet());
+
         verifiedIssuesConsumers.add(new IssueLinksReportConsumer(issueClient, new File("issue-links.txt"), jiraUri, manifestReference));
         verifiedIssuesConsumers.add(new IssueCodesReportConsumer(issueClient, new File("issue-codes.txt"), manifestReference));
         verifiedIssuesConsumers.add(new DetailedReportConsumer(issueClient, new File("detailed-report.txt"), jiraUri, manifestReference));
-        verifiedIssuesConsumers.add(new IssueTransitionConsumer(issueClient, manifestReference, fixVersion));
+        verifiedIssuesConsumers.add(new IssueTransitionConsumer(issueClient, manifestReference, fixVersions));
 
         toCheckManually = new IssueLinksReportConsumer(issueClient, new File("check-manually.txt"),
                 AbstractIssueConsumer.INCLUDE_ALL, AbstractIssueConsumer.INCLUDE_NONE, jiraUri, manifestReference);

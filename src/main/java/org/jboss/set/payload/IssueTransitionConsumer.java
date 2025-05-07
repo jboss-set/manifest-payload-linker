@@ -1,11 +1,14 @@
 package org.jboss.set.payload;
 
 import com.atlassian.jira.rest.client.api.domain.Issue;
+import org.jboss.logging.Logger;
 import org.jboss.set.payload.jira.FaultTolerantIssueClient;
 
 import java.util.Collection;
 
 public class IssueTransitionConsumer extends AbstractIssueConsumer {
+
+    private static final Logger logger = Logger.getLogger(IssueTransitionConsumer.class);
 
     private static final String COMPONENT_UPGRADE_MESSAGE = "This component upgrade has been incorporated in manifest %s.";
     private static final String INCORPORATED_ISSUE_MESSAGE = "This issue has been incorporated in manifest %s via component upgrade %s.";
@@ -26,6 +29,8 @@ public class IssueTransitionConsumer extends AbstractIssueConsumer {
             issueClient.addComment(issue, comment);
             issueClient.updateIssue(issue, fixVersions, LABEL);
             issueClient.transitionToResolved(issue);
+        } else {
+            logger.infof("%s: Issue is already on payload.");
         }
     }
 
@@ -35,6 +40,8 @@ public class IssueTransitionConsumer extends AbstractIssueConsumer {
         if (!hasLabel(issue, LABEL)) {
             issueClient.addComment(issue, comment);
             issueClient.updateIssue(issue, fixVersions, LABEL);
+        } else {
+            logger.infof("%s: Issue is already on payload.");
         }
     }
 

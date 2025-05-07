@@ -111,7 +111,8 @@ public class Main implements Closeable, Runnable {
             logger.debugf("Retrieving issue %s", issueKey);
             Issue issue = issueClient.getIssue(issueKey);
             URI issueUri = jiraUri.resolve("browse/").resolve(issueKey);
-            logger.infof("Processing issue %s : %s", issueUri.toString(), issue.getSummary());
+            logger.infof("Processing issue %s [%s]: %s", issueUri.toString(), issue.getStatus().getName(),
+                    issue.getSummary());
 
             Boolean result = null;
             for (ComponentUpgradeResolutionStrategy strategy: resolutionStrategies) {

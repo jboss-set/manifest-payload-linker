@@ -10,6 +10,7 @@ import org.wildfly.channel.ChannelManifestMapper;
 import java.io.File;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
 public class DependencyGroupsTestCase {
@@ -20,9 +21,7 @@ public class DependencyGroupsTestCase {
         Assert.assertNotNull(manifestResource);
         ChannelManifest manifest = ChannelManifestMapper.from(manifestResource);
 
-        YAMLMapper mapper = YAMLMapper.builder().build();
-        JavaType type = mapper.getTypeFactory().constructParametricType(List.class, DependencyGroup.class);
-        List<DependencyGroup> groups = mapper.readValue(new File("dependency-groups.yaml"), type);
+        List<DependencyGroup> groups = loadDependencyGroups();
 
         ArrayList<String> notMatching = new ArrayList<>();
         manifest.getStreams().forEach(stream -> {
@@ -37,6 +36,22 @@ public class DependencyGroupsTestCase {
         });
 
         Assert.assertTrue(notMatching.isEmpty());
+    }
+
+    @Test
+    public void testMatchingByArtifactId() throws Exception {
+        DependencyGroupLookup lookup = new DependencyGroupLookup(new File("dependency-groups.yaml"));
+        Collection<String> artifacts = lookup.findArtifacts("wildfly-metrics");
+        Assert.assertNotNull(artifacts);
+
+        artifacts = lookup.findArtifacts("wildfly-ee");
+        Assert.assertNull(artifacts); // null due to multiple wildfly-ee artifactIds existing - ambiguity
+    }
+
+    private static List<DependencyGroup> loadDependencyGroups() throws Exception {
+        YAMLMapper mapper = YAMLMapper.builder().build();
+        JavaType type = mapper.getTypeFactory().constructParametricType(List.class, DependencyGroup.class);
+        return mapper.readValue(new File("dependency-groups.yaml"), type);
     }
 
 }

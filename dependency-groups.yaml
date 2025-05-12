@@ -514,7 +514,9 @@
   dependencies:
     - io.rest-assured:rest-assured
 - component: io.smallrye.jandex
-  aliases: []
+  aliases:
+    - smallrye jandex
+    - jandex
   dependencies:
     - io.smallrye:jandex
 - component: io.smallrye.open-api
@@ -524,11 +526,15 @@
     - io.smallrye:smallrye-open-api-jaxrs
     - io.smallrye:smallrye-open-api-model
 - component: io.smallrye.reactive-utils
-  aliases: []
+  aliases:
+    - reactive-utils
+    - reactive utils
   dependencies:
     - io.smallrye.reactive:smallrye-reactive-converter-api
 - component: io.smallrye.smallrye-common
-  aliases: []
+  aliases:
+    - smallrye common
+    - smallrye-common
   dependencies:
     - io.smallrye.common:smallrye-common-annotation
     - io.smallrye.common:smallrye-common-classloader
@@ -537,48 +543,68 @@
     - io.smallrye.common:smallrye-common-function
     - io.smallrye.common:smallrye-common-vertx-context
 - component: io.smallrye.smallrye-config
-  aliases: []
+  aliases:
+    - smallrye config
+    - smallrye-config
   dependencies:
     - io.smallrye.config:smallrye-config-common
     - io.smallrye.config:smallrye-config-core
     - io.smallrye.config:smallrye-config-source-file-system
     - io.smallrye.config:smallrye-config
 - component: io.smallrye.smallrye-fault-tolerance
-  aliases: []
+  aliases:
+    - smallrye fault tolerance
+    - smallrye-fault-tolerance
   dependencies:
     - io.smallrye:smallrye-fault-tolerance-api
     - io.smallrye:smallrye-fault-tolerance-autoconfig-core
     - io.smallrye:smallrye-fault-tolerance-core
     - io.smallrye:smallrye-fault-tolerance
 - component: io.smallrye.smallrye-health
-  aliases: []
+  aliases:
+    - smallrye-health
+    - smallrye health
   dependencies:
     - io.smallrye:smallrye-health
 - component: io.smallrye.smallrye-jwt
-  aliases: []
+  aliases:
+    - smallrye-jwt
+    - smallrye jwt
   dependencies:
     - io.smallrye:smallrye-jwt-cdi-extension
     - io.smallrye:smallrye-jwt-common
     - io.smallrye:smallrye-jwt-http-mechanism
     - io.smallrye:smallrye-jwt
 - component: io.smallrye.smallrye-mutiny
-  aliases: []
+  aliases:
+    - smallrye-mutiny
+    - smallrye mutiny
   dependencies:
     - io.smallrye.reactive:mutiny-reactive-streams-operators
     - io.smallrye.reactive:mutiny
 - component: io.smallrye.smallrye-mutiny-vertx
-  aliases: []
+  aliases:
+    - smallrye-mutiny-vertx
+    - smallrye mutiny vertx
+    - mutiny-vertx
+    - mutiny vertx
   dependencies:
     - io.smallrye.reactive:smallrye-mutiny-vertx-amqp-client
     - io.smallrye.reactive:smallrye-mutiny-vertx-core
     - io.smallrye.reactive:smallrye-mutiny-vertx-runtime
 - component: io.smallrye.smallrye-mutiny-zero
-  aliases: []
+  aliases:
+    - smallrye-mutiny-zero
+    - smallrye mutiny zero
+    - mutiny-zero
+    - mutiny zero
   dependencies:
     - io.smallrye.reactive:mutiny-zero-flow-adapters
     - io.smallrye.reactive:mutiny-zero
 - component: io.smallrye.smallrye-opentelemetry
-  aliases: []
+  aliases:
+    - smallrye-opentelemetry
+    - smallrye opentelemetry
   dependencies:
     - io.smallrye.opentelemetry:smallrye-opentelemetry-api
     - io.smallrye.opentelemetry:smallrye-opentelemetry-cdi
@@ -586,7 +612,9 @@
     - io.smallrye.opentelemetry:smallrye-opentelemetry-propagation
     - io.smallrye.opentelemetry:smallrye-opentelemetry-rest
 - component: io.smallrye.smallrye-reactive-messaging
-  aliases: []
+  aliases:
+    - smallrye-reactive-messaging
+    - smallrye reactive messaging
   dependencies:
     - io.smallrye.reactive:smallrye-reactive-messaging-amqp
     - io.smallrye.reactive:smallrye-reactive-messaging-api
@@ -596,13 +624,15 @@
     - io.smallrye.reactive:smallrye-reactive-messaging-otel
     - io.smallrye.reactive:smallrye-reactive-messaging-provider
 - component: io.undertow
-  aliases: []
+  aliases:
+    - undertow
   dependencies:
     - io.undertow:undertow-core
     - io.undertow:undertow-servlet
     - io.undertow:undertow-websockets-jsr
 - component: io.undertow.jastow
-  aliases: []
+  aliases:
+    - jastow
   dependencies:
     - io.undertow.jastow:jastow
 - component: io.vertx.vertx
@@ -804,7 +834,10 @@
   dependencies:
     - org.apache.activemq:activemq-artemis-native
 - component: org.apache.cxf
-  aliases: []
+  aliases:
+    - apache cxf
+    - apache-cxf
+    - apache.cxf
   dependencies:
     - org.apache.cxf.services.sts:cxf-services-sts-core
     - org.apache.cxf.services.ws-discovery:cxf-services-ws-discovery-api
@@ -1862,7 +1895,9 @@
   dependencies:
     - org.wildfly.security.mp:wildfly-elytron-jwt
 - component: org.wildfly.security.elytron-web
-  aliases: []
+  aliases:
+    - elytron web
+    - elytron-web
   dependencies:
     - org.wildfly.security.elytron-web:undertow-server-servlet
     - org.wildfly.security.elytron-web:undertow-server

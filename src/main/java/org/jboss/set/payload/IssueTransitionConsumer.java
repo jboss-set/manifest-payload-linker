@@ -30,7 +30,7 @@ public class IssueTransitionConsumer extends AbstractIssueConsumer {
             issueClient.updateIssue(issue, fixVersions, LABEL);
             issueClient.transitionToResolved(issue);
         } else {
-            logger.infof("%s: Issue is already on payload.");
+            logger.infof("%s: Issue is already on payload.", issue.getKey());
         }
     }
 
@@ -41,7 +41,7 @@ public class IssueTransitionConsumer extends AbstractIssueConsumer {
             issueClient.addComment(issue, comment);
             issueClient.updateIssue(issue, fixVersions, LABEL);
         } else {
-            logger.infof("%s: Issue is already on payload.");
+            logger.infof("%s: Issue is already on payload.", issue.getKey());
         }
     }
 

@@ -1555,7 +1555,10 @@
   dependencies:
     - org.jboss.ws:jbossws-common-tools
 - component: org.jboss.ws.cxf
-  aliases: []
+  aliases:
+    - JBossWS-CXF
+    - JBossWS CXF
+    - JBoss WS CXF
   dependencies:
     - org.jboss.ws.cxf:jbossws-cxf-client
     - org.jboss.ws.cxf:jbossws-cxf-factories
@@ -1708,7 +1711,9 @@
   dependencies:
     - org.wildfly.client:wildfly-client-config
 - component: org.wildfly.clustering
-  aliases: []
+  aliases:
+    - wildfly-clustering
+    - wildfly clustering
   dependencies:
     - org.wildfly.clustering:wildfly-clustering-bom
     - org.wildfly.clustering:wildfly-clustering-cache-infinispan-common

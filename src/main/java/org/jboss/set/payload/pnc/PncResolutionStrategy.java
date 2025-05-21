@@ -81,7 +81,7 @@ public class PncResolutionStrategy implements ComponentUpgradeResolutionStrategy
         for (Comment comment : issue.getComments()) {
             List<String> lines = comment.getBody().lines().toList();
             for (String line : lines) {
-                if (line.toLowerCase().contains("pnc build:")) {
+                if (line.toLowerCase().contains("https://orch.psi.redhat.com/pnc-web/")) {
                     Matcher matcher = BUILD_URL_PATTERN.matcher(line);
                     if (matcher.find()) {
                         buildId = matcher.group(BUILD_ID_PATTERN_GROUP);

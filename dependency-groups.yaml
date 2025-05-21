@@ -1776,7 +1776,8 @@
   dependencies:
     - org.wildfly.installation-manager:installation-manager-api
 - component: org.wildfly.launcher
-  aliases: []
+  aliases:
+    - wildfly launcher
   dependencies:
     - org.wildfly.launcher:wildfly-launcher
 - component: org.wildfly.legacy.test

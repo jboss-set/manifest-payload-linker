@@ -4,6 +4,7 @@ import com.atlassian.jira.rest.client.api.domain.Issue;
 import org.eclipse.microprofile.config.Config;
 import org.jboss.logging.Logger;
 import org.jboss.set.payload.ComponentUpgradeResolutionStrategy;
+import org.jboss.set.payload.ConfigKeys;
 import org.jboss.set.payload.Main;
 import org.jboss.set.payload.llm.ComponentUpgrade;
 import org.jboss.set.payload.llm.LlmSummaryExtractor;
@@ -26,7 +27,9 @@ public class StaticDependencyGroupsResolutionStrategy implements ComponentUpgrad
         this.summaryExtractor = new LlmSummaryExtractor(config);
         this.manifestChecker = manifestChecker;
         try {
-            this.dependencyGroupLookup = new DependencyGroupLookup(new File("dependency-groups.yaml"));
+            String filename = config.getOptionalValue(ConfigKeys.DEPENDENCY_GROUPS_FILE, String.class)
+                    .orElse("dependency-groups.yaml");
+            this.dependencyGroupLookup = new DependencyGroupLookup(new File(filename));
         } catch (IOException e) {
             throw new RuntimeException("Can't load the dependency group file", e);
         }

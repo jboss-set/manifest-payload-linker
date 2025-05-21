@@ -9,4 +9,5 @@ public interface ConfigKeys {
     String PNC_BUILDS_API_URL = "pnc.builds_api_url";
     String LLM_BASE_URL = "llm.base_url";
     String LLM_TIMEOUT = "llm.timeout";
+    String DEPENDENCY_GROUPS_FILE = "dependency_groups_file";
 }

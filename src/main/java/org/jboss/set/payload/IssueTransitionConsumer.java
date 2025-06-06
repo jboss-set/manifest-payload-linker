@@ -1,8 +1,12 @@
 package org.jboss.set.payload;
 
 import com.atlassian.jira.rest.client.api.domain.Issue;
+import com.atlassian.jira.rest.client.api.domain.IssueField;
+import org.apache.commons.lang3.StringUtils;
 import org.jboss.logging.Logger;
 import org.jboss.set.payload.jira.FaultTolerantIssueClient;
+import org.jboss.set.payload.jira.JiraConstants;
+import org.jboss.util.Strings;
 
 import java.util.Collection;
 
@@ -14,12 +18,17 @@ public class IssueTransitionConsumer extends AbstractIssueConsumer {
     private static final String INCORPORATED_ISSUE_MESSAGE = "This issue has been incorporated in manifest [*\\] marked as %s via component upgrade %s.\n\n[*\\] %s";
     private static final String LABEL = "on-payload";
 
+    private final String targetRelese;
     private final Collection<String> fixVersions;
+    private final Collection<String> layeredFixVersions;
 
 
-    public IssueTransitionConsumer(FaultTolerantIssueClient issueClient, String manifestReference, Collection<String> fixVersions) {
+    public IssueTransitionConsumer(FaultTolerantIssueClient issueClient, String manifestReference, String targetRelease,
+                                   Collection<String> fixVersions, Collection<String> layeredFixVersions) {
         super(issueClient, INCLUDE_NON_VERIFIED, INCLUDE_RESOLVED, manifestReference);
+        this.targetRelese = targetRelease;
         this.fixVersions = fixVersions;
+        this.layeredFixVersions = layeredFixVersions;
     }
 
     @Override
@@ -39,10 +48,25 @@ public class IssueTransitionConsumer extends AbstractIssueConsumer {
         String comment = String.format(INCORPORATED_ISSUE_MESSAGE, fixVersions, componentUpgrade.getKey(), manifestReference);
         if (!hasLabel(issue, LABEL)) {
             issueClient.addComment(issue, comment);
-            issueClient.updateIssue(issue, fixVersions, LABEL);
+            if (StringUtils.isBlank(targetRelese) || targetRelese.equals(getTargetRelease(issue))) {
+                issueClient.updateIssue(issue, fixVersions, LABEL);
+            } else {
+                // This should handle a situation when we have XP issue incorporated in an EAP component upgrade
+                // -> use the layeredFixVersions (that should be the XP fix versions in equivalent CR)
+                issueClient.updateIssue(issue, layeredFixVersions, LABEL);
+            }
         } else {
             logger.infof("%s: Issue is already on payload.", issue.getKey());
         }
+    }
+
+    private String getTargetRelease(Issue issue) {
+        for (IssueField field : issue.getFields()) {
+            if (JiraConstants.TARGET_RELEASE.equals(field.getName())) {
+                return field.getValue().toString();
+            }
+        }
+        return null;
     }
 
     @SuppressWarnings({"BooleanMethodIsAlwaysInverted", "SameParameterValue"})

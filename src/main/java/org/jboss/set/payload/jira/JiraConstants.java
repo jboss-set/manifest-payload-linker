@@ -14,4 +14,5 @@ public final class JiraConstants {
     public static final String DONE = "Done";
     public static final String DUPLICATE = "Duplicate";
 
+    public static final String TARGET_RELEASE = "Target Release";
 }

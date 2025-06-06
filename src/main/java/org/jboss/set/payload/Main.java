@@ -38,26 +38,30 @@ public class Main implements Closeable, Runnable {
     private final URI jiraUri;
 
     public static void main(String[] args) throws Exception {
-        if (args.length != 3) {
+        if (args.length != 4 && args.length != 5) {
             logger.error("Incorrect number of parameters");
             usage();
             System.exit(1);
         }
 
-        try (Main main = new Main(Path.of(args[0]), args[1], args[2])) {
+        try (Main main = new Main(Path.of(args[0]), args[1], args[2], args[3], args[4])) {
             main.run();
         }
     }
 
     private static void usage() {
         System.err.println("Usage:");
-        System.err.println("  java -jar <path-to-jar-file> <path-to-manifest-file> <manifest-reference> <jira-fix-versions>");
+        System.err.println("  java -jar <path-to-jar-file> <path-to-manifest-file> <manifest-reference> <targetRelease> <fix-versions> [<layered-fix-versions>]");
         System.err.println();
         System.err.println("  <manifest-reference>\tcan be a Maven GAV, git hash, etc.");
-        System.err.println("  <jira-fix-versions>\tcomma-delimited list of Jira fix versions.");
+        System.err.println("  <target-release>\ttarget release of the component upgrades.");
+        System.err.println("  <fix-versions>\tcomma-delimited list of Jira fix versions to set to issues.");
+        System.err.println("  <layered-fix-versions>\tcomma-delimited list of Jira fix versions for layered product (e.g. XP).");
     }
 
-    public Main(Path manifestPath, String manifestReference, String fixVersionsString) throws IOException {
+    public Main(Path manifestPath, String manifestReference, String targetRelease, String fixVersionsString,
+                String layeredFixVersionsString)
+            throws IOException {
         config = new SmallRyeConfigBuilder()
                 .addDefaultSources()
                 .build();
@@ -85,11 +89,14 @@ public class Main implements Closeable, Runnable {
         Set<String> fixVersions = Arrays.stream(fixVersionsString.split(","))
                 .map(String::trim)
                 .collect(Collectors.toSet());
+        Set<String> layeredFixVersions = Arrays.stream(layeredFixVersionsString.split(","))
+                .map(String::trim)
+                .collect(Collectors.toSet());
 
         verifiedIssuesConsumers.add(new IssueLinksReportConsumer(issueClient, new File("issue-links.txt"), jiraUri, manifestReference));
         verifiedIssuesConsumers.add(new IssueCodesReportConsumer(issueClient, new File("issue-codes.txt"), manifestReference));
         verifiedIssuesConsumers.add(new DetailedReportConsumer(issueClient, new File("detailed-report.txt"), jiraUri, manifestReference));
-        verifiedIssuesConsumers.add(new IssueTransitionConsumer(issueClient, manifestReference, fixVersions));
+        verifiedIssuesConsumers.add(new IssueTransitionConsumer(issueClient, manifestReference, targetRelease, fixVersions, layeredFixVersions));
 
         toCheckManually = new IssueLinksReportConsumer(issueClient, new File("check-manually.txt"),
                 AbstractIssueConsumer.INCLUDE_ALL, AbstractIssueConsumer.INCLUDE_NONE, jiraUri, manifestReference);

@@ -5,12 +5,13 @@ import com.atlassian.jira.rest.client.api.domain.Issue;
 import com.atlassian.jira.rest.client.api.domain.SearchResult;
 import com.atlassian.jira.rest.client.internal.async.AsynchronousJiraRestClientFactory;
 import io.smallrye.config.SmallRyeConfigBuilder;
+import org.apache.commons.lang3.StringUtils;
 import org.eclipse.microprofile.config.Config;
 import org.jboss.logging.Logger;
 import org.jboss.set.payload.dependencygroups.StaticDependencyGroupsResolutionStrategy;
 import org.jboss.set.payload.jira.FaultTolerantIssueClient;
-import org.jboss.set.payload.pnc.PncResolutionStrategy;
 import org.jboss.set.payload.manifest.ManifestChecker;
+import org.jboss.set.payload.pnc.PncResolutionStrategy;
 
 import java.io.Closeable;
 import java.io.File;
@@ -19,9 +20,9 @@ import java.net.URI;
 import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
-import java.util.Set;
 import java.util.stream.Collectors;
 
 public class Main implements Closeable, Runnable {
@@ -86,12 +87,8 @@ public class Main implements Closeable, Runnable {
             resolutionStrategies.add(new StaticDependencyGroupsResolutionStrategy(config, manifestChecker));
         }
 
-        Set<String> fixVersions = Arrays.stream(fixVersionsString.split(","))
-                .map(String::trim)
-                .collect(Collectors.toSet());
-        Set<String> layeredFixVersions = Arrays.stream(layeredFixVersionsString.split(","))
-                .map(String::trim)
-                .collect(Collectors.toSet());
+        Collection<String> fixVersions = parseCommaSeparatedStringList(fixVersionsString);
+        Collection<String> layeredFixVersions = parseCommaSeparatedStringList(layeredFixVersionsString);
 
         verifiedIssuesConsumers.add(new IssueLinksReportConsumer(issueClient, new File("issue-links.txt"), jiraUri, manifestReference));
         verifiedIssuesConsumers.add(new IssueCodesReportConsumer(issueClient, new File("issue-codes.txt"), manifestReference));
@@ -167,6 +164,15 @@ public class Main implements Closeable, Runnable {
         for (IssueConsumer consumer: verifiedIssuesConsumers) {
             consumer.accept(issue);
         }
+    }
+
+    protected static Collection<String> parseCommaSeparatedStringList(String input) {
+        if (StringUtils.isBlank(input)) {
+            return Collections.emptyList();
+        }
+        return Arrays.stream(input.trim().split(","))
+                .map(String::trim)
+                .collect(Collectors.toSet());
     }
 
 }

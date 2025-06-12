@@ -3,6 +3,8 @@ package org.jboss.set.payload;
 import com.atlassian.jira.rest.client.api.domain.Issue;
 import com.atlassian.jira.rest.client.api.domain.IssueField;
 import org.apache.commons.lang3.StringUtils;
+import org.codehaus.jettison.json.JSONException;
+import org.codehaus.jettison.json.JSONObject;
 import org.jboss.logging.Logger;
 import org.jboss.set.payload.jira.FaultTolerantIssueClient;
 import org.jboss.set.payload.jira.JiraConstants;
@@ -63,7 +65,11 @@ public class IssueTransitionConsumer extends AbstractIssueConsumer {
     private String getTargetRelease(Issue issue) {
         for (IssueField field : issue.getFields()) {
             if (JiraConstants.TARGET_RELEASE.equals(field.getName())) {
-                return field.getValue().toString();
+                try {
+                    return ((JSONObject) field.getValue()).get("name").toString();
+                } catch (JSONException e) {
+                    throw new RuntimeException("Unable to extract target release name from its JSON definition", e);
+                }
             }
         }
         return null;

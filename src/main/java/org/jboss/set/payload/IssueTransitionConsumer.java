@@ -8,7 +8,6 @@ import org.codehaus.jettison.json.JSONObject;
 import org.jboss.logging.Logger;
 import org.jboss.set.payload.jira.FaultTolerantIssueClient;
 import org.jboss.set.payload.jira.JiraConstants;
-import org.jboss.util.Strings;
 
 import java.util.Collection;
 

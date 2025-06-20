@@ -1,5 +1,7 @@
 package org.jboss.set.payload.llm;
 
+import org.apache.commons.lang3.StringUtils;
+
 public record ComponentUpgrade(String component, String targetVersion) {
     @Override
     public String toString() {
@@ -11,6 +13,8 @@ public record ComponentUpgrade(String component, String targetVersion) {
 
     public boolean isValid() {
         // This is dependent on the LLM behavior, and different models get give different indication of null values.
-        return !"null".equals(component) && !"null".equals(targetVersion);
+        return !StringUtils.isBlank(component) && !"null".equals(component)
+                && !StringUtils.isBlank(targetVersion) && !"null".equals(targetVersion)
+                && targetVersion.split("\\.").length > 1;
     }
 }

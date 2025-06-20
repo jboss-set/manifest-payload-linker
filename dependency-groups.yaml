@@ -1174,6 +1174,7 @@
 - component: org.hibernate
   aliases:
     - hibernate
+    - hibernate orm
   dependencies:
     - org.hibernate.orm:hibernate-core
     - org.hibernate.orm:hibernate-envers

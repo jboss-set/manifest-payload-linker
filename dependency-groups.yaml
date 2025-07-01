@@ -261,22 +261,49 @@
   aliases: []
   dependencies:
     - com.fasterxml:classmate
-- component: com.fasterxml.jackson
-  aliases: []
+- component: com.fasterxml.jackson.core
+  aliases:
+    - jackson-core
+  dependencies:
+    - com.fasterxml.jackson.core:jackson-core
+- component: com.fasterxml.jackson.annotations
+  aliases:
+    - jackson-annotations
   dependencies:
     - com.fasterxml.jackson.core:jackson-annotations
-    - com.fasterxml.jackson.core:jackson-annotations
-    - com.fasterxml.jackson.core:jackson-core
-    - com.fasterxml.jackson.core:jackson-core
+- component: com.fasterxml.jackson.databind
+  aliases:
+    - jackson-databind
+  dependencies:
     - com.fasterxml.jackson.core:jackson-databind
-    - com.fasterxml.jackson.core:jackson-databind
+- component: com.fasterxml.jackson.dataformats
+  aliases:
+    - jackson-dataformats-text
+    - jackson-dataformat-yaml
+  dependencies:
     - com.fasterxml.jackson.dataformat:jackson-dataformat-yaml
+- component: com.fasterxml.jackson.modules.base
+  aliases:
+    - jackson-modules-base
+  dependencies:
+    - com.fasterxml.jackson.module:jackson-module-jakarta-xmlbind-annotations
+- component: com.fasterxml.jackson.modules.java8
+  aliases:
+    - jackson-modules-java8
+  dependencies:
     - com.fasterxml.jackson.datatype:jackson-datatype-jdk8
     - com.fasterxml.jackson.datatype:jackson-datatype-jsr310
+- component: com.fasterxml.jackson.jakarta.rs.providers
+  aliases:
+    - jackson-jakarta-rs-providers
+  dependencies:
     - com.fasterxml.jackson.jakarta.rs:jackson-jakarta-rs-base
     - com.fasterxml.jackson.jakarta.rs:jackson-jakarta-rs-json-provider
+- component: com.fasterxml.jackson.jr
+  aliases:
+    - jackson-jr
+  dependencies:
     - com.fasterxml.jackson.jr:jackson-jr-objects
-    - com.fasterxml.jackson.module:jackson-module-jakarta-xmlbind-annotations
 - component: com.github.ben-manes.caffeine
   aliases: []
   dependencies:

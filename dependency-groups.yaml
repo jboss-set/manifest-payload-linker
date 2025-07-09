@@ -2019,3 +2019,17 @@
     - org.jboss.eap:wildfly-ee-product-conf
   dependencies:
     - org.jboss.eap:wildfly-ee-feature-pack-product-conf
+- component: jboss-eap-installation-manager
+  aliases:
+    - prospero
+    - jboss-eap-installation-manager (prospero)
+  dependencies:
+    - org.wildfly.prospero:prospero-cli
+    - org.wildfly.prospero:prospero-common
+    - org.wildfly.prospero:prospero-standalone-galleon-pack
+    - org.wildfly.prospero:prospero-wildfly-galleon-pack
+- component: prospero-metadata
+  aliases:
+    - prospero metadata
+  dependencies:
+    - org.wildfly.prospero:prospero-metadata

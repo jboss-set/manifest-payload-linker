@@ -1,15 +1,14 @@
 package org.jboss.set.payload.manifest;
 
-import org.apache.maven.artifact.versioning.DefaultArtifactVersion;
-import org.codehaus.mojo.versions.ordering.MavenVersionComparator;
-import org.codehaus.mojo.versions.ordering.VersionComparator;
 import org.jboss.logging.Logger;
 import org.wildfly.channel.ChannelManifest;
 import org.wildfly.channel.ChannelManifestMapper;
+import org.wildfly.channel.version.VersionMatcher;
 
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -19,7 +18,7 @@ public class ManifestChecker {
     }
 
     private static final Logger logger = Logger.getLogger(ManifestChecker.class);
-    private static final VersionComparator VERSION_COMPARATOR = new MavenVersionComparator();
+    static final Comparator<String> VERSION_COMPARATOR = VersionMatcher.COMPARATOR;
 
     private final Map<String, String> manifestStreams;
 
@@ -79,7 +78,7 @@ public class ManifestChecker {
      * @return negative number, zero, or positive number if the first version is lower, equal or higher than the second version respectively.
      */
     private static int compareVersions(String first, String second) {
-        return VERSION_COMPARATOR.compare(new DefaultArtifactVersion(first.trim()), new DefaultArtifactVersion(second.trim()));
+        return VERSION_COMPARATOR.compare(first.trim(), second.trim());
     }
 
     /**

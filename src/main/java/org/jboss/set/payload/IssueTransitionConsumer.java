@@ -46,18 +46,22 @@ public class IssueTransitionConsumer extends AbstractIssueConsumer {
 
     @Override
     public void incorporatedIssue(Issue issue, Issue componentUpgrade, String manifestReference) {
-        String comment = String.format(INCORPORATED_ISSUE_MESSAGE, fixVersions, componentUpgrade.getKey(), manifestReference);
-        if (!hasLabel(issue, LABEL)) {
-            issueClient.addComment(issue, comment);
-            if (StringUtils.isBlank(targetRelese) || targetRelese.equals(getTargetRelease(issue))) {
-                issueClient.updateIssue(issue, fixVersions, LABEL);
-            } else {
-                // This should handle a situation when we have XP issue incorporated in an EAP component upgrade
-                // -> use the layeredFixVersions (that should be the XP fix versions in equivalent CR)
-                issueClient.updateIssue(issue, layeredFixVersions, LABEL);
-            }
-        } else {
+        if (hasLabel(issue, LABEL)) {
             logger.infof("%s: Issue is already on payload.", issue.getKey());
+            return;
+        }
+        if (!issue.getKey().startsWith("JBEAP-")) {
+            logger.infof("%s: Not a JBEAP, ignoring.", issue.getKey());
+            return;
+        }
+        String comment = String.format(INCORPORATED_ISSUE_MESSAGE, fixVersions, componentUpgrade.getKey(), manifestReference);
+        issueClient.addComment(issue, comment);
+        if (StringUtils.isBlank(targetRelese) || targetRelese.equals(getTargetRelease(issue))) {
+            issueClient.updateIssue(issue, fixVersions, LABEL);
+        } else {
+            // This should handle a situation when we have XP issue incorporated in an EAP component upgrade
+            // -> use the layeredFixVersions (that should be the XP fix versions in equivalent CR)
+            issueClient.updateIssue(issue, layeredFixVersions, LABEL);
         }
     }
 

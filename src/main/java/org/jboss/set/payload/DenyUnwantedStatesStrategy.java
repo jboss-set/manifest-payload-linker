@@ -6,7 +6,7 @@ import org.jboss.logging.Logger;
 import java.util.Arrays;
 
 import static org.jboss.set.payload.jira.JiraConstants.CLOSED;
-import static org.jboss.set.payload.jira.JiraConstants.DUPLICATE;
+import static org.jboss.set.payload.jira.JiraConstants.DONE;
 import static org.jboss.set.payload.jira.JiraConstants.READY_FOR_QA;
 import static org.jboss.set.payload.jira.JiraConstants.VERIFIED;
 
@@ -26,10 +26,10 @@ public class DenyUnwantedStatesStrategy implements ComponentUpgradeResolutionStr
             logger.infof("%s: Denying issue in a completed state: %s", issue.getKey(), issue.getStatus().getName());
             return false;
         }
-        if (issue.getResolution() != null && DUPLICATE.equals(issue.getResolution().getName())) {
-            logger.infof("%s: Denying issue resolved as duplicate", issue.getKey());
+        if (issue.getResolution() != null && !DONE.equals(issue.getResolution().getName())) {
+            logger.infof("%s: Denying because of resolution %s", issue.getKey(), issue.getResolution().getName());
             return false;
         }
-        return null;
+        return null; // Unknown
     }
 }

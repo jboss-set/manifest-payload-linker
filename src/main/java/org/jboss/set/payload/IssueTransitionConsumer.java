@@ -63,7 +63,7 @@ public class IssueTransitionConsumer extends AbstractIssueConsumer {
 
     private String getTargetRelease(Issue issue) {
         for (IssueField field : issue.getFields()) {
-            if (JiraConstants.TARGET_RELEASE.equals(field.getName())) {
+            if (JiraConstants.TARGET_RELEASE.equals(field.getName()) && field.getValue() != null) {
                 try {
                     return ((JSONObject) field.getValue()).get("name").toString();
                 } catch (JSONException e) {

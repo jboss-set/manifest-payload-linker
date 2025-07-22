@@ -379,7 +379,9 @@
   dependencies:
     - com.nimbusds:nimbus-jose-jwt
 - component: com.redhat.insights
-  aliases: []
+  aliases:
+    - insights
+    - insights java client
   dependencies:
     - com.redhat.insights:runtimes-java-api
     - com.redhat.insights:runtimes-java-core-runtime

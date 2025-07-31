@@ -162,6 +162,7 @@
 - component: org.jboss.galleon
   aliases:
     - galleon
+    - galleon-core
   dependencies:
     - org.jboss.galleon:galleon-core
 - component: legacy.io.netty
@@ -245,20 +246,23 @@
     - org.wildfly.core:wildfly-threads
     - org.wildfly.core:wildfly-version
 - component: antlr
-  aliases: []
+  aliases: [ ]
   dependencies:
     - org.antlr:antlr4-runtime
     - org.antlr:antlr4
 - component: com.beust
-  aliases: []
+  aliases:
+    - jcommander
   dependencies:
     - com.beust:jcommander
 - component: com.carrotsearch.hppc
-  aliases: []
+  aliases:
+    - hppc
   dependencies:
     - com.carrotsearch:hppc
 - component: com.fasterxml.classmate
-  aliases: []
+  aliases:
+    - classmate
   dependencies:
     - com.fasterxml:classmate
 - component: com.fasterxml.jackson.core
@@ -285,6 +289,7 @@
 - component: com.fasterxml.jackson.modules.base
   aliases:
     - jackson-modules-base
+    - jackson-module-jakarta-xmlbind-annotations
   dependencies:
     - com.fasterxml.jackson.module:jackson-module-jakarta-xmlbind-annotations
 - component: com.fasterxml.jackson.modules.java8
@@ -302,80 +307,97 @@
 - component: com.fasterxml.jackson.jr
   aliases:
     - jackson-jr
+    - jackson-jr-objects
   dependencies:
     - com.fasterxml.jackson.jr:jackson-jr-objects
 - component: com.github.ben-manes.caffeine
-  aliases: []
+  aliases:
+    - caffeine
   dependencies:
     - com.github.ben-manes.caffeine:caffeine
 - component: com.github.fge.btf
-  aliases: []
+  aliases:
+    - btf
   dependencies:
     - com.github.fge:btf
 - component: com.github.fge.jackson-coreutils
-  aliases: []
+  aliases:
+    - jackson-coreutils
   dependencies:
     - com.github.fge:jackson-coreutils
 - component: com.github.fge.json-patch
-  aliases: []
+  aliases:
+    - json-patch
   dependencies:
     - com.github.fge:json-patch
 - component: com.github.fge.msg-simple
-  aliases: []
+  aliases:
+    - msg-simple
   dependencies:
     - com.github.fge:msg-simple
 - component: com.github.luben.zstd-jni
-  aliases: []
+  aliases:
+    - zstd-jni
   dependencies:
     - com.github.luben:zstd-jni
 - component: com.google.api.grpc
-  aliases: []
+  aliases:
+    - proto-google-common-protos
   dependencies:
     - com.google.api.grpc:proto-google-common-protos
 - component: com.google.code.findbugs
-  aliases: []
+  aliases:
+    - jsr305
   dependencies:
     - com.google.code.findbugs:jsr305
 - component: com.google.code.gson
-  aliases: []
+  aliases:
+    - gson
   dependencies:
     - com.google.code.gson:gson
 - component: com.google.guava
-  aliases: []
+  aliases: [ ]
   dependencies:
     - com.google.guava:guava
     - com.google.guava:guava
 - component: com.google.guava.failureaccess
-  aliases: []
+  aliases:
+    - failureaccess
   dependencies:
     - com.google.guava:failureaccess
 - component: com.google.protobuf
-  aliases: []
+  aliases: [ ]
   dependencies:
     - com.google.protobuf:protobuf-java-util
     - com.google.protobuf:protobuf-java
 - component: com.googlecode.javaewah
-  aliases: []
+  aliases:
+    - JavaEWAH
   dependencies:
     - com.googlecode.javaewah:JavaEWAH
 - component: com.h2database
-  aliases: []
+  aliases:
+    - h2
   dependencies:
     - com.h2database:h2
 - component: com.ibm.async.asyncutil
-  aliases: []
+  aliases:
+    - asyncutil
   dependencies:
     - com.ibm.async:asyncutil
 - component: com.jcraft.jsch
-  aliases: []
+  aliases:
+    - jsch
   dependencies:
     - com.jcraft:jsch
 - component: com.microsoft.azure
-  aliases: []
+  aliases:
+    - azure-storage
   dependencies:
     - com.microsoft.azure:azure-storage
 - component: com.nimbus.jose-jwt
-  aliases: []
+  aliases:
+    - nimbus-jose-jwt
   dependencies:
     - com.nimbusds:nimbus-jose-jwt
 - component: com.redhat.insights
@@ -386,90 +408,104 @@
     - com.redhat.insights:runtimes-java-api
     - com.redhat.insights:runtimes-java-core-runtime
 - component: com.squareup.protoparser
-  aliases: []
+  aliases:
+    - protoparser
   dependencies:
     - com.squareup:protoparser
 - component: com.sun.istack
-  aliases: []
+  aliases: [ ]
   dependencies:
     - com.sun.istack:istack-commons-runtime
     - com.sun.istack:istack-commons-tools
 - component: com.sun.xml.fastinfoset
-  aliases: []
+  aliases:
+    - FastInfoset
   dependencies:
     - com.sun.xml.fastinfoset:FastInfoset
 - component: com.sun.xml.messaging.saaj
-  aliases: []
+  aliases:
+    - saaj-impl
   dependencies:
     - com.sun.xml.messaging.saaj:saaj-impl
 - component: commons-beanutils
-  aliases: []
+  aliases:
+    - commons-beanutils
   dependencies:
     - commons-beanutils:commons-beanutils
 - component: commons-cli
-  aliases: []
+  aliases:
+    - commons-cli
   dependencies:
     - commons-cli:commons-cli
 - component: commons-codec
-  aliases: []
+  aliases:
+    - commons-codec
   dependencies:
     - commons-codec:commons-codec
 - component: commons-collections
-  aliases: []
+  aliases:
+    - commons-collections
   dependencies:
     - commons-collections:commons-collections
 - component: commons-daemon
-  aliases: []
+  aliases:
+    - commons-daemon
   dependencies:
     - commons-daemon:commons-daemon
 - component: commons-io
-  aliases: []
+  aliases: [ ]
   dependencies:
     - commons-io:commons-io
     - commons-io:commons-io
 - component: commons-lang3
-  aliases: []
+  aliases:
+    - commons-lang3
   dependencies:
     - org.apache.commons:commons-lang3
 - component: de.dentrassi.crypto
-  aliases: []
+  aliases:
+    - pem-keystore
   dependencies:
     - de.dentrassi.crypto:pem-keystore
 - component: dom4j
-  aliases: []
+  aliases:
+    - dom4j
   dependencies:
     - org.dom4j:dom4j
 - component: gnu.getopt
-  aliases: []
+  aliases:
+    - java-getopt
   dependencies:
     - gnu.getopt:java-getopt
 - component: httpunit
-  aliases: []
+  aliases:
+    - httpunit
   dependencies:
     - org.httpunit:httpunit
 - component: io.agroal
-  aliases: []
+  aliases: [ ]
   dependencies:
     - io.agroal:agroal-api
     - io.agroal:agroal-narayana
     - io.agroal:agroal-pool
 - component: io.github.resilience4j
-  aliases: []
+  aliases: [ ]
   dependencies:
     - io.github.resilience4j:resilience4j-core
     - io.github.resilience4j:resilience4j-retry
 - component: io.grpc
-  aliases: []
+  aliases:
+    - grpc-api
   dependencies:
     - io.grpc:grpc-api
 - component: io.micrometer
-  aliases: []
+  aliases: [ ]
   dependencies:
     - io.micrometer:micrometer-commons
     - io.micrometer:micrometer-core
     - io.micrometer:micrometer-registry-otlp
 - component: io.netty
-  aliases: []
+  aliases: [ ]
   dependencies:
     - io.netty:netty-bom
     - io.netty:netty-buffer
@@ -488,18 +524,18 @@
     - io.netty:netty-transport-native-epoll
     - io.netty:netty-transport-native-unix-common
 - component: io.opentelemetry.instrumentation
-  aliases: []
+  aliases: [ ]
   dependencies:
     - io.opentelemetry.instrumentation:opentelemetry-instrumentation-annotations
     - io.opentelemetry.instrumentation:opentelemetry-instrumentation-api
 - component: io.opentelemetry.instrumentation}-alph
-  aliases: []
+  aliases: [ ]
   dependencies:
     - io.opentelemetry.instrumentation:opentelemetry-instrumentation-annotations-support
     - io.opentelemetry.instrumentation:opentelemetry-instrumentation-api-incubator
     - io.opentelemetry.instrumentation:opentelemetry-runtime-telemetry-java8
 - component: io.opentelemetry.opentelemetry
-  aliases: []
+  aliases: [ ]
   dependencies:
     - io.opentelemetry:opentelemetry-api
     - io.opentelemetry:opentelemetry-context
@@ -514,32 +550,38 @@
     - io.opentelemetry:opentelemetry-sdk-trace
     - io.opentelemetry:opentelemetry-sdk
 - component: io.opentelemetry.opentelemetry-semconv
-  aliases: []
+  aliases:
+    - opentelemetry-semconv
   dependencies:
     - io.opentelemetry.semconv:opentelemetry-semconv
 - component: io.opentelemetry.opentelemetry}-alph
-  aliases: []
+  aliases: [ ]
   dependencies:
     - io.opentelemetry.instrumentation:opentelemetry-java-http-client
     - io.opentelemetry:opentelemetry-api-incubator
 - component: io.opentelemetry.proto
-  aliases: []
+  aliases:
+    - opentelemetry-proto
   dependencies:
     - io.opentelemetry.proto:opentelemetry-proto
 - component: io.perfmark
-  aliases: []
+  aliases:
+    - perfmark-api
   dependencies:
     - io.perfmark:perfmark-api
 - component: io.reactivex.rxjava2
-  aliases: []
+  aliases:
+    - rxjava
   dependencies:
     - io.reactivex.rxjava2:rxjava
 - component: io.reactivex.rxjava3
-  aliases: []
+  aliases:
+    - rxjava
   dependencies:
     - io.reactivex.rxjava3:rxjava
 - component: io.rest-assured
-  aliases: []
+  aliases:
+    - rest-assured
   dependencies:
     - io.rest-assured:rest-assured
 - component: io.smallrye.jandex
@@ -549,7 +591,7 @@
   dependencies:
     - io.smallrye:jandex
 - component: io.smallrye.open-api
-  aliases: []
+  aliases: [ ]
   dependencies:
     - io.smallrye:smallrye-open-api-core
     - io.smallrye:smallrye-open-api-jaxrs
@@ -558,6 +600,7 @@
   aliases:
     - reactive-utils
     - reactive utils
+    - smallrye-reactive-converter-api
   dependencies:
     - io.smallrye.reactive:smallrye-reactive-converter-api
 - component: io.smallrye.smallrye-common
@@ -665,7 +708,7 @@
   dependencies:
     - io.undertow.jastow:jastow
 - component: io.vertx.vertx
-  aliases: []
+  aliases: [ ]
   dependencies:
     - io.vertx:vertx-amqp-client
     - io.vertx:vertx-core
@@ -673,167 +716,205 @@
     - io.vertx:vertx-grpc-common
     - io.vertx:vertx-proton
 - component: io.vertx.vertx-kafka-client
-  aliases: []
+  aliases:
+    - vertx-kafka-client
   dependencies:
     - io.vertx:vertx-kafka-client
 - component: jakarta.activation.jakarta.activation-api
-  aliases: []
+  aliases:
+    - jakarta.activation-api
   dependencies:
     - jakarta.activation:jakarta.activation-api
 - component: jakarta.annotation.jakarta-annotation-api
-  aliases: []
+  aliases:
+    - jakarta.annotation-api
   dependencies:
     - jakarta.annotation:jakarta.annotation-api
 - component: jakarta.authentication.jakarta-authentication-api
-  aliases: []
+  aliases:
+    - jakarta.authentication-api
   dependencies:
     - jakarta.authentication:jakarta.authentication-api
 - component: jakarta.authorization.jakarta-authorization-api
-  aliases: []
+  aliases:
+    - jakarta.authorization-api
   dependencies:
     - jakarta.authorization:jakarta.authorization-api
 - component: jakarta.batch.jakarta.batch-api
-  aliases: []
+  aliases:
+    - jakarta.batch-api
   dependencies:
     - jakarta.batch:jakarta.batch-api
 - component: jakarta.data.jakarta-data-api
-  aliases: []
+  aliases:
+    - jakarta.data-api
   dependencies:
     - jakarta.data:jakarta.data-api
 - component: jakarta.ejb.jakarta-ejb-api
-  aliases: []
+  aliases:
+    - jakarta.ejb-api
   dependencies:
     - jakarta.ejb:jakarta.ejb-api
 - component: jakarta.enterprise
-  aliases: []
+  aliases: [ ]
   dependencies:
     - jakarta.enterprise:jakarta.enterprise.cdi-api
     - jakarta.enterprise:jakarta.enterprise.lang-model
 - component: jakarta.enterprise.concurrent.jakarta-enterprise.concurrent-api
-  aliases: []
+  aliases:
+    - jakarta.enterprise.concurrent-api
   dependencies:
     - jakarta.enterprise.concurrent:jakarta.enterprise.concurrent-api
 - component: jakarta.faces
   aliases:
     - mojarra
+    - jakarta.faces
   dependencies:
     - org.glassfish:jakarta.faces
 - component: jakarta.faces.jakarta-faces-api
   aliases:
     - jakarta-faces-api
+    - jakarta.faces-api
   dependencies:
     - jakarta.faces:jakarta.faces-api
 - component: jakarta.inject.jakarta.inject-api
-  aliases: []
+  aliases:
+    - jakarta.inject-api
   dependencies:
     - jakarta.inject:jakarta.inject-api
 - component: jakarta.interceptor.jakarta-interceptors-api
-  aliases: []
+  aliases:
+    - jakarta.interceptor-api
   dependencies:
     - jakarta.interceptor:jakarta.interceptor-api
 - component: jakarta.jms.jakarta-jms-api
-  aliases: []
+  aliases:
+    - jakarta.jms-api
   dependencies:
     - jakarta.jms:jakarta.jms-api
 - component: jakarta.json.bind.api
-  aliases: []
+  aliases:
+    - jakarta.json.bind-api
   dependencies:
     - jakarta.json.bind:jakarta.json.bind-api
 - component: jakarta.json.jakarta-json-api
-  aliases: []
+  aliases:
+    - jakarta.json-api
   dependencies:
     - jakarta.json:jakarta.json-api
 - component: jakarta.mail-api
-  aliases: []
+  aliases:
+    - jakarta.mail-api
   dependencies:
     - jakarta.mail:jakarta.mail-api
 - component: jakarta.mvc.jakarta-mvc-api
-  aliases: []
+  aliases:
+    - jakarta.mvc-api
   dependencies:
     - jakarta.mvc:jakarta.mvc-api
 - component: jakarta.persistence
-  aliases: []
+  aliases:
+    - jakarta.persistence-api
   dependencies:
     - jakarta.persistence:jakarta.persistence-api
 - component: jakarta.resource.jakarta-resource-api
-  aliases: []
+  aliases:
+    - jakarta.resource-api
   dependencies:
     - jakarta.resource:jakarta.resource-api
 - component: jakarta.security.enterprise
-  aliases: []
+  aliases:
+    - jakarta.security.enterprise-api
   dependencies:
     - jakarta.security.enterprise:jakarta.security.enterprise-api
 - component: jakarta.servlet.jakarta-servlet-api
-  aliases: []
+  aliases:
+    - jakarta.servlet-api
   dependencies:
     - jakarta.servlet:jakarta.servlet-api
 - component: jakarta.servlet.jsp.jakarta-servlet-jsp-api
-  aliases: []
+  aliases:
+    - jakarta.servlet.jsp-api
   dependencies:
     - jakarta.servlet.jsp:jakarta.servlet.jsp-api
 - component: jakarta.servlet.jsp.jstl.jakarta-servlet-jsp-jstl-api
-  aliases: []
+  aliases:
+    - jakarta.servlet.jsp.jstl-api
   dependencies:
     - jakarta.servlet.jsp.jstl:jakarta.servlet.jsp.jstl-api
 - component: jakarta.transaction.jakarta-transaction-api
-  aliases: []
+  aliases:
+    - jakarta.transaction-api
   dependencies:
     - jakarta.transaction:jakarta.transaction-api
 - component: jakarta.validation.jakarta-validation-api
-  aliases: []
+  aliases:
+    - jakarta.validation-api
   dependencies:
     - jakarta.validation:jakarta.validation-api
 - component: jakarta.websocket.jakarta-websocket-api
-  aliases: []
+  aliases: [ ]
   dependencies:
     - jakarta.websocket:jakarta.websocket-api
     - jakarta.websocket:jakarta.websocket-client-api
 - component: jakarta.ws.rs.jakarta-ws-rs-api
-  aliases: []
+  aliases:
+    - jakarta.ws.rs-api
   dependencies:
     - jakarta.ws.rs:jakarta.ws.rs-api
 - component: jakarta.xml.bind.jakarta-xml-bind-api
-  aliases: []
+  aliases:
+    - jakarta.xml.bind-api
   dependencies:
     - jakarta.xml.bind:jakarta.xml.bind-api
 - component: javax.xml.bind.jaxb-api
-  aliases: []
+  aliases:
+    - jaxb-api
   dependencies:
     - javax.xml.bind:jaxb-api
 - component: jboss.jaxbintros
-  aliases: []
+  aliases:
+    - jboss-jaxb-intros
   dependencies:
     - jboss.jaxbintros:jboss-jaxb-intros
 - component: joda-time
-  aliases: []
+  aliases:
+    - joda-time
   dependencies:
     - joda-time:joda-time
 - component: jsoup
-  aliases: []
+  aliases:
+    - jsoup
   dependencies:
     - org.jsoup:jsoup
 - component: junit
-  aliases: []
+  aliases:
+    - junit
   dependencies:
     - junit:junit
 - component: net.jcip
-  aliases: []
+  aliases:
+    - jcip-annotations
   dependencies:
     - net.jcip:jcip-annotations
 - component: net.shibboleth.utilities.java-support
-  aliases: []
+  aliases:
+    - java-support
   dependencies:
     - net.shibboleth.utilities:java-support
 - component: org.aesh
-  aliases: []
+  aliases:
+    - aesh
   dependencies:
     - org.aesh:aesh
 - component: org.aesh-extensions
-  aliases: []
+  aliases:
+    - aesh-extensions
   dependencies:
     - org.aesh:aesh-extensions
 - component: org.aesh-readline
-  aliases: []
+  aliases:
+    - readline
   dependencies:
     - org.aesh:readline
 - component: org.apache.activemq.artemis
@@ -859,7 +940,8 @@
     - org.apache.activemq:artemis-selector
     - org.apache.activemq:artemis-server
 - component: org.apache.activemq.artemis.native
-  aliases: []
+  aliases:
+    - activemq-artemis-native
   dependencies:
     - org.apache.activemq:activemq-artemis-native
 - component: org.apache.cxf
@@ -901,7 +983,7 @@
     - org.apache.cxf:cxf-tools-wsdlto-databinding-jaxb
     - org.apache.cxf:cxf-tools-wsdlto-frontend-jaxws
 - component: org.apache.cxf.xjcplugins
-  aliases: []
+  aliases: [ ]
   dependencies:
     - org.apache.cxf.xjc-utils:cxf-xjc-runtime
     - org.apache.cxf.xjcplugins:cxf-xjc-boolean
@@ -909,48 +991,50 @@
     - org.apache.cxf.xjcplugins:cxf-xjc-dv
     - org.apache.cxf.xjcplugins:cxf-xjc-ts
 - component: org.apache.ds
-  aliases: []
+  aliases: [ ]
   dependencies:
     - org.apache.directory.server:apacheds-all
     - org.apache.directory.server:apacheds-interceptor-kerberos
     - org.apache.directory.server:apacheds-test-framework
 - component: org.apache.groovy
-  aliases: []
+  aliases:
+    - groovy
   dependencies:
     - org.apache.groovy:groovy
 - component: org.apache.httpcomponents.httpasyncclient
-  aliases: []
+  aliases:
+    - httpasyncclient
   dependencies:
     - org.apache.httpcomponents:httpasyncclient
 - component: org.apache.httpcomponents.httpclient
-  aliases: []
+  aliases: [ ]
   dependencies:
     - org.apache.httpcomponents:httpclient
     - org.apache.httpcomponents:httpmime
 - component: org.apache.httpcomponents.httpcore
-  aliases: []
+  aliases: [ ]
   dependencies:
     - org.apache.httpcomponents:httpcore-nio
     - org.apache.httpcomponents:httpcore
 - component: org.apache.james.apache-mime4j
-  aliases: []
+  aliases: [ ]
   dependencies:
     - org.apache.james:apache-mime4j-core
     - org.apache.james:apache-mime4j-dom
     - org.apache.james:apache-mime4j-storage
 - component: org.apache.kafka
-  aliases: []
+  aliases: [ ]
   dependencies:
     - org.apache.kafka:kafka-clients
     - org.apache.kafka:kafka-server-common
     - org.apache.kafka:kafka_2.13
 - component: org.apache.logging.log4j
-  aliases: []
+  aliases: [ ]
   dependencies:
     - org.apache.logging.log4j:log4j-api
     - org.apache.logging.log4j:log4j-core
 - component: org.apache.lucene
-  aliases: []
+  aliases: [ ]
   dependencies:
     - org.apache.lucene:lucene-analysis-common
     - org.apache.lucene:lucene-core
@@ -959,11 +1043,12 @@
     - org.apache.lucene:lucene-queries
     - org.apache.lucene:lucene-queryparser
 - component: org.apache.maven.provider
-  aliases: []
+  aliases:
+    - maven-resolver-provider
   dependencies:
     - org.apache.maven:maven-resolver-provider
 - component: org.apache.maven.resolver
-  aliases: []
+  aliases: [ ]
   dependencies:
     - org.apache.maven.resolver:maven-resolver-api
     - org.apache.maven.resolver:maven-resolver-connector-basic
@@ -973,37 +1058,42 @@
     - org.apache.maven.resolver:maven-resolver-transport-http
     - org.apache.maven.resolver:maven-resolver-util
 - component: org.apache.neethi
-  aliases: []
+  aliases:
+    - neethi
   dependencies:
     - org.apache.neethi:neethi
 - component: org.apache.openjpa
-  aliases: []
+  aliases:
+    - openjpa-all
   dependencies:
     - org.apache.openjpa:openjpa-all:${version.org.apache.openjpa}
 - component: org.apache.qpid.proton
-  aliases: []
+  aliases:
+    - proton-j
   dependencies:
     - org.apache.qpid:proton-j
 - component: org.apache.santuario
-  aliases: []
+  aliases:
+    - xmlsec
   dependencies:
     - org.apache.santuario:xmlsec
 - component: org.apache.sshd
-  aliases: []
+  aliases: [ ]
   dependencies:
     - org.apache.sshd:sshd-common
     - org.apache.sshd:sshd-core
 - component: org.apache.velocity
-  aliases: []
+  aliases: [ ]
   dependencies:
     - org.apache.velocity:velocity-engine-core
     - org.apache.velocity:velocity-engine-scripting
 - component: org.apache.ws.xmlschema
-  aliases: []
+  aliases:
+    - xmlschema-core
   dependencies:
     - org.apache.ws.xmlschema:xmlschema-core
 - component: org.apache.wss4j
-  aliases: []
+  aliases: [ ]
   dependencies:
     - org.apache.wss4j:wss4j-bindings
     - org.apache.wss4j:wss4j-policy
@@ -1012,19 +1102,22 @@
     - org.apache.wss4j:wss4j-ws-security-policy-stax
     - org.apache.wss4j:wss4j-ws-security-stax
 - component: org.assertj
-  aliases: []
+  aliases:
+    - assertj-bom
   dependencies:
     - org.assertj:assertj-bom
 - component: org.awaitility.awaitility
-  aliases: []
+  aliases:
+    - awaitility
   dependencies:
     - org.awaitility:awaitility
 - component: org.bitbucket.jose4j
-  aliases: []
+  aliases:
+    - jose4j
   dependencies:
     - org.bitbucket.b_c:jose4j
 - component: org.bouncycastle
-  aliases: []
+  aliases: [ ]
   dependencies:
     - org.bouncycastle:bcjmail-jdk18on
     - org.bouncycastle:bcmail-jdk18on
@@ -1033,39 +1126,47 @@
     - org.bouncycastle:bcprov-jdk18on
     - org.bouncycastle:bcutil-jdk18on
 - component: org.bytebuddy
-  aliases: []
+  aliases:
+    - byte-buddy
   dependencies:
     - net.bytebuddy:byte-buddy
 - component: org.codehaus.plexus.plexus-utils
-  aliases: []
+  aliases:
+    - plexus-utils
   dependencies:
     - org.codehaus.plexus:plexus-utils
 - component: org.codehaus.woodstox.stax2-api
-  aliases: []
+  aliases:
+    - stax2-api
   dependencies:
     - org.codehaus.woodstox:stax2-api
 - component: org.codehaus.woodstox.woodstox-core
-  aliases: []
+  aliases:
+    - woodstox-core
   dependencies:
     - com.fasterxml.woodstox:woodstox-core
 - component: org.cryptacular
-  aliases: []
+  aliases:
+    - cryptacular
   dependencies:
     - org.cryptacular:cryptacular
 - component: org.eclipse.angus.angus-activation
-  aliases: []
+  aliases:
+    - angus-activation
   dependencies:
     - org.eclipse.angus:angus-activation
 - component: org.eclipse.angus.angus-mail
-  aliases: []
+  aliases:
+    - angus-mail
   dependencies:
     - org.eclipse.angus:angus-mail
 - component: org.eclipse.jdt
-  aliases: []
+  aliases:
+    - ecj
   dependencies:
     - org.eclipse.jdt:ecj
 - component: org.eclipse.jetty
-  aliases: []
+  aliases: [ ]
   dependencies:
     - org.eclipse.jetty:jetty-http
     - org.eclipse.jetty:jetty-io
@@ -1076,95 +1177,102 @@
     - org.eclipse.jetty:jetty-util
     - org.eclipse.jetty:jetty-webapp
 - component: org.eclipse.jgit
-  aliases: []
+  aliases: [ ]
   dependencies:
     - org.eclipse.jgit:org.eclipse.jgit.junit.http
     - org.eclipse.jgit:org.eclipse.jgit.junit.ssh
     - org.eclipse.jgit:org.eclipse.jgit.ssh.apache
     - org.eclipse.jgit:org.eclipse.jgit
 - component: org.eclipse.microprofile.config.api
-  aliases: []
+  aliases: [ ]
   dependencies:
     - org.eclipse.microprofile.config:microprofile-config-api
     - org.eclipse.microprofile.config:microprofile-config-tck
 - component: org.eclipse.microprofile.fault-tolerance.api
-  aliases: []
+  aliases: [ ]
   dependencies:
     - org.eclipse.microprofile.fault-tolerance:microprofile-fault-tolerance-api
     - org.eclipse.microprofile.fault-tolerance:microprofile-fault-tolerance-tck
 - component: org.eclipse.microprofile.health.api
-  aliases: []
+  aliases: [ ]
   dependencies:
     - org.eclipse.microprofile.health:microprofile-health-api
     - org.eclipse.microprofile.health:microprofile-health-tck
 - component: org.eclipse.microprofile.jwt.api
-  aliases: []
+  aliases: [ ]
   dependencies:
     - org.eclipse.microprofile.jwt:microprofile-jwt-auth-api
     - org.eclipse.microprofile.jwt:microprofile-jwt-auth-tck
 - component: org.eclipse.microprofile.lra.api
-  aliases: []
+  aliases: [ ]
   dependencies:
     - org.eclipse.microprofile.lra:microprofile-lra-api
     - org.eclipse.microprofile.lra:microprofile-lra-tck
 - component: org.eclipse.microprofile.openapi
-  aliases: []
+  aliases: [ ]
   dependencies:
     - org.eclipse.microprofile.openapi:microprofile-openapi-api
     - org.eclipse.microprofile.openapi:microprofile-openapi-tck
 - component: org.eclipse.microprofile.reactive-messaging.api
-  aliases: []
+  aliases: [ ]
   dependencies:
     - org.eclipse.microprofile.reactive.messaging:microprofile-reactive-messaging-api
     - org.eclipse.microprofile.reactive.messaging:microprofile-reactive-messaging-tck
 - component: org.eclipse.microprofile.reactive-streams-operators.api
-  aliases: []
+  aliases: [ ]
   dependencies:
     - org.eclipse.microprofile.reactive-streams-operators:microprofile-reactive-streams-operators-api
     - org.eclipse.microprofile.reactive-streams-operators:microprofile-reactive-streams-operators-core
     - org.eclipse.microprofile.reactive-streams-operators:microprofile-reactive-streams-operators-tck
 - component: org.eclipse.microprofile.rest.client.api
-  aliases: []
+  aliases: [ ]
   dependencies:
     - org.eclipse.microprofile.rest.client:microprofile-rest-client-api
     - org.eclipse.microprofile.rest.client:microprofile-rest-client-tck
 - component: org.eclipse.microprofile.telemetry
-  aliases: []
+  aliases: [ ]
   dependencies:
     - org.eclipse.microprofile.telemetry:microprofile-telemetry-logs-tck
     - org.eclipse.microprofile.telemetry:microprofile-telemetry-metrics-tck
     - org.eclipse.microprofile.telemetry:microprofile-telemetry-tracing-tck
 - component: org.eclipse.parsson
-  aliases: []
+  aliases:
+    - parsson
   dependencies:
     - org.eclipse.parsson:parsson
 - component: org.eclipse.persistence.eclipselink
-  aliases: []
+  aliases:
+    - eclipselink
   dependencies:
     - org.eclipse.persistence:eclipselink
 - component: org.eclipse.yasson
-  aliases: []
+  aliases:
+    - yasson
   dependencies:
     - org.eclipse:yasson
 - component: org.elasticsearch.client.rest-client
-  aliases: []
+  aliases: [ ]
   dependencies:
     - org.elasticsearch.client:elasticsearch-rest-client-sniffer
     - org.elasticsearch.client:elasticsearch-rest-client
 - component: org.fusesource.jansi
-  aliases: []
+  aliases:
+    - jansi
   dependencies:
     - org.fusesource.jansi:jansi
 - component: org.glassfish.expressly
-  aliases: []
+  aliases:
+    - expressly
   dependencies:
     - org.glassfish.expressly:expressly
 - component: org.glassfish.jakarta.enterprise.concurrent
-  aliases: []
+  aliases:
+    - jakarta.enterprise.concurrent
   dependencies:
     - org.glassfish:jakarta.enterprise.concurrent
 - component: org.glassfish.jakarta.json
-  aliases: []
+  aliases:
+    - jakarta.json
   dependencies:
     - org.glassfish:jakarta.json
 - component: org.glassfish.jaxb
@@ -1188,6 +1296,7 @@
 - component: org.glassfish.web.jakarta.servlet.jsp.jstl
   aliases:
     - jstl
+    - jakarta.servlet.jsp.jstl
   dependencies:
     - org.glassfish.web:jakarta.servlet.jsp.jstl
 - component: org.hamcrest
@@ -1198,6 +1307,7 @@
 - component: org.hamcrest.legacy
   aliases:
     - legacy hamcrest
+    - hamcrest-all
   dependencies:
     - org.hamcrest:hamcrest-all
 - component: org.hibernate
@@ -1281,17 +1391,20 @@
 - component: org.jberet
   aliases:
     - jberet
+    - jberet-core
   dependencies:
     - org.jberet:jberet-core
 - component: org.jboss.activemq.artemis.integration
   aliases:
     - artemis-integration
     - artemis integration
+    - artemis-wildfly-integration
   dependencies:
     - org.jboss.activemq.artemis.integration:artemis-wildfly-integration
 - component: org.jboss.arquillian.core
   aliases:
     - arquillian
+    - arquillian-bom
   dependencies:
     - org.jboss.arquillian:arquillian-bom
 - component: org.jboss.arquillian.jakarta
@@ -1303,6 +1416,7 @@
 - component: org.jboss.arquillian.testcontainers
   aliases:
     - testcontainers
+    - arquillian-testcontainers
   dependencies:
     - org.jboss.arquillian:arquillian-testcontainers
 - component: org.jboss.byteman
@@ -1337,7 +1451,8 @@
   dependencies:
     - org.jboss.ejb3:jboss-ejb3-ext-api
 - component: org.jboss.genericjms
-  aliases: []
+  aliases:
+    - generic-jms-ra-jar
   dependencies:
     - org.jboss.genericjms:generic-jms-ra-jar
 - component: org.jboss.hal.console
@@ -1347,7 +1462,8 @@
   dependencies:
     - org.jboss.hal:hal-console
 - component: org.jboss.iiop-client
-  aliases: []
+  aliases:
+    - jboss-iiop-client
   dependencies:
     - org.jboss:jboss-iiop-client
 - component: org.jboss.invocation
@@ -1368,53 +1484,62 @@
     - org.jboss.ironjacamar:ironjacamar-jdbc
     - org.jboss.ironjacamar:ironjacamar-validator
 - component: org.jboss.jboss-dmr
-  aliases: []
+  aliases:
+    - jboss-dmr
   dependencies:
     - org.jboss:jboss-dmr
 - component: org.jboss.jboss-transaction-spi
-  aliases: []
+  aliases:
+    - jboss-transaction-spi
   dependencies:
     - org.jboss:jboss-transaction-spi
 - component: org.jboss.jboss-vfs
-  aliases: []
+  aliases:
+    - jboss-vfs
   dependencies:
     - org.jboss:jboss-vfs
 - component: org.jboss.logging.commons-logging-jboss-logging
-  aliases: []
+  aliases:
+    - commons-logging-jboss-logging
   dependencies:
     - org.jboss.logging:commons-logging-jboss-logging
 - component: org.jboss.logging.jboss-logging
-  aliases: []
+  aliases:
+    - jboss-logging
   dependencies:
     - org.jboss.logging:jboss-logging
 - component: org.jboss.logging.jboss-logging-tools
-  aliases: []
+  aliases: [ ]
   dependencies:
     - org.jboss.logging:jboss-logging-annotations
     - org.jboss.logging:jboss-logging-processor
 - component: org.jboss.logging.jul-to-slf4j-stub
-  aliases: []
+  aliases:
+    - jul-to-slf4j-stub
   dependencies:
     - org.jboss.logging:jul-to-slf4j-stub
 - component: org.jboss.logmanager.commons-logging-jboss-logmanager
-  aliases: []
+  aliases:
+    - commons-logging-jboss-logmanager
   dependencies:
     - org.jboss.logmanager:commons-logging-jboss-logmanager
 - component: org.jboss.logmanager.jboss-logmanager
-  aliases: []
+  aliases:
+    - jboss-logmanager
   dependencies:
     - org.jboss.logmanager:jboss-logmanager
 - component: org.jboss.logmanager.log4j2-jboss-logmanager
-  aliases: []
+  aliases:
+    - log4j2-jboss-logmanager
   dependencies:
     - org.jboss.logmanager:log4j2-jboss-logmanager
 - component: org.jboss.marshalling.jboss-marshalling
-  aliases: []
+  aliases: [ ]
   dependencies:
     - org.jboss.marshalling:jboss-marshalling-river
     - org.jboss.marshalling:jboss-marshalling
 - component: org.jboss.metadata
-  aliases: []
+  aliases: [ ]
   dependencies:
     - org.jboss.metadata:jboss-metadata-appclient
     - org.jboss.metadata:jboss-metadata-common
@@ -1422,17 +1547,19 @@
     - org.jboss.metadata:jboss-metadata-ejb
     - org.jboss.metadata:jboss-metadata-web
 - component: org.jboss.mod_cluster
-  aliases: []
+  aliases: [ ]
   dependencies:
     - org.jboss.mod_cluster:mod_cluster-container-spi
     - org.jboss.mod_cluster:mod_cluster-core
     - org.jboss.mod_cluster:mod_cluster-load-spi
 - component: org.jboss.modules.jboss-modules
-  aliases: []
+  aliases:
+    - jboss-modules
   dependencies:
     - org.jboss.modules:jboss-modules
 - component: org.jboss.msc.jboss-msc
-  aliases: []
+  aliases:
+    - jboss-msc
   dependencies:
     - org.jboss.msc:jboss-msc
 - component: org.jboss.narayana
@@ -1449,7 +1576,7 @@
     - org.jboss.narayana.xts:jbossxts
     - org.jboss.narayana:jbosstxbridge
 - component: org.jboss.narayana.lra
-  aliases: []
+  aliases: [ ]
   dependencies:
     - org.jboss.narayana.lra:lra-client
     - org.jboss.narayana.lra:lra-coordinator-jar
@@ -1462,15 +1589,17 @@
   dependencies:
     - org.jboss.openjdk-orb:openjdk-orb
 - component: org.jboss.remoting
-  aliases: []
+  aliases:
+    - jboss-remoting
   dependencies:
     - org.jboss.remoting:jboss-remoting
 - component: org.jboss.remotingjmx.remoting-jmx
-  aliases: []
+  aliases:
+    - remoting-jmx
   dependencies:
     - org.jboss.remotingjmx:remoting-jmx
 - component: org.jboss.resteasy
-  aliases: []
+  aliases: [ ]
   dependencies:
     - org.jboss.resteasy:resteasy-atom-provider
     - org.jboss.resteasy:resteasy-cdi
@@ -1489,71 +1618,85 @@
     - org.jboss.resteasy:resteasy-rxjava2
     - org.jboss.resteasy:resteasy-validator-provider
 - component: org.jboss.resteasy.extensions
-  aliases: []
+  aliases:
+    - resteasy-tracing-api
   dependencies:
     - org.jboss.resteasy:resteasy-tracing-api
 - component: org.jboss.resteasy.microprofile
-  aliases: []
+  aliases: [ ]
   dependencies:
     - org.jboss.resteasy.microprofile:microprofile-config
     - org.jboss.resteasy.microprofile:microprofile-rest-client-base
     - org.jboss.resteasy.microprofile:microprofile-rest-client
 - component: org.jboss.resteasy.spring
-  aliases: []
+  aliases:
+    - resteasy-spring
   dependencies:
     - org.jboss.resteasy.spring:resteasy-spring
 - component: org.jboss.shrinkwrap.descriptors
-  aliases: []
+  aliases:
+    - shrinkwrap-descriptors-impl-javaee
   dependencies:
     - org.jboss.shrinkwrap.descriptors:shrinkwrap-descriptors-impl-javaee
 - component: org.jboss.shrinkwrap.resolvers
-  aliases: []
+  aliases:
+    - shrinkwrap-resolver-depchain
   dependencies:
     - org.jboss.shrinkwrap.resolver:shrinkwrap-resolver-depchain
 - component: org.jboss.shrinkwrap.shrinkwrap
-  aliases: []
+  aliases: [ ]
   dependencies:
     - org.jboss.shrinkwrap:shrinkwrap-api
     - org.jboss.shrinkwrap:shrinkwrap-bom
     - org.jboss.shrinkwrap:shrinkwrap-impl-base
 - component: org.jboss.slf4j.slf4j-jboss-logmanager
-  aliases: []
+  aliases:
+    - slf4j-jboss-logmanager
   dependencies:
     - org.jboss.slf4j:slf4j-jboss-logmanager
 - component: org.jboss.spec.jakarta.el.jboss-el-api_5.0_spec
-  aliases: []
+  aliases:
+    - jboss-el-api_5.0_spec
   dependencies:
     - org.jboss.spec.jakarta.el:jboss-el-api_5.0_spec
 - component: org.jboss.spec.jakarta.xml.soap.saaj-api_3.0_spec
-  aliases: []
+  aliases:
+    - jboss-saaj-api_3.0_spec
   dependencies:
     - org.jboss.spec.jakarta.xml.soap:jboss-saaj-api_3.0_spec
 - component: org.jboss.spec.jakarta.xml.ws.api_4.0_spec
-  aliases: []
+  aliases:
+    - jboss-jakarta-xml-ws-api_4.0_spec
   dependencies:
     - org.jboss.spec.jakarta.xml.ws:jboss-jakarta-xml-ws-api_4.0_spec
 - component: org.jboss.spec.javax.servlet.jboss-servlet-api_4.0_spec
-  aliases: []
+  aliases:
+    - jboss-servlet-api_4.0_spec
   dependencies:
     - org.jboss.spec.javax.servlet:jboss-servlet-api_4.0_spec
 - component: org.jboss.staxmapper
-  aliases: []
+  aliases:
+    - staxmapper
   dependencies:
     - org.jboss:staxmapper
 - component: org.jboss.stdio
-  aliases: []
+  aliases:
+    - jboss-stdio
   dependencies:
     - org.jboss.stdio:jboss-stdio
 - component: org.jboss.threads
-  aliases: []
+  aliases:
+    - jboss-threads
   dependencies:
     - org.jboss.threads:jboss-threads
 - component: org.jboss.universe.community
-  aliases: []
+  aliases:
+    - community-universe
   dependencies:
     - org.jboss.universe:community-universe
 - component: org.jboss.universe.producer.wildfly
-  aliases: []
+  aliases:
+    - wildfly-producers
   dependencies:
     - org.jboss.universe.producer:wildfly-producers
 - component: org.jboss.weld.weld
@@ -1568,20 +1711,23 @@
     - org.jboss.weld:weld-core-impl
     - org.jboss.weld:weld-lite-extension-translator
 - component: org.jboss.weld.weld-api
-  aliases: []
+  aliases: [ ]
   dependencies:
     - org.jboss.weld:weld-api
     - org.jboss.weld:weld-spi
 - component: org.jboss.ws.api
-  aliases: []
+  aliases:
+    - jbossws-api
   dependencies:
     - org.jboss.ws:jbossws-api
 - component: org.jboss.ws.common
-  aliases: []
+  aliases:
+    - jbossws-common
   dependencies:
     - org.jboss.ws:jbossws-common
 - component: org.jboss.ws.common.tools
-  aliases: []
+  aliases:
+    - jbossws-common-tools
   dependencies:
     - org.jboss.ws:jbossws-common-tools
 - component: org.jboss.ws.cxf
@@ -1597,77 +1743,93 @@
     - org.jboss.ws.cxf:jbossws-cxf-transports-udp
     - org.jboss.ws.cxf:jbossws-cxf-transports-undertow
 - component: org.jboss.ws.jaxws-undertow-httpspi
-  aliases: []
+  aliases:
+    - jaxws-undertow-httpspi
   dependencies:
     - org.jboss.ws.projects:jaxws-undertow-httpspi
 - component: org.jboss.ws.spi
-  aliases: []
+  aliases:
+    - jbossws-spi
   dependencies:
     - org.jboss.ws:jbossws-spi
 - component: org.jboss.xnio.netty.netty-xnio-transport
-  aliases: []
+  aliases:
+    - netty-xnio-transport
   dependencies:
     - org.jboss.xnio.netty:netty-xnio-transport
 - component: org.jboss.xnio.xnio-api
-  aliases: []
+  aliases:
+    - xnio-api
   dependencies:
     - org.jboss.xnio:xnio-api
 - component: org.jboss.xnio.xnio-nio
-  aliases: []
+  aliases:
+    - xnio-nio
   dependencies:
     - org.jboss.xnio:xnio-nio
 - component: org.jctools.jctools-core
-  aliases: []
+  aliases:
+    - jctools-core
   dependencies:
     - org.jctools:jctools-core
 - component: org.jgroups
-  aliases: []
+  aliases:
+    - jgroups
   dependencies:
     - org.jgroups:jgroups
 - component: org.jgroups.aws
-  aliases: []
+  aliases:
+    - jgroups-aws
   dependencies:
     - org.jgroups.aws:jgroups-aws
 - component: org.jgroups.azure
-  aliases: []
+  aliases:
+    - jgroups-azure
   dependencies:
     - org.jgroups.azure:jgroups-azure
 - component: org.jgroups.kubernetes
-  aliases: []
+  aliases:
+    - jgroups-kubernetes
   dependencies:
     - org.jgroups.kubernetes:jgroups-kubernetes
 - component: org.jmockit
-  aliases: []
+  aliases:
+    - jmockit
   dependencies:
     - org.jmockit:jmockit
 - component: org.junit
-  aliases: []
+  aliases:
+    - junit-bom
   dependencies:
     - org.junit:junit-bom
 - component: org.jvnet.staxex
-  aliases: []
+  aliases:
+    - stax-ex
   dependencies:
     - org.jvnet.staxex:stax-ex
 - component: org.keycloak
-  aliases: []
+  aliases: [ ]
   dependencies:
     - org.keycloak:keycloak-admin-client
     - org.keycloak:keycloak-core
     - org.keycloak:keycloak-services
 - component: org.keycloak.keycloak-saml-wildfly-subsystem
-  aliases: []
+  aliases:
+    - keycloak-saml-wildfly-subsystem
   dependencies:
     - org.keycloak:keycloak-saml-wildfly-subsystem
 - component: org.kohsuke.metainf-services
-  aliases: []
+  aliases:
+    - metainf-services
   dependencies:
     - org.kohsuke.metainf-services:metainf-services
 - component: org.lz4.lz4-java
-  aliases: []
+  aliases:
+    - lz4-java
   dependencies:
     - org.lz4:lz4-java
 - component: org.mock-server.mockserver
-  aliases: []
+  aliases: [ ]
   dependencies:
     - org.mock-server:mockserver-netty
     - org.mock-server:mockserver
@@ -1695,47 +1857,53 @@
     - org.opensaml:opensaml-xmlsec-api
     - org.opensaml:opensaml-xmlsec-impl
 - component: org.ow2.asm
-  aliases: []
+  aliases: [ ]
   dependencies:
     - org.ow2.asm:asm-util
     - org.ow2.asm:asm
 - component: org.projectodd.vdx
-  aliases: []
+  aliases: [ ]
   dependencies:
     - org.projectodd.vdx:vdx-core
     - org.projectodd.vdx:vdx-wildfly
 - component: org.reactivestreams
-  aliases: []
+  aliases: [ ]
   dependencies:
     - org.reactivestreams:reactive-streams-tck
     - org.reactivestreams:reactive-streams
 - component: org.slf4j
-  aliases: []
+  aliases: [ ]
   dependencies:
     - org.slf4j:jcl-over-slf4j
     - org.slf4j:slf4j-api
 - component: org.syslog4j
-  aliases: []
+  aliases:
+    - syslog4j
   dependencies:
     - org.syslog4j:syslog4j
 - component: org.testcontainers
-  aliases: []
+  aliases:
+    - testcontainers-bom
   dependencies:
     - org.testcontainers:testcontainers-bom
 - component: org.testng
-  aliases: []
+  aliases:
+    - testng
   dependencies:
     - org.testng:testng
 - component: org.wildfly.arquillian
-  aliases: []
+  aliases:
+    - wildfly-arquillian-bom
   dependencies:
     - org.wildfly.arquillian:wildfly-arquillian-bom
 - component: org.wildfly.checkstyle-config
-  aliases: []
+  aliases:
+    - wildfly-checkstyle-config
   dependencies:
     - org.wildfly.checkstyle:wildfly-checkstyle-config
 - component: org.wildfly.client.config
-  aliases: []
+  aliases:
+    - wildfly-client-config
   dependencies:
     - org.wildfly.client:wildfly-client-config
 - component: org.wildfly.clustering
@@ -1764,15 +1932,17 @@
     - org.wildfly.clustering:wildfly-clustering-session-spec-spi
     - org.wildfly.clustering:wildfly-clustering-session-spi
 - component: org.wildfly.common
-  aliases: []
+  aliases:
+    - wildfly-common
   dependencies:
     - org.wildfly.common:wildfly-common
 - component: org.wildfly.discovery
-  aliases: []
+  aliases:
+    - wildfly-discovery-client
   dependencies:
     - org.wildfly.discovery:wildfly-discovery-client
 - component: org.wildfly.extras.creaper
-  aliases: []
+  aliases: [ ]
   dependencies:
     - org.wildfly.extras.creaper:creaper-commands
     - org.wildfly.extras.creaper:creaper-core
@@ -1786,7 +1956,7 @@
     - org.wildfly.galleon-plugins:wildfly-galleon-plugins
     - org.wildfly.galleon-plugins:wildfly-galleon-plugins
 - component: org.wildfly.glow
-  aliases: []
+  aliases: [ ]
   dependencies:
     - org.wildfly.glow:wildfly-glow-core
     - org.wildfly.glow:wildfly-glow-maven-resolver
@@ -1800,49 +1970,59 @@
     - org.wildfly.wildfly-http-client:wildfly-http-naming-client
     - org.wildfly.wildfly-http-client:wildfly-http-transaction-client
 - component: org.wildfly.installation-manager.installation-manager-api
-  aliases: []
+  aliases:
+    - installation-manager-api
   dependencies:
     - org.wildfly.installation-manager:installation-manager-api
 - component: org.wildfly.launcher
   aliases:
     - wildfly launcher
+    - wildfly-launcher
   dependencies:
     - org.wildfly.launcher:wildfly-launcher
 - component: org.wildfly.legacy.test
-  aliases: []
+  aliases: [ ]
   dependencies:
     - org.wildfly.legacy.test:wildfly-legacy-spi
     - org.wildfly.legacy.test:wildfly-legacy-versions
 - component: org.wildfly.mvc.krazo
-  aliases: []
+  aliases:
+    - mvc-krazo-galleon-shared
   dependencies:
     - org.wildfly:mvc-krazo-galleon-shared
 - component: org.wildfly.naming-client
-  aliases: []
+  aliases:
+    - wildfly-naming-client
   dependencies:
     - org.wildfly:wildfly-naming-client
 - component: org.wildfly.openssl
-  aliases: []
+  aliases:
+    - wildfly-openssl-java
   dependencies:
     - org.wildfly.openssl:wildfly-openssl-java
 - component: org.wildfly.openssl.wildfly-openssl-linux-ppc64le
-  aliases: []
+  aliases:
+    - wildfly-openssl-linux-ppc64le
   dependencies:
     - org.wildfly.openssl:wildfly-openssl-linux-ppc64le
 - component: org.wildfly.openssl.wildfly-openssl-linux-rhel8-x86_64
-  aliases: []
+  aliases:
+    - wildfly-openssl-linux-rhel8-x86_64
   dependencies:
     - org.wildfly.openssl:wildfly-openssl-linux-rhel8-x86_64
 - component: org.wildfly.openssl.wildfly-openssl-linux-rhel9-x86_64
-  aliases: []
+  aliases:
+    - wildfly-openssl-linux-rhel9-x86_64
   dependencies:
     - org.wildfly.openssl:wildfly-openssl-linux-rhel9-x86_64
 - component: org.wildfly.openssl.wildfly-openssl-linux-s390x
-  aliases: []
+  aliases:
+    - wildfly-openssl-linux-s390x
   dependencies:
     - org.wildfly.openssl:wildfly-openssl-linux-s390x
 - component: org.wildfly.openssl.wildfly-openssl-windows-x86_64
-  aliases: []
+  aliases:
+    - wildfly-openssl-windows-x86_64
   dependencies:
     - org.wildfly.openssl:wildfly-openssl-windows-x86_64
 - component: org.wildfly.security.elytron
@@ -1925,7 +2105,8 @@
     - org.wildfly.security:wildfly-elytron-x500
     - org.wildfly.security:wildfly-elytron
 - component: org.wildfly.security.elytron-mp
-  aliases: []
+  aliases:
+    - wildfly-elytron-jwt
   dependencies:
     - org.wildfly.security.mp:wildfly-elytron-jwt
 - component: org.wildfly.security.elytron-web
@@ -1947,17 +2128,20 @@
     - org.wildfly.security.jakarta:jakarta-client-webservices
     - org.wildfly.security.jakarta:jakarta-security
 - component: org.wildfly.transaction.client
-  aliases: []
+  aliases:
+    - wildfly-transaction-client
   dependencies:
     - org.wildfly.transaction:wildfly-transaction-client
 - component: org.wildfly.unstable.api.annotation
   aliases:
     - unstable-api-annotation
     - unstable-api-annotation-utils
+    - unstable-api-annotation-classpath-indexer
   dependencies:
     - org.wildfly.unstable.api.annotation:unstable-api-annotation-classpath-indexer
 - component: org.wiremock
-  aliases: []
+  aliases:
+    - wiremock
   dependencies:
     - org.wiremock:wiremock
 - component: org.xerial.snappy.snappy-java
@@ -1996,20 +2180,23 @@
     - software.amazon.awssdk:third-party-jackson-core
     - software.amazon.awssdk:utils
 - component: software.amazon.eventstream
-  aliases: []
+  aliases:
+    - eventstream
   dependencies:
     - software.amazon.eventstream:eventstream
 - component: sun.jaxb
-  aliases: []
+  aliases: [ ]
   dependencies:
     - com.sun.xml.bind.external:relaxng-datatype
     - com.sun.xml.bind.external:rngom
 - component: wsdl4j
-  aliases: []
+  aliases:
+    - wsdl4j
   dependencies:
     - wsdl4j:wsdl4j
 - component: xml-resolver
-  aliases: []
+  aliases:
+    - xml-resolver
   dependencies:
     - xml-resolver:xml-resolver
 - component: wildfly-ee-feature-pack-product-conf
@@ -2017,6 +2204,7 @@
     - eap-product-conf
     - wildfly-ee-product-conf
     - org.jboss.eap:wildfly-ee-product-conf
+    - wildfly-ee-feature-pack-product-conf
   dependencies:
     - org.jboss.eap:wildfly-ee-feature-pack-product-conf
 - component: jboss-eap-installation-manager
@@ -2031,5 +2219,6 @@
 - component: prospero-metadata
   aliases:
     - prospero metadata
+    - prospero-metadata
   dependencies:
     - org.wildfly.prospero:prospero-metadata

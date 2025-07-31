@@ -1671,17 +1671,15 @@
   dependencies:
     - org.mock-server:mockserver-netty
     - org.mock-server:mockserver
-- component: org.mock-server.mockserver-netty
-  aliases: []
-  dependencies:
-    - org.mock-server:mockserver-netty
 - component: org.mockito
-  aliases: []
+  aliases:
+    - mockito
   dependencies:
     - org.mockito:mockito-bom
     - org.mockito:mockito-core
 - component: org.opensaml.opensaml
-  aliases: []
+  aliases:
+    - opensaml
   dependencies:
     - org.opensaml:opensaml-core
     - org.opensaml:opensaml-profile-api

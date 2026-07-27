@@ -63,6 +63,7 @@ public class IssueTransitionConsumer extends AbstractIssueConsumer {
             // -> use the layeredFixVersions (that should be the XP fix versions in equivalent CR)
             issueClient.updateIssue(issue, layeredFixVersions, LABEL);
         }
+        issueClient.transitionIssue(issue);
     }
 
     private String getTargetRelease(Issue issue) {

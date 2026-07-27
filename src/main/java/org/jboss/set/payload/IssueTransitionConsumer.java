@@ -15,8 +15,8 @@ public class IssueTransitionConsumer extends AbstractIssueConsumer {
 
     private static final Logger logger = Logger.getLogger(IssueTransitionConsumer.class);
 
-    private static final String COMPONENT_UPGRADE_MESSAGE = "This component upgrade has been incorporated in manifest marked as %s [*\\].\n\n[*\\] %s";
-    private static final String INCORPORATED_ISSUE_MESSAGE = "This issue has been incorporated in manifest [*\\] marked as %s via component upgrade %s.\n\n[*\\] %s";
+    private static final String COMPONENT_UPGRADE_MESSAGE = "This component upgrade has been incorporated in manifest marked as %s. %s";
+    private static final String INCORPORATED_ISSUE_MESSAGE = "This issue has been incorporated in manifest marked as %s via component upgrade %s. %s";
     private static final String LABEL = "on-payload";
 
     private final String targetRelese;
@@ -38,7 +38,7 @@ public class IssueTransitionConsumer extends AbstractIssueConsumer {
         if (!hasLabel(issue, LABEL)) {
             issueClient.addComment(issue, comment);
             issueClient.updateIssue(issue, fixVersions, LABEL);
-            issueClient.transitionToResolved(issue);
+            issueClient.transitionIssue(issue);
         } else {
             logger.infof("%s: Issue is already on payload.", issue.getKey());
         }

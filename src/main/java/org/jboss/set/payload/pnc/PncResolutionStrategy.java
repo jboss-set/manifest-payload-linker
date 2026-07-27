@@ -26,7 +26,7 @@ public class PncResolutionStrategy implements ComponentUpgradeResolutionStrategy
     /**
      * Pattern to extract PNC build ID from a URL posted in a text. If you change this, update the group number bellow.
      */
-    private static final Pattern BUILD_URL_PATTERN = Pattern.compile(".*(https://orch\\.psi\\.redhat\\.com/pnc-web/(.*/)?builds/([a-zA-Z0-9]+)).*");
+    private static final Pattern BUILD_URL_PATTERN = Pattern.compile(".*(https://[a-z.]+\\.redhat\\.com/pnc-web/(.*/)?builds/([a-zA-Z0-9]+)).*");
     /**
      * Regexp group number that contains the PNC build ID.
      */
@@ -81,7 +81,8 @@ public class PncResolutionStrategy implements ComponentUpgradeResolutionStrategy
         for (Comment comment : issue.getComments()) {
             List<String> lines = comment.getBody().lines().toList();
             for (String line : lines) {
-                if (line.toLowerCase().contains("https://orch.psi.redhat.com/pnc-web/")) {
+                if (line.toLowerCase().contains("https://orch.pnc.engineering.redhat.com/pnc-web/")
+                        || line.toLowerCase().contains("https://orch.psi.redhat.com/pnc-web/")) {
                     Matcher matcher = BUILD_URL_PATTERN.matcher(line);
                     if (matcher.find()) {
                         buildId = matcher.group(BUILD_ID_PATTERN_GROUP);

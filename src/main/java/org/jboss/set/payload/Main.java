@@ -23,6 +23,7 @@ import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 public class Main implements Closeable, Runnable {
@@ -45,7 +46,14 @@ public class Main implements Closeable, Runnable {
             System.exit(1);
         }
 
-        try (Main main = new Main(Path.of(args[0]), args[1], args[2], args[3], args[4])) {
+        final Path manifestPath = Path.of(args[0]);
+        final String manifestReference = args[1];
+        final String targetRelease = args[2];
+        final String fixVersionsString = args[3];
+        final String layeredFixVersionsString = args.length == 5 ? args[4] : "";
+
+        try (Main main = new Main(manifestPath, manifestReference, targetRelease, fixVersionsString,
+                layeredFixVersionsString)) {
             main.run();
         }
     }
@@ -71,14 +79,14 @@ public class Main implements Closeable, Runnable {
 
         // Initialize Jira client
         jiraUri = config.getValue(ConfigKeys.JIRA_URL, URI.class);
+        String jiraUser = config.getValue(ConfigKeys.JIRA_USER, String.class);
         String jiraToken = config.getValue(ConfigKeys.JIRA_TOKEN, String.class);
         Long spacing = config.getOptionalValue(ConfigKeys.JIRA_REQUEST_FREQUENCY, Long.class).orElse(0L);
         Boolean disableStaticStrategy = config.getOptionalValue("static_resolution_strategy.disable", Boolean.class).orElse(false);
         Boolean dryMode = config.getOptionalValue(ConfigKeys.JIRA_DRY_MODE, Boolean.class).orElse(true);
 
         jiraClient = new AsynchronousJiraRestClientFactory()
-                .createWithAuthenticationHandler(jiraUri,
-                        builder -> builder.setHeader("Authorization", "Bearer " + jiraToken));
+                .createWithBasicHttpAuthentication(jiraUri, jiraUser, jiraToken);
         issueClient = new FaultTolerantIssueClient(jiraClient.getIssueClient(), spacing, dryMode);
 
         resolutionStrategies.add(new DenyUnwantedStatesStrategy());
@@ -147,15 +155,18 @@ public class Main implements Closeable, Runnable {
         SearchResult searchResult;
 
         String jiraQuery = config.getValue(ConfigKeys.JIRA_QUERY, String.class);
+        Set<String> fields = Set.of("summary", "issuetype", "created", "updated", "project", "status"/*, "comments", "fixversions"*/);
+
+        int count = jiraClient.getSearchClient().totalCount(jiraQuery).claim().getCount();
 
         do {
             searchResult = jiraClient.getSearchClient()
-                    .searchJql(jiraQuery, maxResults, startIndex, Collections.emptySet()).claim();
+                    .searchJql(jiraQuery, maxResults, startIndex, fields).claim();
             searchResult.getIssues().iterator().forEachRemaining(issue -> keys.add(issue.getKey()));
             startIndex += maxResults;
-        } while (searchResult.getTotal() > startIndex);
+        } while (count > startIndex);
 
-        logger.infof("Found %s component upgrade issues.", searchResult.getTotal());
+        logger.infof("Found %s component upgrade issues.", count);
 
         return keys;
     }

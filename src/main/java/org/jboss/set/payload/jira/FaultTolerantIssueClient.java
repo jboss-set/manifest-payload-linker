@@ -36,6 +36,10 @@ public class FaultTolerantIssueClient {
     private static final Logger logger = Logger.getLogger(FaultTolerantIssueClient.class);
 
     private static final String[] RESOLVED_STATES = new String[] {RESOLVED, READY_FOR_QA, VERIFIED, CLOSED};
+    private static final String[] QA_STATES = new String[] {READY_FOR_QA, VERIFIED, CLOSED};
+
+    private final static String RESOLVE_ISSUE = "Resolve Issue";
+    private final static String HAND_OVER_TO_QA = "Hand Over to QA";
 
     private final IssueRestClient issueRestClient;
     private final Invoker invoker;
@@ -102,33 +106,70 @@ public class FaultTolerantIssueClient {
         }
     }
 
-    public void transitionToResolved(final Issue issue) {
+    public void transitionIssue(final Issue issue) {
         if (issue.getStatus().getName().equals(NEW)) {
             logger.warnf("%s: Transitioning from NEW state is not implemented currently.", issue.getKey());
             return;
         }
+
         if (Arrays.stream(RESOLVED_STATES).anyMatch(state -> state.equals(issue.getStatus().getName()))) {
             logger.infof("%s: Issue is already resolved (%s)", issue.getKey(), issue.getStatus().getName());
-            return;
+        } else {
+            //
+            logger.infof("%s: Transitioning issue to Resolved %s", issue.getKey(), dryModeFlag());
+            Integer resolveTransitionId = getResolvedTransitionId(issue);
+            if (resolveTransitionId != null) {
+                TransitionInput resolveTransitionInput = new TransitionInput(resolveTransitionId, List.of(
+                        new FieldInput("resolution", ComplexIssueInputFieldValue.with("name", "Done"))));
+                if (!dryMode) {
+                    Callable<Promise<Void>> callable = () -> issueRestClient.transition(issue, resolveTransitionInput);
+                    invoker.invoke(callable);
+                }
+            }
         }
-        logger.infof("%s: Transitioning issue to Resolved %s", issue.getKey(), dryModeFlag());
-        int transitionId = getResolveTransitionId(issue);
-        TransitionInput transitionInput = new TransitionInput(transitionId, List.of(
-                new FieldInput("resolution", ComplexIssueInputFieldValue.with("name", "Done"))));
-        if (!dryMode) {
-            Callable<Promise<Void>> callable = () -> issueRestClient.transition(issue, transitionInput);
-            invoker.invoke(callable);
+
+        if (Arrays.stream(QA_STATES).anyMatch(state -> state.equals(issue.getStatus().getName()))) {
+            logger.infof("%s: Issue is already on QA (%s)", issue.getKey(), issue.getStatus().getName());
+        } else {
+            logger.infof("%s: Transitioning issue to Ready for QA %s", issue.getKey(), dryModeFlag());
+            Integer onQATransitionId = getReadyForQATransitionId(issue);
+            if (onQATransitionId != null) {
+                TransitionInput onQAtransitionInput = new TransitionInput(onQATransitionId, List.of());
+                if (!dryMode) {
+                    Callable<Promise<Void>> callable = () -> issueRestClient.transition(issue, onQAtransitionInput);
+                    invoker.invoke(callable);
+                }
+            }
         }
     }
 
-    private int getResolveTransitionId(Issue issue) {
+    private Integer getResolvedTransitionId(Issue issue) {
         Iterable<Transition> transitions = issueRestClient.getTransitions(issue).claim();
         for (Transition transition : transitions) {
-            if ("Resolve Issue".equals(transition.getName())) {
+            if (RESOLVE_ISSUE.equals(transition.getName())) {
                 return transition.getId();
             }
         }
-        throw new RuntimeException("Transition to Resolved is not available.");
+        logger.warnf("Transition to Resolved is not available: %s, %s",
+                issue.getKey(), issue.getStatus().getName());
+        return null;
+    }
+
+    private Integer getReadyForQATransitionId(Issue issue) {
+        Iterable<Transition> transitions = issueRestClient.getTransitions(issue).claim();
+        for (Transition transition : transitions) {
+            if (HAND_OVER_TO_QA.equals(transition.getName())) {
+                return transition.getId();
+            }
+        }
+
+        String message = "Transition to Ready for QA is not available";
+        if (dryMode) {
+            message = message + " (expected in dry mode)";
+        }
+        message = message + ": %s, %s";
+        logger.warnf(message, issue.getKey(), issue.getStatus().getName());
+        return null;
     }
 
     private String dryModeFlag() {

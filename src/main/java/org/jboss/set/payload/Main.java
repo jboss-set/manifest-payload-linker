@@ -149,7 +149,7 @@ public class Main implements Closeable, Runnable {
      */
     private List<String> loadIssueKeys() {
         int maxResults = 30;
-        int startIndex = 0;
+        String nextPageToken = null;
 
         List<String> keys = new ArrayList<>();
         SearchResult searchResult;
@@ -157,16 +157,14 @@ public class Main implements Closeable, Runnable {
         String jiraQuery = config.getValue(ConfigKeys.JIRA_QUERY, String.class);
         Set<String> fields = Set.of("summary", "issuetype", "created", "updated", "project", "status"/*, "comments", "fixversions"*/);
 
-        int count = jiraClient.getSearchClient().totalCount(jiraQuery).claim().getCount();
-
         do {
             searchResult = jiraClient.getSearchClient()
-                    .searchJql(jiraQuery, maxResults, startIndex, fields).claim();
+                    .enhancedSearchJql(jiraQuery, maxResults, nextPageToken, fields, null).claim();
             searchResult.getIssues().iterator().forEachRemaining(issue -> keys.add(issue.getKey()));
-            startIndex += maxResults;
-        } while (count > startIndex);
+            nextPageToken = searchResult.getNextPageToken();
+        } while (nextPageToken != null);
 
-        logger.infof("Found %s component upgrade issues.", count);
+        logger.infof("Found %s component upgrade issues.", keys.size());
 
         return keys;
     }

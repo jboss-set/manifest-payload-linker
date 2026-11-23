@@ -34,6 +34,13 @@ public class ManifestChecker {
     }
 
     /**
+     * @param manifestStreams map of "groupId:artifactId" -> "artifact version"
+     */
+    public ManifestChecker(Map<String, String> manifestStreams) {
+        this.manifestStreams = manifestStreams;
+    }
+
+    /**
      * Checks if given component upgrade is covered by the manifest.
      *
      * @param componentQuery component query to resolve
@@ -51,7 +58,10 @@ public class ManifestChecker {
                 // Here were compare version introduced by the component upgrade against the version present in the
                 // manifest. If the version from the manifest is lower, the component upgrade is not covered by this
                 // manifest.
-                if (compareVersions(upgradedVersion, versionInManifest) > 0) {
+                // It is also being checked if the versions have the same major.minor segments. If the major.minor
+                // segments are different, it likely means the components being compared do not belong to the same
+                // EE product variant.
+                if (!isSameMinor(upgradedVersion, versionInManifest) || compareVersions(upgradedVersion, versionInManifest) > 0) {
                     logger.infof("%s: Build artifact %s:%s is not satisfied by manifest stream %s:%s",
                             componentQuery.issueKey, ga, upgradedVersion, ga, versionInManifest);
                     return false;
@@ -77,8 +87,28 @@ public class ManifestChecker {
      *
      * @return negative number, zero, or positive number if the first version is lower, equal or higher than the second version respectively.
      */
-    private static int compareVersions(String first, String second) {
+    static int compareVersions(String first, String second) {
         return VERSION_COMPARATOR.compare(first.trim(), second.trim());
+    }
+
+    /**
+     * Checks that the two version strings have identical "major.minor" segments.
+     */
+    static boolean isSameMinor(String first, String second) {
+        String[] firstSegments = first.split("\\.", 3);
+        String[] secondSegments = second.split("\\.", 3);
+
+        if (firstSegments.length < 2 || secondSegments.length < 2) {
+            return false;
+        }
+
+        for (int i = 0; i < 2; i++) {
+            if (!firstSegments[i].equals(secondSegments[i])) {
+                return false;
+            }
+        }
+
+        return true;
     }
 
     /**

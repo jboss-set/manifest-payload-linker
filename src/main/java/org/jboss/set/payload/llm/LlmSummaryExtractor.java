@@ -16,6 +16,8 @@ public class LlmSummaryExtractor {
 
     private static final Logger logger = Logger.getLogger(LlmSummaryExtractor.class);
 
+    private static boolean warningPrinted = false;
+
     private ComponentUpgradeService service = null;
 
     public LlmSummaryExtractor(Config config) {
@@ -42,7 +44,10 @@ public class LlmSummaryExtractor {
 
     public ComponentUpgrade extractInfo(String summary) {
         if (service == null) {
-            logger.warnf("LLM service not configured.");
+            if (!warningPrinted) {
+                warningPrinted = true;
+                logger.warnf("LLM service not configured.");
+            }
             return null;
         }
         String responseContent = null;

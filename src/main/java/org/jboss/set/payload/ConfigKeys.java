@@ -11,4 +11,5 @@ public interface ConfigKeys {
     String LLM_BASE_URL = "llm.base_url";
     String LLM_TIMEOUT = "llm.timeout";
     String DEPENDENCY_GROUPS_FILE = "dependency_groups_file";
+    String IGNORE_ARTIFACTS = "manifest.ignore_artifacts";
 }

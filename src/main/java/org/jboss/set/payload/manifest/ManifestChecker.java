@@ -1,6 +1,8 @@
 package org.jboss.set.payload.manifest;
 
+import org.eclipse.microprofile.config.Config;
 import org.jboss.logging.Logger;
+import org.jboss.set.payload.ConfigKeys;
 import org.wildfly.channel.ChannelManifest;
 import org.wildfly.channel.ChannelManifestMapper;
 import org.wildfly.channel.version.VersionMatcher;
@@ -8,9 +10,13 @@ import org.wildfly.channel.version.VersionMatcher;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 
 public class ManifestChecker {
 
@@ -21,23 +27,24 @@ public class ManifestChecker {
     static final Comparator<String> VERSION_COMPARATOR = VersionMatcher.COMPARATOR;
 
     private final Map<String, String> manifestStreams;
+    private final List<String> ignoredGAs = new ArrayList<>();
 
     /**
      * @param manifestPath path to manifest file
      */
-    public ManifestChecker(Path manifestPath) {
-        try {
-            this.manifestStreams = loadManifestStreams(manifestPath);
-        } catch (IOException e) {
-            throw new RuntimeException("Can't load the manifest file", e);
-        }
+    public ManifestChecker(Path manifestPath, Config config) {
+        this(loadManifestStreams(manifestPath), config);
     }
 
     /**
      * @param manifestStreams map of "groupId:artifactId" -> "artifact version"
      */
-    public ManifestChecker(Map<String, String> manifestStreams) {
+    public ManifestChecker(Map<String, String> manifestStreams, Config config) {
         this.manifestStreams = manifestStreams;
+        if (config != null) {
+            Optional<String> ignoreArtifactsOpt = config.getOptionalValue(ConfigKeys.IGNORE_ARTIFACTS, String.class);
+            ignoreArtifactsOpt.ifPresent(str -> Collections.addAll(ignoredGAs, str.split(",")));
+        }
     }
 
     /**
@@ -61,7 +68,10 @@ public class ManifestChecker {
                 // It is also being checked if the versions have the same major.minor segments. If the major.minor
                 // segments are different, it likely means the components being compared do not belong to the same
                 // EE product variant.
-                if (!isSameMinor(upgradedVersion, versionInManifest) || compareVersions(upgradedVersion, versionInManifest) > 0) {
+                if (ignoredGAs.contains(ga)) {
+                    logger.debugf("%s: Build artifact %s:%s is ignored via global configuration",
+                            componentQuery.issueKey, ga, upgradedVersion);
+                } else if (!isSameMinor(upgradedVersion, versionInManifest) || compareVersions(upgradedVersion, versionInManifest) > 0) {
                     logger.infof("%s: Build artifact %s:%s is not satisfied by manifest stream %s:%s",
                             componentQuery.issueKey, ga, upgradedVersion, ga, versionInManifest);
                     return false;
@@ -114,18 +124,22 @@ public class ManifestChecker {
     /**
      * Loads manifest streams into a map.
      */
-    private static Map<String, String> loadManifestStreams(Path manifestPath) throws IOException {
-        Map<String, String> manifestStreams = new HashMap<>();
-        ChannelManifest manifest = ChannelManifestMapper.fromString(Files.readString(manifestPath));
-        manifest.getStreams().forEach(s -> {
-            if (s.getVersion() != null) {
-                manifestStreams.put(s.getGroupId() + ":" + s.getArtifactId(), s.getVersion());
-            } else {
-                logger.warnf("Manifest stream %s:%s doesn't have a fixed version, can't be used for comparison.",
-                        s.getGroupId(), s.getArtifactId());
-            }
-        });
-        return manifestStreams;
+    private static Map<String, String> loadManifestStreams(Path manifestPath) {
+        try {
+            Map<String, String> manifestStreams = new HashMap<>();
+            ChannelManifest manifest = ChannelManifestMapper.fromString(Files.readString(manifestPath));
+            manifest.getStreams().forEach(s -> {
+                if (s.getVersion() != null) {
+                    manifestStreams.put(s.getGroupId() + ":" + s.getArtifactId(), s.getVersion());
+                } else {
+                    logger.warnf("Manifest stream %s:%s doesn't have a fixed version, can't be used for comparison.",
+                            s.getGroupId(), s.getArtifactId());
+                }
+            });
+            return manifestStreams;
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
     }
 
 }

@@ -34,7 +34,7 @@ public class ManifestCheckerTestCase {
     private boolean testManifestChecker(String manifestVersion, String ticketVersion) {
         HashMap<String, String> streams = new HashMap<>();
         streams.put("io.undertow:undertow-core", manifestVersion);
-        ManifestChecker manifestChecker = new ManifestChecker(streams);
+        ManifestChecker manifestChecker = new ManifestChecker(streams, null);
 
         HashMap<String, String> upgradedArtifacts = new HashMap<>();
         upgradedArtifacts.put("io.undertow:undertow-core", ticketVersion);

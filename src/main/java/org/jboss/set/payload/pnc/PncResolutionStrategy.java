@@ -91,6 +91,9 @@ public class PncResolutionStrategy implements ComponentUpgradeResolutionStrategy
                 }
             }
         }
+        if (buildId == null) {
+            logger.infof("%s: PNC build ID not found.", issue.getKey());
+        }
         return buildId;
     }
 

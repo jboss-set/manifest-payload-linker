@@ -75,7 +75,7 @@ public class Main implements Closeable, Runnable {
                 .addDefaultSources()
                 .build();
 
-        ManifestChecker manifestChecker = new ManifestChecker(manifestPath);
+        ManifestChecker manifestChecker = new ManifestChecker(manifestPath, config);
 
         // Initialize Jira client
         jiraUri = config.getValue(ConfigKeys.JIRA_URL, URI.class);

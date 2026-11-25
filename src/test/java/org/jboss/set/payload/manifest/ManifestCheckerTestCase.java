@@ -27,11 +27,11 @@ public class ManifestCheckerTestCase {
         Assert.assertFalse(testManifestChecker("1.2.3", "1.2.4"));
         Assert.assertTrue(testManifestChecker("1.2.4", "1.2.4"));
         Assert.assertTrue(testManifestChecker("1.2.5", "1.2.4"));
-        Assert.assertFalse(testManifestChecker("1.3.0", "1.2.4"));
-        Assert.assertFalse(testManifestChecker("2.1.0", "1.2.4"));
+        Assert.assertTrue(testManifestChecker("1.3.0", "1.2.4") == null);
+        Assert.assertTrue(testManifestChecker("2.1.0", "1.2.4") == null);
     }
 
-    private boolean testManifestChecker(String manifestVersion, String ticketVersion) {
+    private Boolean testManifestChecker(String manifestVersion, String ticketVersion) {
         HashMap<String, String> streams = new HashMap<>();
         streams.put("io.undertow:undertow-core", manifestVersion);
         ManifestChecker manifestChecker = new ManifestChecker(streams, null);

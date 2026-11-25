@@ -69,13 +69,19 @@ public class ManifestChecker {
                 // segments are different, it likely means the components being compared do not belong to the same
                 // EE product variant.
                 if (ignoredGAs.contains(ga)) {
+                    // In this case we just skip over, as the GA is intentionally ignored.
                     logger.debugf("%s: Build artifact %s:%s is ignored via global configuration",
                             componentQuery.issueKey, ga, upgradedVersion);
-                } else if (!isSameMinor(upgradedVersion, versionInManifest) || compareVersions(upgradedVersion, versionInManifest) > 0) {
+                } else if (!isSameMinor(upgradedVersion, versionInManifest)) {
+                    // Not the same minor -> likely doesn't belong to given product EE variant, result is "unknown".
+                    return null;
+                } else if (compareVersions(upgradedVersion, versionInManifest) > 0) {
+                    // Version in manifest is lower than the ticket version -> negative result.
                     logger.infof("%s: Build artifact %s:%s is not satisfied by manifest stream %s:%s",
                             componentQuery.issueKey, ga, upgradedVersion, ga, versionInManifest);
                     return false;
                 } else {
+                    // Version in manifest is equal or higher -> positive result.
                     logger.debugf("%s: Build artifact %s:%s is satisfied by manifest stream %s:%s",
                             componentQuery.issueKey, ga, upgradedVersion, ga, versionInManifest);
                 }

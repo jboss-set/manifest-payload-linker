@@ -22,7 +22,9 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -36,8 +38,13 @@ public class Main implements Closeable, Runnable {
 
     private final List<ComponentUpgradeResolutionStrategy> resolutionStrategies = new ArrayList<>();
     private final List<IssueConsumer> verifiedIssuesConsumers = new ArrayList<>();
-    private final IssueConsumer toCheckManually;
+    private final IssueConsumer uncertainConsumer;
+    private final IssueConsumer positiveConsumer;
+    private final IssueConsumer negativeConsumer;
     private final URI jiraUri;
+    private final Map<String, Issue> uncertainIssues = new HashMap<>();
+    private final Map<String, Issue> positiveIssues = new HashMap<>();
+    private final Map<String, Issue> negativeIssues = new HashMap<>();
 
     public static void main(String[] args) throws Exception {
         if (args.length != 4 && args.length != 5) {
@@ -98,12 +105,15 @@ public class Main implements Closeable, Runnable {
         Collection<String> fixVersions = parseCommaSeparatedStringList(fixVersionsString);
         Collection<String> layeredFixVersions = parseCommaSeparatedStringList(layeredFixVersionsString);
 
-        verifiedIssuesConsumers.add(new IssueLinksReportConsumer(issueClient, new File("issue-links.txt"), jiraUri, manifestReference));
-        verifiedIssuesConsumers.add(new IssueCodesReportConsumer(issueClient, new File("issue-codes.txt"), manifestReference));
+        verifiedIssuesConsumers.add(new IssueCodesReportConsumer(issueClient, new File("positive-codes.txt"), manifestReference));
         verifiedIssuesConsumers.add(new DetailedReportConsumer(issueClient, new File("detailed-report.txt"), jiraUri, manifestReference));
         verifiedIssuesConsumers.add(new IssueTransitionConsumer(issueClient, manifestReference, targetRelease, fixVersions, layeredFixVersions));
 
-        toCheckManually = new IssueLinksReportConsumer(issueClient, new File("check-manually.txt"),
+        uncertainConsumer = new IssueLinksReportConsumer(issueClient, new File("uncertain.txt"),
+                AbstractIssueConsumer.INCLUDE_ALL, AbstractIssueConsumer.INCLUDE_NONE, jiraUri, manifestReference);
+        positiveConsumer = new IssueLinksReportConsumer(issueClient, new File("positive.txt"),
+                AbstractIssueConsumer.INCLUDE_ALL, AbstractIssueConsumer.INCLUDE_NONE, jiraUri, manifestReference);
+        negativeConsumer = new IssueLinksReportConsumer(issueClient, new File("negative.txt"),
                 AbstractIssueConsumer.INCLUDE_ALL, AbstractIssueConsumer.INCLUDE_NONE, jiraUri, manifestReference);
     }
 
@@ -113,7 +123,7 @@ public class Main implements Closeable, Runnable {
         for (IssueConsumer consumer: verifiedIssuesConsumers) {
             consumer.close();
         }
-        toCheckManually.close();
+        uncertainConsumer.close();
     }
 
     @Override
@@ -134,14 +144,19 @@ public class Main implements Closeable, Runnable {
 
             if (result == null) {
                 logger.warnf("%s: Unable to determine if issue is covered by the manifest.", issueKey);
-                toCheckManually.accept(issue);
+                uncertainIssues.put(issueKey, issue);
             } else if (result) {
                 logger.infof("%s: Issue is covered by the manifest.", issueKey);
+                positiveIssues.put(issueKey, issue);
                 processReportConsumers(issue);
             } else {
+                negativeIssues.put(issueKey, issue);
                 logger.infof("%s: Issue is not covered by the manifest.", issueKey);
             }
         }
+        uncertainIssues.values().forEach(uncertainConsumer);
+        positiveIssues.values().forEach(positiveConsumer);
+        negativeIssues.values().forEach(negativeConsumer);
     }
 
     /**
